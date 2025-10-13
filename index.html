@@ -69,58 +69,97 @@
             </div>
         </div>
     </section>
-
+            
     <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <h2 class="section-title" data-text="About Me">
-                <span class="glitch">About Me</span>
-            </h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>I'm Aryan Singh, a Master of Engineering student at McMaster University & Software Engineer Intern at TD Bank, working on DevSecOps initiatives. I love building end-to-end systems that merge development and automation — from backend APIs to CI/CD pipelines. I'm passionate about cloud, automation, and modern software delivery.</p>
-                </div>
-                <div class="skills-grid">
-                    <div class="skill-category">
-                        <h3>DevOps Tools</h3>
-                        <div class="skill-badges">
-                            <span class="skill-badge">Docker</span>
-                            <span class="skill-badge">Terraform</span>
-                            <span class="skill-badge">GitHub Actions</span>
-                            <span class="skill-badge">Jenkins</span>
-                            <span class="skill-badge">SonarQube</span>
-                        </div>
-                    </div>
-                    <div class="skill-category">
-                        <h3>Languages</h3>
-                        <div class="skill-badges">
-                            <span class="skill-badge">Python</span>
-                            <span class="skill-badge">Java</span>
-                            <span class="skill-badge">Groovy</span>
-                            <span class="skill-badge">JavaScript</span>
-                        </div>
-                    </div>
-                    <div class="skill-category">
-                        <h3>Cloud</h3>
-                        <div class="skill-badges">
-                            <span class="skill-badge">AWS</span>
-                            <span class="skill-badge">Azure</span>
-                            <span class="skill-badge">GCP</span>
-                        </div>
-                    </div>
-                    <div class="skill-category">
-                        <h3>Monitoring</h3>
-                        <div class="skill-badges">
-                            <span class="skill-badge">Prometheus</span>
-                            <span class="skill-badge">Grafana</span>
-                            <span class="skill-badge">ELK Stack</span>
+<section id="about" class="about">
+    <div class="container">
+        <!-- Two Logos Equispaced -->
+        <div class="logos-container">
+            <!-- McMaster Logo - Left (Original Image) -->
+            <div class="mcmaster-logo-badge">
+                <img src="mcmaster-logo.png" alt="McMaster University" class="mcmaster-img">
+                <div class="logo-glow-effect"></div>
+            </div>
 
-                        </div>
+            <!-- TD Bank Logo - Right -->
+            <div class="td-logo-badge">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Green Square Background with Cyberpunk Glow -->
+                    <rect x="15" y="15" width="70" height="70" fill="#54B848" rx="5" class="td-square"/>
+                    
+                    <!-- Outer Glow Square -->
+                    <rect x="12" y="12" width="76" height="76" fill="none" stroke="#54B848" stroke-width="2" rx="8" class="td-glow-outer" opacity="0.5"/>
+                    
+                    <!-- TD Letters -->
+                    <g class="td-letters">
+                        <!-- T Letter -->
+                        <path d="M30 35 L30 70 M25 35 L45 35" stroke="white" stroke-width="5" stroke-linecap="round" fill="none"/>
+                        
+                        <!-- D Letter -->
+                        <path d="M45 35 L45 70 M45 35 Q65 35 65 52.5 Q65 70 45 70" stroke="white" stroke-width="5" stroke-linecap="round" fill="none"/>
+                    </g>
+                    
+                    <!-- Corner Accents -->
+                    <path d="M15 20 L15 15 L20 15" stroke="#00FFFF" stroke-width="1.5" fill="none" class="corner-accent"/>
+                    <path d="M80 15 L85 15 L85 20" stroke="#00FFFF" stroke-width="1.5" fill="none" class="corner-accent"/>
+                    <path d="M85 80 L85 85 L80 85" stroke="#00FFFF" stroke-width="1.5" fill="none" class="corner-accent"/>
+                    <path d="M20 85 L15 85 L15 80" stroke="#00FFFF" stroke-width="1.5" fill="none" class="corner-accent"/>
+                    
+                    <!-- TD Bank Text -->
+                    <text x="50" y="95" font-family="Orbitron, sans-serif" font-size="7" fill="#54B848" text-anchor="middle" opacity="0.9">TD BANK</text>
+                </svg>
+            </div>
+        </div>
+
+        <h2 class="section-title" data-text="About Me">
+            <span class="glitch">About Me</span>
+        </h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>I'm Aryan Singh, a Master of Engineering student at McMaster University & Software Engineer Intern at TD Bank, working on DevSecOps initiatives. I love building end-to-end systems that merge development and automation — from backend APIs to CI/CD pipelines. I'm passionate about cloud, automation, and modern software delivery.</p>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>DevOps Tools</h3>
+                    <div class="skill-badges">
+                        <span class="skill-badge">Docker</span>
+                        <span class="skill-badge">Terraform</span>
+                        <span class="skill-badge">GitHub Actions</span>
+                        <span class="skill-badge">Jenkins</span>
+                        <span class="skill-badge">SonarQube</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Languages</h3>
+                    <div class="skill-badges">
+                        <span class="skill-badge">Python</span>
+                        <span class="skill-badge">Java</span>
+                        <span class="skill-badge">Groovy</span>
+                        <span class="skill-badge">JavaScript</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Cloud</h3>
+                    <div class="skill-badges">
+                        <span class="skill-badge">AWS</span>
+                        <span class="skill-badge">Azure</span>
+                        <span class="skill-badge">GCP</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Monitoring</h3>
+                    <div class="skill-badges">
+                        <span class="skill-badge">Prometheus</span>
+                        <span class="skill-badge">Grafana</span>
+                        <span class="skill-badge">ELK Stack</span>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+
+
 
     <!-- Projects Section -->
     <section id="projects" class="projects">
