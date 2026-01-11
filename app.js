@@ -172,7 +172,7 @@ class TacticalDashboard {
                     // Trigger actual download
                     setTimeout(() => {
                         // Replace with actual resume path
-                        window.open('resume.pdf', '_blank');
+                        window.open('Aryan_S_Resume.pdf', '_blank');
 
                         // Reset UI after download
                         setTimeout(() => {
