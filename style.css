@@ -1,5 +1,42 @@
 :root {
-  /* Primitive Color Tokens */
+  /* ============================================
+     WAYNE ENTERPRISES TACTICAL THEME
+     Monochromatic Design System
+     ============================================ */
+
+  /* Tactical Color Palette */
+  --tactical-black: #0D0D0D;
+  --tactical-slate: #1E293B;
+  --tactical-slate-light: #334155;
+  --tactical-dark-blue: #0F172A;
+  --tactical-gray: #64748B;
+  --tactical-gray-light: #94A3B8;
+
+  /* PlayStation Blue Accents */
+  --playstation-blue: #00439C;
+  --playstation-blue-light: #0066CC;
+  --playstation-blue-glow: rgba(0, 67, 156, 0.4);
+  --playstation-blue-glow-strong: rgba(0, 67, 156, 0.6);
+
+  /* Glassmorphism */
+  --glass-bg: rgba(30, 41, 59, 0.3);
+  --glass-bg-strong: rgba(30, 41, 59, 0.5);
+  --glass-border: rgba(148, 163, 184, 0.1);
+  --glass-border-strong: rgba(148, 163, 184, 0.2);
+
+  /* Semantic Colors */
+  --color-background: var(--tactical-black);
+  --color-surface: var(--tactical-slate);
+  --color-surface-elevated: var(--tactical-slate-light);
+  --color-text: rgba(255, 255, 255, 0.95);
+  --color-text-secondary: rgba(255, 255, 255, 0.7);
+  --color-text-tertiary: rgba(255, 255, 255, 0.5);
+  --color-primary: var(--playstation-blue);
+  --color-primary-hover: var(--playstation-blue-light);
+  --color-border: rgba(148, 163, 184, 0.15);
+  --color-border-strong: rgba(148, 163, 184, 0.3);
+
+  /* Legacy compatibility (for gradual migration) */
   --color-white: rgba(255, 255, 255, 1);
   --color-black: rgba(0, 0, 0, 1);
   --color-cream-50: rgba(252, 252, 249, 1);
@@ -34,14 +71,22 @@
   --color-orange-400-rgb: 230, 129, 97;
 
   /* Background color tokens (Light Mode) */
-  --color-bg-1: rgba(59, 130, 246, 0.08); /* Light blue */
-  --color-bg-2: rgba(245, 158, 11, 0.08); /* Light yellow */
-  --color-bg-3: rgba(34, 197, 94, 0.08); /* Light green */
-  --color-bg-4: rgba(239, 68, 68, 0.08); /* Light red */
-  --color-bg-5: rgba(147, 51, 234, 0.08); /* Light purple */
-  --color-bg-6: rgba(249, 115, 22, 0.08); /* Light orange */
-  --color-bg-7: rgba(236, 72, 153, 0.08); /* Light pink */
-  --color-bg-8: rgba(6, 182, 212, 0.08); /* Light cyan */
+  --color-bg-1: rgba(0, 67, 156, 0.08);
+  /* Light blue */
+  --color-bg-2: rgba(245, 158, 11, 0.08);
+  /* Light yellow */
+  --color-bg-3: rgba(34, 197, 94, 0.08);
+  /* Light green */
+  --color-bg-4: rgba(239, 68, 68, 0.08);
+  /* Light red */
+  --color-bg-5: rgba(147, 51, 234, 0.08);
+  /* Light purple */
+  --color-bg-6: rgba(249, 115, 22, 0.08);
+  /* Light orange */
+  --color-bg-7: rgba(236, 72, 153, 0.08);
+  /* Light pink */
+  --color-bg-8: rgba(6, 182, 212, 0.08);
+  /* Light cyan */
 
   /* Semantic Color Tokens (Light Mode) */
   --color-background: var(--color-cream-50);
@@ -154,14 +199,22 @@
     --color-gray-200-rgb: 245, 245, 245;
 
     /* Background color tokens (Dark Mode) */
-    --color-bg-1: rgba(29, 78, 216, 0.15); /* Dark blue */
-    --color-bg-2: rgba(180, 83, 9, 0.15); /* Dark yellow */
-    --color-bg-3: rgba(21, 128, 61, 0.15); /* Dark green */
-    --color-bg-4: rgba(185, 28, 28, 0.15); /* Dark red */
-    --color-bg-5: rgba(107, 33, 168, 0.15); /* Dark purple */
-    --color-bg-6: rgba(194, 65, 12, 0.15); /* Dark orange */
-    --color-bg-7: rgba(190, 24, 93, 0.15); /* Dark pink */
-    --color-bg-8: rgba(8, 145, 178, 0.15); /* Dark cyan */
+    --color-bg-1: rgba(29, 78, 216, 0.15);
+    /* Dark blue */
+    --color-bg-2: rgba(180, 83, 9, 0.15);
+    /* Dark yellow */
+    --color-bg-3: rgba(21, 128, 61, 0.15);
+    /* Dark green */
+    --color-bg-4: rgba(185, 28, 28, 0.15);
+    /* Dark red */
+    --color-bg-5: rgba(107, 33, 168, 0.15);
+    /* Dark purple */
+    --color-bg-6: rgba(194, 65, 12, 0.15);
+    /* Dark orange */
+    --color-bg-7: rgba(190, 24, 93, 0.15);
+    /* Dark pink */
+    --color-bg-8: rgba(8, 145, 178, 0.15);
+    /* Dark cyan */
 
     /* Semantic Color Tokens (Dark Mode) */
     --color-background: var(--color-charcoal-700);
@@ -214,14 +267,22 @@
   --color-gray-200-rgb: 245, 245, 245;
 
   /* Colorful background palette - Dark Mode */
-  --color-bg-1: rgba(29, 78, 216, 0.15); /* Dark blue */
-  --color-bg-2: rgba(180, 83, 9, 0.15); /* Dark yellow */
-  --color-bg-3: rgba(21, 128, 61, 0.15); /* Dark green */
-  --color-bg-4: rgba(185, 28, 28, 0.15); /* Dark red */
-  --color-bg-5: rgba(107, 33, 168, 0.15); /* Dark purple */
-  --color-bg-6: rgba(194, 65, 12, 0.15); /* Dark orange */
-  --color-bg-7: rgba(190, 24, 93, 0.15); /* Dark pink */
-  --color-bg-8: rgba(8, 145, 178, 0.15); /* Dark cyan */
+  --color-bg-1: rgba(29, 78, 216, 0.15);
+  /* Dark blue */
+  --color-bg-2: rgba(180, 83, 9, 0.15);
+  /* Dark yellow */
+  --color-bg-3: rgba(21, 128, 61, 0.15);
+  /* Dark green */
+  --color-bg-4: rgba(185, 28, 28, 0.15);
+  /* Dark red */
+  --color-bg-5: rgba(107, 33, 168, 0.15);
+  /* Dark purple */
+  --color-bg-6: rgba(194, 65, 12, 0.15);
+  /* Dark orange */
+  --color-bg-7: rgba(190, 24, 93, 0.15);
+  /* Dark pink */
+  --color-bg-8: rgba(8, 145, 178, 0.15);
+  /* Dark cyan */
 
   /* Semantic Color Tokens (Dark Mode) */
   --color-background: var(--color-charcoal-700);
@@ -318,6 +379,7 @@ body {
 *::after {
   box-sizing: inherit;
 }
+
 /* McMaster Logo Cyberpunk Styling */
 .mcmaster-logo {
   position: relative;
@@ -372,24 +434,33 @@ body {
 
 /* Animations */
 @keyframes logoGlow {
-  0%, 100% {
+
+  0%,
+  100% {
     filter: drop-shadow(0 0 10px #9B59B6) drop-shadow(0 0 20px #00FFFF);
   }
+
   50% {
     filter: drop-shadow(0 0 15px #FF00FF) drop-shadow(0 0 25px #3498DB);
   }
 }
 
 @keyframes glitchEffect {
-  0%, 90%, 100% {
+
+  0%,
+  90%,
+  100% {
     transform: translate(0, 0);
   }
+
   92% {
     transform: translate(-2px, 1px);
   }
+
   94% {
     transform: translate(2px, -1px);
   }
+
   96% {
     transform: translate(-1px, 2px);
   }
@@ -420,18 +491,23 @@ h6 {
 h1 {
   font-size: var(--font-size-4xl);
 }
+
 h2 {
   font-size: var(--font-size-3xl);
 }
+
 h3 {
   font-size: var(--font-size-2xl);
 }
+
 h4 {
   font-size: var(--font-size-xl);
 }
+
 h5 {
   font-size: var(--font-size-lg);
 }
+
 h6 {
   font-size: var(--font-size-md);
 }
@@ -652,43 +728,31 @@ select.form-control {
 }
 
 .status--success {
-  background-color: rgba(
-    var(--color-success-rgb, 33, 128, 141),
-    var(--status-bg-opacity)
-  );
+  background-color: rgba(var(--color-success-rgb, 33, 128, 141),
+      var(--status-bg-opacity));
   color: var(--color-success);
-  border: 1px solid
-    rgba(var(--color-success-rgb, 33, 128, 141), var(--status-border-opacity));
+  border: 1px solid rgba(var(--color-success-rgb, 33, 128, 141), var(--status-border-opacity));
 }
 
 .status--error {
-  background-color: rgba(
-    var(--color-error-rgb, 192, 21, 47),
-    var(--status-bg-opacity)
-  );
+  background-color: rgba(var(--color-error-rgb, 192, 21, 47),
+      var(--status-bg-opacity));
   color: var(--color-error);
-  border: 1px solid
-    rgba(var(--color-error-rgb, 192, 21, 47), var(--status-border-opacity));
+  border: 1px solid rgba(var(--color-error-rgb, 192, 21, 47), var(--status-border-opacity));
 }
 
 .status--warning {
-  background-color: rgba(
-    var(--color-warning-rgb, 168, 75, 47),
-    var(--status-bg-opacity)
-  );
+  background-color: rgba(var(--color-warning-rgb, 168, 75, 47),
+      var(--status-bg-opacity));
   color: var(--color-warning);
-  border: 1px solid
-    rgba(var(--color-warning-rgb, 168, 75, 47), var(--status-border-opacity));
+  border: 1px solid rgba(var(--color-warning-rgb, 168, 75, 47), var(--status-border-opacity));
 }
 
 .status--info {
-  background-color: rgba(
-    var(--color-info-rgb, 98, 108, 113),
-    var(--status-bg-opacity)
-  );
+  background-color: rgba(var(--color-info-rgb, 98, 108, 113),
+      var(--status-bg-opacity));
   color: var(--color-info);
-  border: 1px solid
-    rgba(var(--color-info-rgb, 98, 108, 113), var(--status-border-opacity));
+  border: 1px solid rgba(var(--color-info-rgb, 98, 108, 113), var(--status-border-opacity));
 }
 
 /* Container layout */
@@ -705,16 +769,19 @@ select.form-control {
     max-width: var(--container-sm);
   }
 }
+
 @media (min-width: 768px) {
   .container {
     max-width: var(--container-md);
   }
 }
+
 @media (min-width: 1024px) {
   .container {
     max-width: var(--container-lg);
   }
 }
+
 @media (min-width: 1280px) {
   .container {
     max-width: var(--container-xl);
@@ -725,24 +792,31 @@ select.form-control {
 .flex {
   display: flex;
 }
+
 .flex-col {
   flex-direction: column;
 }
+
 .items-center {
   align-items: center;
 }
+
 .justify-center {
   justify-content: center;
 }
+
 .justify-between {
   justify-content: space-between;
 }
+
 .gap-4 {
   gap: var(--space-4);
 }
+
 .gap-8 {
   gap: var(--space-8);
 }
+
 .gap-16 {
   gap: var(--space-16);
 }
@@ -750,16 +824,20 @@ select.form-control {
 .m-0 {
   margin: 0;
 }
+
 .mt-8 {
   margin-top: var(--space-8);
 }
+
 .mb-8 {
   margin-bottom: var(--space-8);
 }
+
 .mx-8 {
   margin-left: var(--space-8);
   margin-right: var(--space-8);
 }
+
 .my-8 {
   margin-top: var(--space-8);
   margin-bottom: var(--space-8);
@@ -768,18 +846,22 @@ select.form-control {
 .p-0 {
   padding: 0;
 }
+
 .py-8 {
   padding-top: var(--space-8);
   padding-bottom: var(--space-8);
 }
+
 .px-8 {
   padding-left: var(--space-8);
   padding-right: var(--space-8);
 }
+
 .py-16 {
   padding-top: var(--space-16);
   padding-bottom: var(--space-16);
 }
+
 .px-16 {
   padding-left: var(--space-16);
   padding-right: var(--space-16);
@@ -788,6 +870,7 @@ select.form-control {
 .block {
   display: block;
 }
+
 .hidden {
   display: none;
 }
@@ -817,8 +900,7 @@ select.form-control {
 
 @font-face {
   font-family: 'FKGroteskNeue';
-  src: url('https://r2cdn.perplexity.ai/fonts/FKGroteskNeue.woff2')
-    format('woff2');
+  src: url('https://r2cdn.perplexity.ai/fonts/FKGroteskNeue.woff2') format('woff2');
 }
 
 /* END PERPLEXITY DESIGN SYSTEM */
@@ -836,12 +918,12 @@ select.form-control {
   --text-muted: #666666;
   --border-glow: rgba(255, 0, 255, 0.3);
   --accent-glow: rgba(0, 255, 255, 0.5);
-  
+
   /* Typography */
   --font-primary: 'Orbitron', monospace;
   --font-secondary: 'Rajdhani', sans-serif;
   --font-accent: 'Audiowide', cursive;
-  
+
   /* Spacing */
   --spacing-xs: 0.5rem;
   --spacing-sm: 1rem;
@@ -849,13 +931,13 @@ select.form-control {
   --spacing-lg: 2rem;
   --spacing-xl: 3rem;
   --spacing-2xl: 4rem;
-  
+
   /* Border Radius */
   --radius-sm: 0.25rem;
   --radius-md: 0.5rem;
   --radius-lg: 0.75rem;
   --radius-xl: 1rem;
-  
+
   /* Animations */
   --animation-speed-fast: 0.2s;
   --animation-speed-normal: 0.3s;
@@ -886,113 +968,131 @@ body {
   line-height: 1.6;
   cursor: none;
 }
+
 /* McMaster Eagle Logo Badge - Centered & Bigger */
 .mcmaster-logo-badge {
-    width: 140px;
-    height: 140px;
-    margin: 0 auto 30px auto;
-    display: block;
-    opacity: 0.9;
-    filter: drop-shadow(0 0 20px #9B59B6) drop-shadow(0 0 30px #00FFFF);
-    animation: eagleGlow 4s ease-in-out infinite, floatBadge 6s ease-in-out infinite;
-    position: relative;
-    z-index: 10;
+  width: 140px;
+  height: 140px;
+  margin: 0 auto 30px auto;
+  display: block;
+  opacity: 0.9;
+  filter: drop-shadow(0 0 20px #9B59B6) drop-shadow(0 0 30px #00FFFF);
+  animation: eagleGlow 4s ease-in-out infinite, floatBadge 6s ease-in-out infinite;
+  position: relative;
+  z-index: 10;
 }
 
 .mcmaster-logo-badge svg {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 /* Shield Glow */
 .shield {
-    filter: drop-shadow(0 0 10px #9B59B6);
+  filter: drop-shadow(0 0 10px #9B59B6);
 }
 
 /* Eagle Wing Animation */
-.wing-left, .wing-right {
-    filter: drop-shadow(0 0 8px #9B59B6);
-    animation: wingPulse 3s ease-in-out infinite;
+.wing-left,
+.wing-right {
+  filter: drop-shadow(0 0 8px #9B59B6);
+  animation: wingPulse 3s ease-in-out infinite;
 }
 
-.wing-detail-left, .wing-detail-right {
-    animation: wingDetailGlow 2.5s ease-in-out infinite;
+.wing-detail-left,
+.wing-detail-right {
+  animation: wingDetailGlow 2.5s ease-in-out infinite;
 }
 
 /* Cross Glow */
 .cross {
-    filter: drop-shadow(0 0 12px #00FFFF) drop-shadow(0 0 6px #3498DB);
-    animation: crossPulse 2s ease-in-out infinite;
+  filter: drop-shadow(0 0 12px #00FFFF) drop-shadow(0 0 6px #3498DB);
+  animation: crossPulse 2s ease-in-out infinite;
 }
 
 /* Beak */
 .beak {
-    filter: drop-shadow(0 0 5px #00FFFF);
+  filter: drop-shadow(0 0 5px #00FFFF);
 }
 
 /* Animations */
 @keyframes eagleGlow {
-    0%, 100% {
-        filter: drop-shadow(0 0 20px #9B59B6) drop-shadow(0 0 30px #00FFFF);
-    }
-    50% {
-        filter: drop-shadow(0 0 30px #FF00FF) drop-shadow(0 0 40px #3498DB);
-    }
+
+  0%,
+  100% {
+    filter: drop-shadow(0 0 20px #9B59B6) drop-shadow(0 0 30px #00FFFF);
+  }
+
+  50% {
+    filter: drop-shadow(0 0 30px #FF00FF) drop-shadow(0 0 40px #3498DB);
+  }
 }
 
 @keyframes floatBadge {
-    0%, 100% {
-        transform: translateY(0px);
-    }
-    50% {
-        transform: translateY(-12px);
-    }
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
 }
 
 @keyframes wingPulse {
-    0%, 100% {
-        opacity: 0.8;
-    }
-    50% {
-        opacity: 1;
-    }
+
+  0%,
+  100% {
+    opacity: 0.8;
+  }
+
+  50% {
+    opacity: 1;
+  }
 }
 
 @keyframes wingDetailGlow {
-    0%, 100% {
-        stroke: #00FFFF;
-    }
-    50% {
-        stroke: #3498DB;
-    }
+
+  0%,
+  100% {
+    stroke: #00FFFF;
+  }
+
+  50% {
+    stroke: #3498DB;
+  }
 }
 
 @keyframes crossPulse {
-    0%, 100% {
-        opacity: 0.9;
-        filter: drop-shadow(0 0 12px #00FFFF) drop-shadow(0 0 6px #3498DB);
-    }
-    50% {
-        opacity: 1;
-        filter: drop-shadow(0 0 20px #00FFFF) drop-shadow(0 0 12px #3498DB);
-    }
+
+  0%,
+  100% {
+    opacity: 0.9;
+    filter: drop-shadow(0 0 12px #00FFFF) drop-shadow(0 0 6px #3498DB);
+  }
+
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 20px #00FFFF) drop-shadow(0 0 12px #3498DB);
+  }
 }
 
 /* Hover Effect */
 .mcmaster-logo-badge:hover {
-    opacity: 1;
-    transform: scale(1.2);
-    filter: drop-shadow(0 0 35px #9B59B6) drop-shadow(0 0 45px #00FFFF);
-    transition: all 0.5s ease;
+  opacity: 1;
+  transform: scale(1.2);
+  filter: drop-shadow(0 0 35px #9B59B6) drop-shadow(0 0 45px #00FFFF);
+  transition: all 0.5s ease;
 }
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
-    .mcmaster-logo-badge {
-        width: 90px;
-        height: 90px;
-        margin-bottom: 20px;
-    }
+  .mcmaster-logo-badge {
+    width: 90px;
+    height: 90px;
+    margin-bottom: 20px;
+  }
 }
 
 /* Custom Cursor */
@@ -1037,214 +1137,228 @@ body::after {
     opacity: 1;
     transform: scale(1);
   }
+
   100% {
     opacity: 0;
     transform: scale(0);
   }
 }
+
 /* About Section Container */
 .about .container {
-    position: relative;
+  position: relative;
 }
 
 /* Logos Container - Two Logos Equispaced */
 .logos-container {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin: 0 auto 40px auto;
-    max-width: 500px;
-    padding: 20px;
-    position: relative;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0 auto 40px auto;
+  max-width: 500px;
+  padding: 20px;
+  position: relative;
 }
 
 /* McMaster Logo - Original Image with Cyberpunk Effects */
 .mcmaster-logo-badge {
-    width: 140px;
-    height: 120px;
-    position: relative;
-    opacity: 0.95;
-    animation: floatBadge 6s ease-in-out infinite;
-    z-index: 10;
+  width: 140px;
+  height: 120px;
+  position: relative;
+  opacity: 0.95;
+  animation: floatBadge 6s ease-in-out infinite;
+  z-index: 10;
 }
 
 .mcmaster-img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    filter: drop-shadow(0 0 20px #9B59B6) 
-            drop-shadow(0 0 30px #00FFFF)
-            brightness(1.1)
-            contrast(1.1);
-    animation: mcmasterGlow 4s ease-in-out infinite;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 20px #9B59B6) drop-shadow(0 0 30px #00FFFF) brightness(1.1) contrast(1.1);
+  animation: mcmasterGlow 4s ease-in-out infinite;
 }
 
 .logo-glow-effect {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 120%;
-    height: 120%;
-    background: radial-gradient(circle, rgba(155, 89, 182, 0.3) 0%, transparent 70%);
-    pointer-events: none;
-    animation: glowPulse 3s ease-in-out infinite;
-    z-index: -1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(circle, rgba(155, 89, 182, 0.3) 0%, transparent 70%);
+  pointer-events: none;
+  animation: glowPulse 3s ease-in-out infinite;
+  z-index: -1;
 }
 
 /* TD Bank Logo - Right */
 .td-logo-badge {
-    width: 120px;
-    height: 120px;
-    opacity: 0.9;
-    filter: drop-shadow(0 0 15px #54B848) drop-shadow(0 0 25px #00FFFF);
-    animation: tdGlow 4s ease-in-out infinite, floatTD 6s ease-in-out infinite 1s;
-    z-index: 10;
+  width: 120px;
+  height: 120px;
+  opacity: 0.9;
+  filter: drop-shadow(0 0 15px #54B848) drop-shadow(0 0 25px #00FFFF);
+  animation: tdGlow 4s ease-in-out infinite, floatTD 6s ease-in-out infinite 1s;
+  z-index: 10;
 }
 
 .td-logo-badge svg {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 /* TD Square Animation */
 .td-square {
-    filter: drop-shadow(0 0 10px #54B848);
-    animation: squarePulse 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 10px #54B848);
+  animation: squarePulse 3s ease-in-out infinite;
 }
 
 .td-glow-outer {
-    animation: outerGlowPulse 2.5s ease-in-out infinite;
+  animation: outerGlowPulse 2.5s ease-in-out infinite;
 }
 
 .td-letters {
-    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
 }
 
 .corner-accent {
-    animation: cornerBlink 2s ease-in-out infinite;
+  animation: cornerBlink 2s ease-in-out infinite;
 }
 
 /* McMaster Animations */
 @keyframes mcmasterGlow {
-    0%, 100% {
-        filter: drop-shadow(0 0 20px #9B59B6) 
-                drop-shadow(0 0 30px #00FFFF)
-                brightness(1.1)
-                contrast(1.1);
-    }
-    50% {
-        filter: drop-shadow(0 0 30px #FF00FF) 
-                drop-shadow(0 0 40px #3498DB)
-                brightness(1.2)
-                contrast(1.15);
-    }
+
+  0%,
+  100% {
+    filter: drop-shadow(0 0 20px #9B59B6) drop-shadow(0 0 30px #00FFFF) brightness(1.1) contrast(1.1);
+  }
+
+  50% {
+    filter: drop-shadow(0 0 30px #FF00FF) drop-shadow(0 0 40px #3498DB) brightness(1.2) contrast(1.15);
+  }
 }
 
 @keyframes floatBadge {
-    0%, 100% {
-        transform: translateY(0px);
-    }
-    50% {
-        transform: translateY(-12px);
-    }
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
 }
 
 @keyframes glowPulse {
-    0%, 100% {
-        opacity: 0.6;
-        transform: translate(-50%, -50%) scale(1);
-    }
-    50% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1.1);
-    }
+
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
 }
 
 /* TD Animations */
 @keyframes tdGlow {
-    0%, 100% {
-        filter: drop-shadow(0 0 15px #54B848) drop-shadow(0 0 25px #00FFFF);
-    }
-    50% {
-        filter: drop-shadow(0 0 25px #54B848) drop-shadow(0 0 35px #00FFFF);
-    }
+
+  0%,
+  100% {
+    filter: drop-shadow(0 0 15px #54B848) drop-shadow(0 0 25px #00FFFF);
+  }
+
+  50% {
+    filter: drop-shadow(0 0 25px #54B848) drop-shadow(0 0 35px #00FFFF);
+  }
 }
 
 @keyframes floatTD {
-    0%, 100% {
-        transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-        transform: translateY(-10px) rotate(-3deg);
-    }
+
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-10px) rotate(-3deg);
+  }
 }
 
 @keyframes squarePulse {
-    0%, 100% {
-        opacity: 0.9;
-    }
-    50% {
-        opacity: 1;
-    }
+
+  0%,
+  100% {
+    opacity: 0.9;
+  }
+
+  50% {
+    opacity: 1;
+  }
 }
 
 @keyframes outerGlowPulse {
-    0%, 100% {
-        opacity: 0.5;
-        stroke: #54B848;
-    }
-    50% {
-        opacity: 0.8;
-        stroke: #00FFFF;
-    }
+
+  0%,
+  100% {
+    opacity: 0.5;
+    stroke: #54B848;
+  }
+
+  50% {
+    opacity: 0.8;
+    stroke: #00FFFF;
+  }
 }
 
 @keyframes cornerBlink {
-    0%, 100% {
-        opacity: 0.6;
-    }
-    50% {
-        opacity: 1;
-        stroke: #3498DB;
-    }
+
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+
+  50% {
+    opacity: 1;
+    stroke: #3498DB;
+  }
 }
 
 /* Hover Effects */
 .mcmaster-logo-badge:hover .mcmaster-img {
-    transform: scale(1.15);
-    filter: drop-shadow(0 0 35px #9B59B6) 
-            drop-shadow(0 0 45px #00FFFF)
-            brightness(1.3)
-            contrast(1.2);
-    transition: all 0.5s ease;
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 35px #9B59B6) drop-shadow(0 0 45px #00FFFF) brightness(1.3) contrast(1.2);
+  transition: all 0.5s ease;
 }
 
 .td-logo-badge:hover {
-    opacity: 1;
-    transform: scale(1.2) rotate(-5deg);
-    filter: drop-shadow(0 0 30px #54B848) drop-shadow(0 0 40px #00FFFF);
-    transition: all 0.4s ease;
+  opacity: 1;
+  transform: scale(1.2) rotate(-5deg);
+  filter: drop-shadow(0 0 30px #54B848) drop-shadow(0 0 40px #00FFFF);
+  transition: all 0.4s ease;
 }
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
-    .logos-container {
-        flex-direction: column;
-        gap: 30px;
-        padding: 10px;
-        max-width: 300px;
-    }
-    
-    .mcmaster-logo-badge {
-        width: 120px;
-        height: 100px;
-    }
-    
-    .td-logo-badge {
-        width: 100px;
-        height: 100px;
-    }
+  .logos-container {
+    flex-direction: column;
+    gap: 30px;
+    padding: 10px;
+    max-width: 300px;
+  }
+
+  .mcmaster-logo-badge {
+    width: 120px;
+    height: 100px;
+  }
+
+  .td-logo-badge {
+    width: 100px;
+    height: 100px;
+  }
 }
 
 /* Particle Background */
@@ -1272,12 +1386,15 @@ body::after {
     transform: translateY(100vh) rotate(0deg);
     opacity: 0;
   }
+
   10% {
     opacity: 1;
   }
+
   90% {
     opacity: 1;
   }
+
   100% {
     transform: translateY(-10px) rotate(360deg);
     opacity: 0;
@@ -1399,10 +1516,10 @@ body::after {
   align-items: center;
   position: relative;
   z-index: 10;
-  background: linear-gradient(45deg, 
-    rgba(155, 89, 182, 0.1) 0%, 
-    rgba(0, 255, 255, 0.05) 50%, 
-    rgba(52, 152, 219, 0.1) 100%);
+  background: linear-gradient(45deg,
+      rgba(155, 89, 182, 0.1) 0%,
+      rgba(0, 255, 255, 0.05) 50%,
+      rgba(52, 152, 219, 0.1) 100%);
 }
 
 .hero-content {
@@ -1433,6 +1550,7 @@ body::after {
   0% {
     filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.8)) drop-shadow(0 0 40px rgba(255, 0, 255, 0.4));
   }
+
   100% {
     filter: drop-shadow(0 0 40px rgba(0, 255, 255, 1)) drop-shadow(0 0 60px rgba(255, 0, 255, 0.6));
   }
@@ -1461,36 +1579,48 @@ body::after {
 }
 
 @keyframes glitch1 {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translate(0);
   }
+
   20% {
     transform: translate(-2px, 2px);
   }
+
   40% {
     transform: translate(-2px, -2px);
   }
+
   60% {
     transform: translate(2px, 2px);
   }
+
   80% {
     transform: translate(2px, -2px);
   }
 }
 
 @keyframes glitch2 {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translate(0);
   }
+
   20% {
     transform: translate(2px, 2px);
   }
+
   40% {
     transform: translate(2px, -2px);
   }
+
   60% {
     transform: translate(-2px, 2px);
   }
+
   80% {
     transform: translate(-2px, -2px);
   }
@@ -1514,10 +1644,14 @@ body::after {
 }
 
 @keyframes blink {
-  0%, 50% {
+
+  0%,
+  50% {
     opacity: 1;
   }
-  51%, 100% {
+
+  51%,
+  100% {
     opacity: 0;
   }
 }
@@ -1565,7 +1699,7 @@ body::after {
   transform: translateY(-5px) scale(1.1);
   border-color: var(--neon-cyan);
   box-shadow: 0 10px 25px rgba(0, 255, 255, 0.3),
-              0 0 30px rgba(0, 255, 255, 0.4);
+    0 0 30px rgba(0, 255, 255, 0.4);
 }
 
 .social-link svg {
@@ -1617,9 +1751,12 @@ body::after {
 }
 
 @keyframes bounce {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateX(-50%) translateY(0);
   }
+
   50% {
     transform: translateX(-50%) translateY(10px);
   }
@@ -1650,9 +1787,12 @@ section {
 }
 
 @keyframes glitchText {
-  0%, 100% {
+
+  0%,
+  100% {
     text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
   }
+
   50% {
     text-shadow: 0 0 30px rgba(255, 0, 255, 0.5), 0 0 40px rgba(0, 255, 255, 0.3);
   }
@@ -1741,7 +1881,7 @@ section {
   transform: translateY(-3px) scale(1.05);
   border-color: var(--neon-pink);
   box-shadow: 0 5px 15px rgba(255, 0, 255, 0.3),
-              0 0 20px rgba(255, 0, 255, 0.2);
+    0 0 20px rgba(255, 0, 255, 0.2);
   color: var(--neon-pink);
 }
 
@@ -1766,6 +1906,7 @@ section {
   overflow: hidden;
   cursor: pointer;
 }
+
 .project-link {
   display: inline-block;
   margin-top: 10px;
@@ -1817,9 +1958,11 @@ section {
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
@@ -1828,7 +1971,7 @@ section {
 .project-card:hover {
   transform: translateY(-10px) rotateX(5deg);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3),
-              0 0 30px rgba(0, 255, 255, 0.2);
+    0 0 30px rgba(0, 255, 255, 0.2);
 }
 
 .project-header {
@@ -1988,19 +2131,22 @@ section {
   left: 0;
   right: 0;
   height: 2px;
-  background: linear-gradient(90deg, 
-    transparent, 
-    var(--neon-cyan), 
-    var(--neon-pink), 
-    var(--primary-purple), 
-    transparent);
+  background: linear-gradient(90deg,
+      transparent,
+      var(--neon-cyan),
+      var(--neon-pink),
+      var(--primary-purple),
+      transparent);
   animation: glowPulse 3s ease-in-out infinite;
 }
 
 @keyframes glowPulse {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 0.5;
   }
+
   50% {
     opacity: 1;
   }
@@ -2016,20 +2162,20 @@ section {
   .nav-container {
     padding: 0 var(--spacing-md);
   }
-  
+
   .container {
     padding: 0 var(--spacing-md);
   }
-  
+
   .about-content {
     grid-template-columns: 1fr;
     gap: var(--spacing-xl);
   }
-  
+
   .projects-grid {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   }
-  
+
   .contact-links {
     gap: var(--spacing-lg);
   }
@@ -2039,40 +2185,40 @@ section {
   .nav-links {
     display: none;
   }
-  
+
   .theme-toggle {
     top: 70px;
     right: 1rem;
     width: 40px;
     height: 40px;
   }
-  
+
   .hero {
     padding: 0 var(--spacing-md);
   }
-  
+
   .hero-social {
     gap: var(--spacing-md);
   }
-  
+
   .social-link {
     width: 40px;
     height: 40px;
   }
-  
+
   .social-link svg {
     width: 20px;
     height: 20px;
   }
-  
+
   .skills-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .projects-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .contact-links {
     flex-direction: column;
     align-items: center;
@@ -2083,15 +2229,15 @@ section {
   section {
     padding: var(--spacing-xl) 0;
   }
-  
+
   .container {
     padding: 0 var(--spacing-sm);
   }
-  
+
   .project-card {
     padding: var(--spacing-md);
   }
-  
+
   .hero-subtitle {
     font-size: 1rem;
   }
@@ -2099,6 +2245,7 @@ section {
 
 /* Accessibility */
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
@@ -2110,17 +2257,18 @@ section {
 
 /* Print Styles */
 @media print {
+
   #particles-container,
   .theme-toggle,
   .nav {
     display: none;
   }
-  
+
   body {
     background: white;
     color: black;
   }
-  
+
   .hero-title {
     -webkit-text-fill-color: black;
   }
@@ -2132,6 +2280,7 @@ section {
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -2148,6 +2297,7 @@ section {
     opacity: 0;
     transform: translateX(-50px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -2159,6 +2309,7 @@ section {
     opacity: 0;
     transform: translateX(50px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);

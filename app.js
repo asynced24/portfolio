@@ -1,582 +1,282 @@
-class CyberpunkPortfolio {
+// ============================================
+// WAYNE ENTERPRISES TACTICAL DASHBOARD
+// JavaScript Functionality
+// ============================================
+
+class TacticalDashboard {
     constructor() {
-        this.mouseX = 0;
-        this.mouseY = 0;
-        this.particles = [];
-        this.cursorTrails = [];
-        this.maxTrails = 20;
-        this.isTyping = false;
-        
         this.init();
     }
 
     init() {
-        this.setupEventListeners();
-        this.createParticles();
-        this.startTypingAnimation();
-        this.setupScrollAnimations();
-        this.setupThemeToggle();
-        this.setupSmoothScroll();
-        this.updateCustomCursor();
+        this.showBootSequence();
+        this.initTypingAnimation();
+        this.initStatCounters();
+        this.initDownloadClearance();
+        this.initSmoothScroll();
+        this.initCustomCursor();
     }
 
-    setupEventListeners() {
-        // Mouse tracking
-        document.addEventListener('mousemove', (e) => {
-            this.mouseX = e.clientX;
-            this.mouseY = e.clientY;
-            this.createCursorTrail();
-        });
-
-        // Resize handler
-        window.addEventListener('resize', () => {
-            this.handleResize();
-        });
-
-        // Scroll handler
-        window.addEventListener('scroll', () => {
-            this.handleScroll();
-        });
-
-        // Navigation active states
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const target = document.querySelector(e.target.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
-
-        // Project card interactions
-        document.querySelectorAll('.project-card').forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                this.animateProjectCard(card, 'enter');
-            });
-            card.addEventListener('mouseleave', () => {
-                this.animateProjectCard(card, 'leave');
-            });
-        });
-
-        // Skill badge hover effects
-        document.querySelectorAll('.skill-badge').forEach(badge => {
-            badge.addEventListener('mouseenter', () => {
-                this.animateSkillBadge(badge, 'enter');
-            });
-            badge.addEventListener('mouseleave', () => {
-                this.animateSkillBadge(badge, 'leave');
-            });
-        });
-    }
-
-    // Particle System
-    createParticles() {
-        const container = document.getElementById('particles-container');
-        
-        // Create initial particles
-        for (let i = 0; i < 50; i++) {
-            this.createParticle(container);
-        }
-
-        // Continuously create new particles
-        setInterval(() => {
-            if (this.particles.length < 100) {
-                this.createParticle(container);
-            }
-        }, 200);
-    }
-
-    createParticle(container) {
-        const particle = document.createElement('div');
-        particle.className = 'particle';
-        
-        // Random properties
-        const size = Math.random() * 4 + 1;
-        const startX = Math.random() * window.innerWidth;
-        const duration = Math.random() * 4 + 4;
-        const delay = Math.random() * 2;
-        
-        // Random color
-        const colors = ['#00FFFF', '#FF00FF', '#9B59B6', '#3498DB'];
-        const color = colors[Math.floor(Math.random() * colors.length)];
-        
-        particle.style.cssText = `
-            width: ${size}px;
-            height: ${size}px;
-            left: ${startX}px;
-            background: ${color};
-            animation-duration: ${duration}s;
-            animation-delay: ${delay}s;
-            box-shadow: 0 0 ${size * 2}px ${color};
+    // ============================================
+    // BOOT SEQUENCE
+    // ============================================
+    showBootSequence() {
+        const bootScreen = document.createElement('div');
+        bootScreen.className = 'boot-screen';
+        bootScreen.innerHTML = `
+            <div class="boot-text">
+                WAYNE ENT. APPLIED SCIENCES<br>
+                AUTHORIZING ACCESS...
+            </div>
         `;
-        
-        container.appendChild(particle);
-        this.particles.push(particle);
-        
-        // Remove particle after animation
+        document.body.appendChild(bootScreen);
+
+        // Remove boot screen after 2.5 seconds
         setTimeout(() => {
-            if (particle.parentNode) {
-                particle.parentNode.removeChild(particle);
-                const index = this.particles.indexOf(particle);
-                if (index > -1) {
-                    this.particles.splice(index, 1);
-                }
-            }
-        }, (duration + delay) * 1000);
+            bootScreen.remove();
+        }, 2500);
     }
 
-    // Cursor Trail Effect
-    createCursorTrail() {
-        const trail = document.createElement('div');
-        trail.className = 'cursor-particle';
-        trail.style.left = this.mouseX + 'px';
-        trail.style.top = this.mouseY + 'px';
-        
-        document.getElementById('cursor-trail').appendChild(trail);
-        this.cursorTrails.push(trail);
-        
-        // Remove old trails
-        if (this.cursorTrails.length > this.maxTrails) {
-            const oldTrail = this.cursorTrails.shift();
-            if (oldTrail.parentNode) {
-                oldTrail.parentNode.removeChild(oldTrail);
-            }
-        }
-        
-        // Remove trail after animation
-        setTimeout(() => {
-            if (trail.parentNode) {
-                trail.parentNode.removeChild(trail);
-            }
-        }, 800);
-    }
+    // ============================================
+    // TYPING ANIMATION
+    // ============================================
+    initTypingAnimation() {
+        const roles = [
+            'SOFTWARE ENGINEER INTERN @ TD BANK',
+            'DEVOPS ENGINEER'
+        ];
 
-    // Update custom cursor position
-    updateCustomCursor() {
-        document.addEventListener('mousemove', (e) => {
-            document.body.style.setProperty('--cursor-x', e.clientX + 'px');
-            document.body.style.setProperty('--cursor-y', e.clientY + 'px');
-        });
+        const typedElement = document.getElementById('typed-role');
+        if (!typedElement) return;
 
-        // Update cursor position via CSS custom properties
-        const updateCursor = () => {
-            document.documentElement.style.setProperty('--cursor-x', this.mouseX + 'px');
-            document.documentElement.style.setProperty('--cursor-y', this.mouseY + 'px');
-            requestAnimationFrame(updateCursor);
-        };
-        updateCursor();
-    }
+        let roleIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let typingSpeed = 100;
 
-    // Typing Animation
-    startTypingAnimation() {
-        const text = "AI-driven DevOps & Software Engineer | Learning how systems think - and helping them think better";
-        const element = document.getElementById('typed-tagline');
-        const cursor = document.querySelector('.cursor');
-        let index = 0;
-        this.isTyping = true;
-        
-        const typeChar = () => {
-            if (index < text.length) {
-                element.textContent += text.charAt(index);
-                index++;
-                setTimeout(typeChar, Math.random() * 100 + 50);
+        const type = () => {
+            const currentRole = roles[roleIndex];
+
+            if (isDeleting) {
+                typedElement.textContent = currentRole.substring(0, charIndex - 1);
+                charIndex--;
+                typingSpeed = 50;
             } else {
-                this.isTyping = false;
-                // Optional: restart typing after delay
-                setTimeout(() => {
-                    element.textContent = '';
-                    index = 0;
-                    this.startTypingAnimation();
-                }, 5000);
+                typedElement.textContent = currentRole.substring(0, charIndex + 1);
+                charIndex++;
+                typingSpeed = 100;
             }
+
+            if (!isDeleting && charIndex === currentRole.length) {
+                // Pause at end
+                typingSpeed = 2000;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                roleIndex = (roleIndex + 1) % roles.length;
+                typingSpeed = 500;
+            }
+
+            setTimeout(type, typingSpeed);
         };
-        
-        // Clear and start typing
-        element.textContent = '';
-        setTimeout(typeChar, 1000);
+
+        // Start typing after boot sequence
+        setTimeout(type, 2500);
     }
 
-    // Scroll Animations
-    setupScrollAnimations() {
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
+    // ============================================
+    // STAT COUNTERS
+    // ============================================
+    initStatCounters() {
+        const statValues = document.querySelectorAll('.stat-value');
+
+        const animateCounter = (element) => {
+            const target = parseFloat(element.getAttribute('data-target'));
+            const duration = 2000;
+            const increment = target / (duration / 16);
+            let current = 0;
+            const isDecimal = target % 1 !== 0;
+
+            const updateCounter = () => {
+                current += increment;
+                if (current < target) {
+                    element.textContent = isDecimal ? current.toFixed(1) : Math.floor(current).toLocaleString();
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    element.textContent = isDecimal ? target.toFixed(1) : target.toLocaleString();
+                }
+            };
+
+            updateCounter();
         };
 
+        // Observe stat cards and animate when visible
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('fade-in-up');
-                    
-                    // Animate skill badges with stagger
-                    if (entry.target.classList.contains('skill-category')) {
-                        const badges = entry.target.querySelectorAll('.skill-badge');
-                        badges.forEach((badge, index) => {
-                            setTimeout(() => {
-                                badge.style.animation = 'fadeInUp 0.6s ease-out forwards';
-                            }, index * 100);
-                        });
-                    }
-                    
-                    // Animate project cards with stagger
-                    if (entry.target.classList.contains('projects-grid')) {
-                        const cards = entry.target.querySelectorAll('.project-card');
-                        cards.forEach((card, index) => {
-                            setTimeout(() => {
-                                card.style.animation = 'fadeInUp 0.8s ease-out forwards';
-                            }, index * 150);
-                        });
-                    }
+                    animateCounter(entry.target);
+                    observer.unobserve(entry.target);
                 }
             });
-        }, observerOptions);
+        }, { threshold: 0.5 });
 
-        // Observe elements
-        document.querySelectorAll('.skill-category, .project-card, .contact-link, .projects-grid').forEach(el => {
-            observer.observe(el);
+        statValues.forEach(stat => observer.observe(stat));
+    }
+
+    // ============================================
+    // DOWNLOAD CLEARANCE (PS5 PROGRESS BAR)
+    // ============================================
+    initDownloadClearance() {
+        const downloadBtn = document.getElementById('download-resume');
+        const progressContainer = document.getElementById('download-progress');
+
+        if (!downloadBtn || !progressContainer) return;
+
+        downloadBtn.addEventListener('click', () => {
+            // Hide button, show progress
+            downloadBtn.style.opacity = '0';
+            downloadBtn.style.pointerEvents = 'none';
+            progressContainer.classList.add('active');
+
+            const progressFill = progressContainer.querySelector('.progress-bar-fill');
+            const progressPercentage = progressContainer.querySelector('.progress-percentage');
+            const progressLabel = progressContainer.querySelector('.progress-label');
+            const progressStatus = progressContainer.querySelector('.progress-status');
+
+            let progress = 0;
+            const duration = 2000; // 2 seconds
+            const interval = 20; // Update every 20ms
+            const increment = (100 / duration) * interval;
+
+            const statusMessages = [
+                'DECRYPTING PERSONNEL DATA',
+                'VALIDATING CLEARANCE LEVEL',
+                'COMPILING MISSION RECORDS',
+                'GENERATING SECURE FILE',
+                'FINALIZING DOCUMENT'
+            ];
+
+            const progressInterval = setInterval(() => {
+                progress += increment;
+
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(progressInterval);
+
+                    // Update final status
+                    progressLabel.textContent = 'DOWNLOAD AUTHORIZED';
+                    progressStatus.textContent = 'FILE READY';
+                    progressPercentage.textContent = '100%';
+                    progressFill.style.width = '100%';
+
+                    // Trigger actual download
+                    setTimeout(() => {
+                        // Replace with actual resume path
+                        window.open('resume.pdf', '_blank');
+
+                        // Reset UI after download
+                        setTimeout(() => {
+                            progressContainer.classList.remove('active');
+                            downloadBtn.style.opacity = '1';
+                            downloadBtn.style.pointerEvents = 'all';
+                            progress = 0;
+                            progressFill.style.width = '0%';
+                            progressPercentage.textContent = '0%';
+                            progressLabel.textContent = 'GENERATING SECURE FILE...';
+                            progressStatus.textContent = 'DECRYPTING PERSONNEL DATA';
+                        }, 1000);
+                    }, 500);
+                } else {
+                    // Update progress
+                    progressFill.style.width = progress + '%';
+                    progressPercentage.textContent = Math.floor(progress) + '%';
+
+                    // Update status message based on progress
+                    const statusIndex = Math.floor((progress / 100) * statusMessages.length);
+                    if (statusIndex < statusMessages.length) {
+                        progressStatus.textContent = statusMessages[statusIndex];
+                    }
+                }
+            }, interval);
         });
     }
 
-    // Theme Toggle
-    setupThemeToggle() {
-        const toggle = document.getElementById('theme-toggle');
-        let currentTheme = 'default';
-        
-        toggle.addEventListener('click', () => {
-            if (currentTheme === 'default') {
-                document.body.classList.add('theme-purple');
-                currentTheme = 'purple';
-                toggle.querySelector('.theme-icon').textContent = '🟣';
-            } else {
-                document.body.classList.remove('theme-purple');
-                currentTheme = 'default';
-                toggle.querySelector('.theme-icon').textContent = '🌓';
-            }
-            
-            // Add click animation
-            toggle.style.transform = 'scale(0.9) rotate(180deg)';
-            setTimeout(() => {
-                toggle.style.transform = 'scale(1) rotate(360deg)';
-            }, 150);
-        });
-    }
-
-    // Smooth Scrolling
-    setupSmoothScroll() {
-        // Add smooth scrolling behavior
-        document.documentElement.style.scrollBehavior = 'smooth';
-        
-        // Update navigation active states on scroll
-        window.addEventListener('scroll', () => {
-            const sections = document.querySelectorAll('section[id]');
-            const scrollPos = window.pageYOffset;
-            
-            sections.forEach(section => {
-                const top = section.offsetTop - 100;
-                const bottom = top + section.offsetHeight;
-                const id = section.getAttribute('id');
-                
-                if (scrollPos >= top && scrollPos < bottom) {
-                    document.querySelectorAll('.nav-link').forEach(link => {
-                        link.classList.remove('active');
-                        if (link.getAttribute('href') === `#${id}`) {
-                            link.classList.add('active');
-                        }
+    // ============================================
+    // SMOOTH SCROLL
+    // ============================================
+    initSmoothScroll() {
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
                     });
                 }
             });
         });
     }
 
-    // Project Card Animations
-    animateProjectCard(card, type) {
-        const icon = card.querySelector('.project-icon');
-        const techBadges = card.querySelectorAll('.tech-badge');
-        
-        if (type === 'enter') {
-            // Scale and rotate icon
-            icon.style.transform = 'scale(1.2) rotate(10deg)';
-            icon.style.filter = 'drop-shadow(0 0 20px var(--neon-cyan))';
-            
-            // Animate tech badges
-            techBadges.forEach((badge, index) => {
-                setTimeout(() => {
-                    badge.style.transform = 'translateY(-3px)';
-                    badge.style.boxShadow = '0 5px 15px rgba(0, 255, 255, 0.2)';
-                }, index * 50);
-            });
-            
-            // Add glow effect
-            card.style.boxShadow = `
-                0 20px 40px rgba(0, 0, 0, 0.3),
-                0 0 30px rgba(0, 255, 255, 0.3),
-                inset 0 0 30px rgba(255, 0, 255, 0.1)
-            `;
-        } else {
-            // Reset animations
-            icon.style.transform = '';
-            icon.style.filter = '';
-            
-            techBadges.forEach(badge => {
-                badge.style.transform = '';
-                badge.style.boxShadow = '';
-            });
-            
-            card.style.boxShadow = '';
-        }
-    }
+    // ============================================
+    // CUSTOM CURSOR
+    // ============================================
+    initCustomCursor() {
+        const cursor = document.querySelector('.tactical-cursor');
+        const cursorTrail = document.querySelector('.cursor-trail');
 
-    // Skill Badge Animations
-    animateSkillBadge(badge, type) {
-        if (type === 'enter') {
-            // Create ripple effect
-            const ripple = document.createElement('div');
-            ripple.style.cssText = `
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                width: 0;
-                height: 0;
-                border-radius: 50%;
-                background: radial-gradient(circle, rgba(255, 0, 255, 0.3), transparent);
-                transform: translate(-50%, -50%);
-                animation: ripple 0.6s ease-out;
-                pointer-events: none;
-                z-index: 1;
-            `;
-            
-            badge.style.position = 'relative';
-            badge.appendChild(ripple);
-            
-            // Add ripple animation
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes ripple {
-                    0% {
-                        width: 0;
-                        height: 0;
-                        opacity: 1;
-                    }
-                    100% {
-                        width: 100px;
-                        height: 100px;
-                        opacity: 0;
-                    }
-                }
-            `;
-            document.head.appendChild(style);
-            
-            // Remove ripple after animation
-            setTimeout(() => {
-                if (ripple.parentNode) {
-                    ripple.parentNode.removeChild(ripple);
-                }
-                if (style.parentNode) {
-                    style.parentNode.removeChild(style);
-                }
-            }, 600);
-        }
-    }
+        if (!cursor) return;
 
-    // Handle Resize
-    handleResize() {
-        // Update particle positions if needed
-        this.particles.forEach(particle => {
-            const currentLeft = parseInt(particle.style.left);
-            if (currentLeft > window.innerWidth) {
-                particle.style.left = Math.random() * window.innerWidth + 'px';
+        let mouseX = 0, mouseY = 0;
+        let cursorX = 0, cursorY = 0;
+        let trailX = 0, trailY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        // Smooth cursor animation
+        const animateCursor = () => {
+            // Main cursor - fast follow
+            cursorX += (mouseX - cursorX) * 0.2;
+            cursorY += (mouseY - cursorY) * 0.2;
+            cursor.style.left = cursorX + 'px';
+            cursor.style.top = cursorY + 'px';
+
+            // Trail - slower follow
+            if (cursorTrail) {
+                trailX += (mouseX - trailX) * 0.1;
+                trailY += (mouseY - trailY) * 0.1;
+                cursorTrail.style.left = trailX + 'px';
+                cursorTrail.style.top = trailY + 'px';
             }
+
+            requestAnimationFrame(animateCursor);
+        };
+        animateCursor();
+
+        // Hover effects on interactive elements
+        const interactiveElements = document.querySelectorAll('a, button, .access-card, .dossier-node, .timeline-node, .tech-badge');
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'scale(1.5)';
+                cursor.querySelector('::before')?.style?.setProperty('background', '#00FF00');
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'scale(1)';
+            });
         });
-    }
-
-    // Handle Scroll
-    handleScroll() {
-        const scrolled = window.pageYOffset;
-        const rate = scrolled * -0.5;
-        
-        // Parallax effect for hero section
-        const hero = document.querySelector('.hero');
-        if (hero) {
-            hero.style.transform = `translateY(${rate}px)`;
-        }
-        
-        // Update navigation transparency
-        const nav = document.querySelector('.nav');
-        if (nav) {
-            const opacity = Math.min(scrolled / 100, 0.95);
-            nav.style.background = `rgba(10, 10, 10, ${opacity})`;
-        }
-    }
-
-    // Add glitch effect to text elements
-    addGlitchEffect(element) {
-        const text = element.textContent;
-        element.setAttribute('data-text', text);
-        
-        const glitchChars = '!@#$%^&*()_+-=[]{}|;:,.<>?';
-        let isGlitching = false;
-        
-        element.addEventListener('mouseenter', () => {
-            if (isGlitching) return;
-            isGlitching = true;
-            
-            let iterations = 0;
-            const maxIterations = 10;
-            
-            const glitchInterval = setInterval(() => {
-                if (iterations >= maxIterations) {
-                    element.textContent = text;
-                    isGlitching = false;
-                    clearInterval(glitchInterval);
-                    return;
-                }
-                
-                element.textContent = text
-                    .split('')
-                    .map((char, index) => {
-                        if (index < iterations) {
-                            return text[index];
-                        }
-                        return glitchChars[Math.floor(Math.random() * glitchChars.length)];
-                    })
-                    .join('');
-                
-                iterations++;
-            }, 50);
-        });
-    }
-
-    // Initialize Easter Eggs
-    initEasterEggs() {
-        // Konami Code Easter Egg
-        const konamiCode = [
-            'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
-            'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight',
-            'KeyB', 'KeyA'
-        ];
-        let konamiIndex = 0;
-        
-        document.addEventListener('keydown', (e) => {
-            if (e.code === konamiCode[konamiIndex]) {
-                konamiIndex++;
-                if (konamiIndex === konamiCode.length) {
-                    this.activateEasterEgg();
-                    konamiIndex = 0;
-                }
-            } else {
-                konamiIndex = 0;
-            }
-        });
-    }
-
-    activateEasterEgg() {
-        // Create matrix rain effect
-        const matrixContainer = document.createElement('div');
-        matrixContainer.style.cssText = `
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 9999;
-            background: rgba(0, 0, 0, 0.8);
-        `;
-        
-        document.body.appendChild(matrixContainer);
-        
-        // Add matrix characters
-        for (let i = 0; i < 50; i++) {
-            this.createMatrixChar(matrixContainer);
-        }
-        
-        // Remove after 5 seconds
-        setTimeout(() => {
-            document.body.removeChild(matrixContainer);
-        }, 5000);
-    }
-
-    createMatrixChar(container) {
-        const char = document.createElement('div');
-        const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
-        
-        char.textContent = chars[Math.floor(Math.random() * chars.length)];
-        char.style.cssText = `
-            position: absolute;
-            top: -20px;
-            left: ${Math.random() * 100}%;
-            color: #00ff00;
-            font-family: 'Courier New', monospace;
-            font-size: ${Math.random() * 20 + 10}px;
-            animation: matrixFall ${Math.random() * 3 + 2}s linear infinite;
-        `;
-        
-        container.appendChild(char);
-        
-        // Add CSS animation
-        if (!document.getElementById('matrix-style')) {
-            const style = document.createElement('style');
-            style.id = 'matrix-style';
-            style.textContent = `
-                @keyframes matrixFall {
-                    0% {
-                        transform: translateY(-20px);
-                        opacity: 1;
-                    }
-                    100% {
-                        transform: translateY(100vh);
-                        opacity: 0;
-                    }
-                }
-            `;
-            document.head.appendChild(style);
-        }
     }
 }
 
-// Initialize the application
+// ============================================
+// INITIALIZE ON DOM LOAD
+// ============================================
 document.addEventListener('DOMContentLoaded', () => {
-    const portfolio = new CyberpunkPortfolio();
-    
-    // Add some additional interactive features
-    
-    // Audio feedback for interactions (optional)
-    const playHoverSound = () => {
-        // Create a subtle beep sound using Web Audio API
-        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        const oscillator = audioContext.createOscillator();
-        const gainNode = audioContext.createGain();
-        
-        oscillator.connect(gainNode);
-        gainNode.connect(audioContext.destination);
-        
-        oscillator.frequency.value = 800;
-        oscillator.type = 'sine';
-        
-        gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
-        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
-        
-        oscillator.start(audioContext.currentTime);
-        oscillator.stop(audioContext.currentTime + 0.1);
-    };
-    
-    // Add hover sounds to interactive elements
-    document.querySelectorAll('.social-link, .contact-link, .nav-link').forEach(element => {
-        element.addEventListener('mouseenter', () => {
-            // Uncomment to enable hover sounds
-            // playHoverSound();
-        });
-    });
-    
-    // Add loading animation
-    window.addEventListener('load', () => {
-        document.body.classList.add('loaded');
-    });
-    
-    // Initialize Easter eggs
-    portfolio.initEasterEggs();
-    
-    console.log('🚀 Cyberpunk Portfolio Initialized');
-    console.log('💡 Try the Konami Code for a surprise!');
+    const dashboard = new TacticalDashboard();
+    console.log('🎯 TACTICAL DASHBOARD INITIALIZED');
+    console.log('🔒 SECURITY CLEARANCE: LEVEL-5');
+    console.log('✅ ALL SYSTEMS OPERATIONAL');
 });

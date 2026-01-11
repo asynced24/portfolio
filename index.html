@@ -1,344 +1,581 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aryan Singh - DevOps &amp; Software Engineer</title>
+    <title>ARYAN SINGH // TACTICAL COMMAND INTERFACE</title>
+    <meta name="description" content="DevOps & Software Engineer - Tactical Command Dashboard">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Audiowide&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="tactical-theme.css">
 </head>
-<body>
-    <!-- Particle Background -->
-    <div id="particles-container"></div>
-    
-    <!-- Cursor Trail -->
-    <div id="cursor-trail"></div>
 
-    <!-- Theme Toggle -->
-    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
-        <span class="theme-icon">🌓</span>
-    </button>
+<body data-theme="tactical">
+    <!-- Tactical Grid Background -->
+    <div class="tactical-grid"></div>
+    <div class="scan-lines"></div>
+
+    <!-- HUD Overlay -->
+    <div class="hud-overlay">
+        <div class="hud-corner hud-tl"></div>
+        <div class="hud-corner hud-tr"></div>
+        <div class="hud-corner hud-bl"></div>
+        <div class="hud-corner hud-br"></div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="tactical-cursor"></div>
+    <div class="cursor-trail"></div>
 
     <!-- Navigation -->
-    <nav class="nav">
+    <nav class="tactical-nav">
         <div class="nav-container">
-            <a href="#hero" class="nav-logo">ASYNC</a>
+            <div class="nav-logo">
+                <span class="logo-bracket">[</span>
+                <span class="logo-text">WAYNE_ENTERPRISES</span>
+                <span class="logo-bracket">]</span>
+            </div>
             <div class="nav-links">
-                <a href="#hero" class="nav-link">Home</a>
-                <a href="#about" class="nav-link">About</a>
-                <a href="#projects" class="nav-link">Projects</a>
-                <a href="#contact" class="nav-link">Contact</a>
+                <a href="#command" class="nav-link"><span class="link-icon">▸</span>COMMAND</a>
+                <a href="#timeline" class="nav-link"><span class="link-icon">▸</span>TIMELINE</a>
+                <a href="#dossier" class="nav-link"><span class="link-icon">▸</span>DOSSIER</a>
+                <a href="#projects" class="nav-link"><span class="link-icon">▸</span>PROJECTS</a>
+                <a href="#arsenal" class="nav-link"><span class="link-icon">▸</span>ARSENAL</a>
+                <a href="#clearance" class="nav-link"><span class="link-icon">▸</span>CLEARANCE</a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="hero" class="hero">
-        <div class="hero-content">
-            <div class="hero-glitch" data-text="Async">
-                <h1 class="hero-title">Aryan Singh</h1>
-            </div>
-            <div class="hero-subtitle">
-                <span id="typed-tagline"></span>
-                <span class="cursor">|</span>
-            </div>
-            <div class="hero-social">
-                <a href="https://github.com/asynced24" target="_blank" class="social-link">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
-                    </svg>
-                </a>
-                <a href="https://linkedin.com/in/aryansingh24" target="_blank" class="social-link">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                    </svg>
-                </a>
-                <a href="mailto:aryanssingh437@gmail.com" class="social-link">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 010 19.366V5.457c0-.904.732-1.636 1.636-1.636h.749L12 11.367 21.615 3.821h.749c.904 0 1.636.732 1.636 1.636z"/>
-                    </svg>
-                </a>
-            </div>
-        </div>
-        <div class="hero-scroll">
-            <div class="scroll-indicator">
-                <span>Scroll</span>
-                <div class="scroll-arrow"></div>
-            </div>
-        </div>
-    </section>
-            
-    <!-- About Section -->
-<section id="about" class="about">
-    <div class="container">
-        <!-- Two Logos Equispaced -->
-        <div class="logos-container">
-            <!-- McMaster Logo - Left (Original Image) -->
-            <div class="mcmaster-logo-badge">
-                <img src="mcmaster-logo.png" alt="McMaster University" class="mcmaster-img">
-                <div class="logo-glow-effect"></div>
-            </div>
-
-            <!-- TD Bank Logo - Right -->
-            <div class="td-logo-badge">
-                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Green Square Background with Cyberpunk Glow -->
-                    <rect x="15" y="15" width="70" height="70" fill="#54B848" rx="5" class="td-square"/>
-                    
-                    <!-- Outer Glow Square -->
-                    <rect x="12" y="12" width="76" height="76" fill="none" stroke="#54B848" stroke-width="2" rx="8" class="td-glow-outer" opacity="0.5"/>
-                    
-                    <!-- TD Letters -->
-                    <g class="td-letters">
-                        <!-- T Letter -->
-                        <path d="M30 35 L30 70 M25 35 L45 35" stroke="white" stroke-width="5" stroke-linecap="round" fill="none"/>
-                        
-                        <!-- D Letter -->
-                        <path d="M45 35 L45 70 M45 35 Q65 35 65 52.5 Q65 70 45 70" stroke="white" stroke-width="5" stroke-linecap="round" fill="none"/>
-                    </g>
-                    
-                    <!-- Corner Accents -->
-                    <path d="M15 20 L15 15 L20 15" stroke="#00FFFF" stroke-width="1.5" fill="none" class="corner-accent"/>
-                    <path d="M80 15 L85 15 L85 20" stroke="#00FFFF" stroke-width="1.5" fill="none" class="corner-accent"/>
-                    <path d="M85 80 L85 85 L80 85" stroke="#00FFFF" stroke-width="1.5" fill="none" class="corner-accent"/>
-                    <path d="M20 85 L15 85 L15 80" stroke="#00FFFF" stroke-width="1.5" fill="none" class="corner-accent"/>
-                    
-                    <!-- TD Bank Text -->
-                    <text x="50" y="95" font-family="Orbitron, sans-serif" font-size="7" fill="#54B848" text-anchor="middle" opacity="0.9">TD BANK</text>
-                </svg>
-            </div>
-        </div>
-
-        <h2 class="section-title" data-text="About Me">
-            <span class="glitch">About Me</span>
-        </h2>
-        <div class="about-content">
-            <div class="about-text">
-                <p>I'm Aryan Singh, a Master of Engineering student at McMaster University & Software Engineer Intern at TD Bank, working on DevSecOps initiatives. I love building end-to-end systems that merge development and automation — from backend APIs to CI/CD pipelines. I'm passionate about cloud, automation, and modern software delivery.</p>
-            </div>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3>DevOps Tools</h3>
-                    <div class="skill-badges">
-                        <span class="skill-badge">Docker</span>
-                        <span class="skill-badge">Terraform</span>
-                        <span class="skill-badge">GitHub Actions</span>
-                        <span class="skill-badge">Jenkins</span>
-                        <span class="skill-badge">SonarQube</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3>Languages</h3>
-                    <div class="skill-badges">
-                        <span class="skill-badge">Python</span>
-                        <span class="skill-badge">Java</span>
-                        <span class="skill-badge">Groovy</span>
-                        <span class="skill-badge">JavaScript</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3>Cloud</h3>
-                    <div class="skill-badges">
-                        <span class="skill-badge">AWS</span>
-                        <span class="skill-badge">Azure</span>
-                        <span class="skill-badge">GCP</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3>Monitoring</h3>
-                    <div class="skill-badges">
-                        <span class="skill-badge">Prometheus</span>
-                        <span class="skill-badge">Grafana</span>
-                        <span class="skill-badge">ELK Stack</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-
-
-    <!-- Projects Section -->
-    <section id="projects" class="projects">
-    <div class="container">
-        <h2 class="section-title" data-text="Projects">
-        <span class="glitch">Projects</span>
-        </h2>
-        <div class="projects-grid">
-
-        <!-- Financial AI Risk Framework -->
-        <div class="project-card">
-            <div class="project-header">
-            <h3>Financial AI Risk & Governance Framework</h3>
-            <div class="project-icon">💹</div>
-            </div>
-            <p class="project-description">
-            Built a validation and governance framework for financial AI models, ensuring fairness, reproducibility, and accountability across ML pipelines. Integrated MLflow and statistical risk testing for transparency.
-            </p>
-            <div class="project-tech">
-            <span class="tech-badge">Python</span>
-            <span class="tech-badge">MLflow</span>
-            <span class="tech-badge">Governance</span>
-            <span class="tech-badge">Risk Analytics</span>
-            </div>
-            <a href="https://github.com/asynced24/financial-ai-risk-governance-framework" target="_blank" class="project-link">🔗 View on GitHub</a>
-        </div>
-
-        <!-- SME Credit Model -->
-        <div class="project-card">
-            <div class="project-header">
-            <h3>SME Credit Risk Model (ALP Tech Intern)</h3>
-            <div class="project-icon">🏦</div>
-            </div>
-            <p class="project-description">
-            Machine learning model for SME credit scoring using Bayesian priors and financial analytics. Deployed for multi-country SME portfolios. 
-            <strong>Link coming soon 🔜</strong>
-            </p>
-            <div class="project-tech">
-            <span class="tech-badge">Python</span>
-            <span class="tech-badge">Bayesian ML</span>
-            <span class="tech-badge">Streamlit</span>
-            <span class="tech-badge">Finance</span>
-            </div>
-            <a href="#" class="project-link disabled">🔒 Coming Soon</a>
-        </div>
-
-        <!-- Vision-GPT2 -->
-        <div class="project-card">
-            <div class="project-header">
-            <h3>Vision-GPT2 Image Captioning</h3>
-            <div class="project-icon">🤖</div>
-            </div>
-            <p class="project-description">
-            Combined Vision Transformers and GPT-2 for multimodal caption generation. Achieved state-of-the-art caption accuracy on Flickr8K dataset with transformer-based tuning.
-            </p>
-            <div class="project-tech">
-            <span class="tech-badge">Python</span>
-            <span class="tech-badge">PyTorch</span>
-            <span class="tech-badge">Transformers</span>
-            <span class="tech-badge">GPT-2</span>
-            </div>
-            <a href="https://github.com/asynced24/vision-gpt2-image-captioning" target="_blank" class="project-link">🔗 View on GitHub</a>
-        </div>
-
-        <!-- Fetal Health Classification -->
-        <div class="project-card">
-            <div class="project-header">
-            <h3>Fetal Health Classification</h3>
-            <div class="project-icon">🧠</div>
-            </div>
-            <p class="project-description">
-            End-to-end classification pipeline achieving 95%+ F1-score using TensorFlow and cross-validation. Includes automated risk scoring and validation reports.
-            </p>
-            <div class="project-tech">
-            <span class="tech-badge">Python</span>
-            <span class="tech-badge">TensorFlow</span>
-            <span class="tech-badge">Neural Nets</span>
-            </div>
-            <a href="https://github.com/asynced24/fetal-health-classification" target="_blank" class="project-link">🔗 View on GitHub</a>
-        </div>
-
-        <!-- Smart Manufacturing QC -->
-        <div class="project-card">
-            <div class="project-header">
-            <h3>Smart Manufacturing Quality Control</h3>
-            <div class="project-icon">🏭</div>
-            </div>
-            <p class="project-description">
-            Raspberry Pi vision-based system for real-time defect detection and cloud analytics using PubNub IoT integration.
-            </p>
-            <div class="project-tech">
-            <span class="tech-badge">IoT</span>
-            <span class="tech-badge">Computer Vision</span>
-            <span class="tech-badge">Edge AI</span>
-            </div>
-            <a href="https://github.com/asynced24/smart-manufacturing-qc-system" target="_blank" class="project-link">🔗 View on GitHub</a>
-        </div>
-
-        <!-- Distributed Log Analytics -->
-        <div class="project-card">
-            <div class="project-header">
-            <h3>Distributed Log Analytics Platform</h3>
-            <div class="project-icon">☁️</div>
-            </div>
-            <p class="project-description">
-            Event-driven pipeline using Kinesis, Lambda, and Athena processing 50K events/s. Terraform-based IaC with cost-optimized scaling.
-            </p>
-            <div class="project-tech">
-            <span class="tech-badge">AWS</span>
-            <span class="tech-badge">Terraform</span>
-            <span class="tech-badge">Kinesis</span>
-            </div>
-        </div>
-
-        <!-- Smart Street Light -->
-        <div class="project-card">
-            <div class="project-header">
-            <h3>Smart Street Light Monitoring System</h3>
-            <div class="project-icon">💡</div>
-            </div>
-            <p class="project-description">
-            IoT-based intelligent lighting system using ML for predictive maintenance and adaptive scheduling.
-            </p>
-            <div class="project-tech">
-            <span class="tech-badge">IoT</span>
-            <span class="tech-badge">Machine Learning</span>
-            </div>
-        </div>
-
-        </div>
-    </div>
-    </section>
-
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
+    <!-- Hero Command Center -->
+    <section id="command" class="command-center">
         <div class="container">
-            <h2 class="section-title" data-text="Contact">
-                <span class="glitch">Let's Build Something Awesome Together 💻</span>
+            <div class="command-header">
+                <div class="status-bar">
+                    <span class="status-item">STATUS: <span class="status-active">ACTIVE</span></span>
+                    <span class="status-item">CLEARANCE: <span class="status-level">LEVEL-5</span></span>
+                    <span class="status-item">UPTIME: <span id="uptime">99.97%</span></span>
+                </div>
+            </div>
+
+            <div class="command-identity">
+                <h1 class="identity-name">
+                    <span class="name-prefix">AGENT://</span>
+                    ARYAN SINGH
+                </h1>
+                <div class="identity-role">
+                    <span id="typed-role"></span>
+                    <span class="cursor-blink">█</span>
+                </div>
+            </div>
+
+            <!-- Bento Grid Layout -->
+            <div class="bento-grid">
+                <div class="bento-card radar-card">
+                    <div class="card-header"><span class="card-label">SYSTEM CAPABILITIES</span></div>
+                    <div class="radar-container">
+                        <svg class="radar-chart" viewBox="-50 -10 300 220">
+                            <!-- Grid lines -->
+                            <polygon class="radar-grid" points="100,20 180,100 100,180 20,100" />
+                            <polygon class="radar-grid" points="100,40 160,100 100,160 40,100" />
+                            <polygon class="radar-grid" points="100,60 140,100 100,140 60,100" />
+                            <polygon class="radar-grid" points="100,80 120,100 100,120 80,100" />
+                            <!-- Axis lines -->
+                            <line class="radar-axis" x1="100" y1="20" x2="100" y2="180" />
+                            <line class="radar-axis" x1="20" y1="100" x2="180" y2="100" />
+                            <!-- Data polygon -->
+                            <polygon class="radar-data" points="100,28 172,100 100,166 24,100">
+                                <animate attributeName="points" from="100,100 100,100 100,100 100,100"
+                                    to="100,28 172,100 100,166 24,100" dur="1.5s" fill="freeze" begin="2.5s" />
+                            </polygon>
+                            <!-- Data points -->
+                            <circle class="radar-point" cx="100" cy="28" r="4">
+                                <animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="4s" fill="freeze" />
+                            </circle>
+                            <circle class="radar-point" cx="172" cy="100" r="4">
+                                <animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="4.1s"
+                                    fill="freeze" />
+                            </circle>
+                            <circle class="radar-point" cx="100" cy="166" r="4">
+                                <animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="4.2s"
+                                    fill="freeze" />
+                            </circle>
+                            <circle class="radar-point" cx="24" cy="100" r="4">
+                                <animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="4.3s"
+                                    fill="freeze" />
+                            </circle>
+                            <!-- Labels -->
+                            <text class="radar-label" x="100" y="5" text-anchor="middle">CLOUD</text>
+                            <text class="radar-label" x="195" y="105" text-anchor="start">ML</text>
+                            <text class="radar-label" x="100" y="200" text-anchor="middle">DEVOPS</text>
+                            <text class="radar-label" x="-45" y="105" text-anchor="start">FULLSTACK</text>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="bento-card stat-card">
+                    <div class="card-header"><span class="card-label">MISSION SUCCESS</span></div>
+                    <div class="stat-value" data-target="3.9">0.0</div>
+                    <div class="stat-unit">GPA RATING</div>
+                </div>
+
+                <div class="bento-card stat-card">
+                    <div class="card-header"><span class="card-label">CLOUD PLATFORMS</span></div>
+                    <div class="stat-value" data-target="2">0</div>
+                    <div class="stat-unit">AWS • AZURE</div>
+                </div>
+
+                <div class="bento-card contact-card">
+                    <div class="card-header"><span class="card-label">SECURE CHANNELS</span></div>
+                    <div class="contact-grid">
+                        <a href="https://github.com/asynced24" target="_blank" class="contact-btn">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+                            </svg>
+                            <span>GITHUB</span>
+                        </a>
+                        <a href="https://linkedin.com/in/aryansingh24" target="_blank" class="contact-btn">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                            </svg>
+                            <span>LINKEDIN</span>
+                        </a>
+                        <a href="mailto:aryanssingh437@gmail.com" class="contact-btn">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 010 19.366V5.457c0-.904.732-1.636 1.636-1.636h.749L12 11.367 21.615 3.821h.749c.904 0 1.636.732 1.636 1.636z" />
+                            </svg>
+                            <span>EMAIL</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Career Timeline Section -->
+    <section id="timeline" class="career-timeline">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="title-bracket">[</span>MISSION TIMELINE<span class="title-bracket">]</span>
             </h2>
-            <div class="contact-content">
-                <div class="contact-links">
-                    <a href="https://github.com/asynced24" target="_blank" class="contact-link">
-                        <div class="contact-icon">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+
+            <div class="timeline-wrapper">
+                <div class="timeline-line"></div>
+
+                <div class="timeline-node active" data-year="2025">
+                    <div class="node-dot"></div>
+                    <div class="node-content">
+                        <span class="node-date">SEP 2025 - PRESENT</span>
+                        <span class="node-role">SOFTWARE ENGINEER INTERN</span>
+                        <span class="node-company">TD BANK</span>
+                        <span class="node-badge alpha">ACTIVE</span>
+                    </div>
+                    <div class="node-details">
+                        <ul class="detail-points">
+                            <li>Reduced secrets misconfiguration by 30% via Vault-backed schemas for CRM pipelines</li>
+                            <li>Accelerated deployment cycles by 20% by refactoring Jenkins shared libraries</li>
+                            <li>Designed CI/CD validation framework enforcing security gates across 15+ microservices
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-node" data-year="2025">
+                    <div class="node-dot"></div>
+                    <div class="node-content">
+                        <span class="node-date">MAY - AUG 2025</span>
+                        <span class="node-role">ML DEVELOPER INTERN</span>
+                        <span class="node-company">ANGEL LANE PARTNERS</span>
+                        <span class="node-badge beta">BETA</span>
+                    </div>
+                    <div class="node-details">
+                        <ul class="detail-points">
+                            <li>Enabled risk scoring for 10,000+ clients via IFRS9-compliant Bayesian credit risk model
+                            </li>
+                            <li>Engineered 50+ risk features across financial, behavioral, and operational dimensions
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-node" data-year="2024">
+                    <div class="node-dot"></div>
+                    <div class="node-content">
+                        <span class="node-date">JAN - SEP 2024</span>
+                        <span class="node-role">DEVOPS ENGINEER INTERN</span>
+                        <span class="node-company">K2 NEXTGEN</span>
+                        <span class="node-badge gamma">GAMMA</span>
+                    </div>
+                    <div class="node-details">
+                        <ul class="detail-points">
+                            <li>Accelerated release cycles by 40% via CI/CD pipelines using Jenkins, Docker, Terraform
+                            </li>
+                            <li>Built serverless log analytics pipeline processing 50K+ events/sec on AWS</li>
+                            <li>Improved security by integrating Keycloak SSO and AWS security controls</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-node" data-year="2023">
+                    <div class="node-dot"></div>
+                    <div class="node-content">
+                        <span class="node-date">MAY - AUG 2023</span>
+                        <span class="node-role">DEVOPS ENGINEER INTERN</span>
+                        <span class="node-company">K2 NEXTGEN</span>
+                        <span class="node-badge delta">DELTA</span>
+                    </div>
+                    <div class="node-details">
+                        <ul class="detail-points">
+                            <li>Deployed containerized microservices on AWS using Docker and Ansible</li>
+                            <li>Reduced deployment errors by 30% and incident resolution time by 25% via ELK logging
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Academic Dossier Section -->
+    <section id="dossier" class="academic-dossier">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="title-bracket">[</span>ACADEMIC DOSSIER<span class="title-bracket">]</span>
+            </h2>
+
+            <div class="dossier-grid">
+                <div class="dossier-node" data-institution="mcmaster">
+                    <div class="node-header">
+                        <div class="node-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                                <path d="M2 17l10 5 10-5M2 12l10 5 10-5" />
                             </svg>
                         </div>
-                        <span>GitHub</span>
-                    </a>
-                    <a href="https://linkedin.com/in/aryansingh24" target="_blank" class="contact-link">
-                        <div class="contact-icon">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        <div class="node-info">
+                            <h3 class="node-name">MCMASTER UNIVERSITY</h3>
+                            <p class="node-degree">M.ENG // AUTOMATION & SMART SYSTEMS</p>
+                            <p class="node-gpa">GPA: <span class="gpa-value">3.9</span>/4.0 | JAN 2025 - DEC 2026</p>
+                        </div>
+                    </div>
+                    <div class="data-stream">
+                        <div class="stream-header">TRANSCRIPT COURSEWORK</div>
+                        <div class="coursework-grid">
+                            <div class="course-item"><span class="course-name">Cloud Computing</span></div>
+                            <div class="course-item"><span class="course-name">Internet of Things</span></div>
+                            <div class="course-item"><span class="course-name">Machine Learning</span></div>
+                            <div class="course-item"><span class="course-name">Cyber Physical Systems</span></div>
+                            <div class="course-item"><span class="course-name">Data Analytics & Big Data</span></div>
+                            <div class="course-item"><span class="course-name">Deep Learning</span></div>
+                            <div class="course-item"><span class="course-name">Int'l Governance & Sustainability</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dossier-node" data-institution="ggsipu">
+                    <div class="node-header">
+                        <div class="node-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10" />
+                                <path d="M12 6v6l4 2" />
                             </svg>
                         </div>
-                        <span>LinkedIn</span>
-                    </a>
-                    <a href="mailto:aryanssingh437@gmail.com" class="contact-link">
-                        <div class="contact-icon">
+                        <div class="node-info">
+                            <h3 class="node-name">GGSIPU</h3>
+                            <p class="node-degree">B.TECH // ELECTRONICS & COMMUNICATION ENGINEERING</p>
+                            <p class="node-minor">MINOR: COMPUTER SCIENCE</p>
+                            <p class="node-gpa">GPA: <span class="gpa-value">3.7</span>/4.0 | JUN 2020 - JUN 2024</p>
+                        </div>
+                    </div>
+                    <div class="data-stream">
+                        <div class="stream-header">RELEVANT COURSEWORK</div>
+                        <div class="coursework-grid">
+                            <div class="course-item"><span class="course-name">Data Structures & Algorithms</span></div>
+                            <div class="course-item"><span class="course-name">Data Communication & Networking</span>
+                            </div>
+                            <div class="course-item"><span class="course-name">Microprocessors & Microcontrollers</span>
+                            </div>
+                            <div class="course-item"><span class="course-name">Control Systems</span></div>
+                            <div class="course-item"><span class="course-name">Digital Signal Processing</span></div>
+                            <div class="course-item"><span class="course-name">Database Management Systems</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section (Sleek Cards with GitHub) -->
+    <section id="projects" class="projects-section">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="title-bracket">[</span>PROJECTS ARCHIVE<span class="title-bracket">]</span>
+            </h2>
+
+            <div class="projects-sleek-grid">
+                <!-- Project 1: Vision-GPT2 -->
+                <div class="project-sleek-card">
+                    <div class="project-sleek-header">
+                        <h3 class="project-sleek-title">Vision-GPT2 Image Captioning</h3>
+                        <a href="https://github.com/asynced24/vision-gpt2-image-captioning" target="_blank"
+                            class="github-btn">
                             <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 010 19.366V5.457c0-.904.732-1.636 1.636-1.636h.749L12 11.367 21.615 3.821h.749c.904 0 1.636.732 1.636 1.636z"/>
+                                <path
+                                    d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="project-sleek-tech">PyTorch • ViT • GPT-2 • Transformers</div>
+                    <ul class="project-sleek-points">
+                        <li>Built multimodal pipeline using Vision Transformers, GPT-2, and PyTorch for automated image
+                            caption generation</li>
+                        <li>Improved caption quality through dataset curation and benchmarking on Flickr8K using NLP
+                            metrics</li>
+                        <li>Increased experimentation reliability by implementing validation pipelines</li>
+                    </ul>
+                </div>
+
+                <!-- Project 2: Financial AI -->
+                <div class="project-sleek-card">
+                    <div class="project-sleek-header">
+                        <h3 class="project-sleek-title">Financial AI Risk & Governance</h3>
+                        <a href="https://github.com/asynced24/financial-ai-risk-governance-framework" target="_blank"
+                            class="github-btn">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="project-sleek-tech">Python • XGBoost • LightGBM • Random Forest</div>
+                    <ul class="project-sleek-points">
+                        <li>Developed modular Python framework for credit risk modeling using Logistic Regression,
+                            XGBoost, and LightGBM</li>
+                        <li>Improved model transparency by integrating uncertainty estimation, calibration checks, and
+                            fairness diagnostics</li>
+                        <li>Enabled reproducible risk evaluation by standardizing tracking and reporting outputs</li>
+                    </ul>
+                </div>
+
+                <!-- Project 3: Fetal Health -->
+                <div class="project-sleek-card">
+                    <div class="project-sleek-header">
+                        <h3 class="project-sleek-title">Fetal Health Classification</h3>
+                        <a href="https://github.com/asynced24/fetal-health-classification" target="_blank"
+                            class="github-btn">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="project-sleek-tech">scikit-learn • Neural Networks • Pandas • NumPy</div>
+                    <ul class="project-sleek-points">
+                        <li>Built end-to-end ML classification pipeline using scikit-learn and neural networks</li>
+                        <li>Achieved <span class="highlight">95%+</span> F1-score through hyperparameter tuning and
+                            stratified cross-validation</li>
+                        <li>Improved model stability by implementing repeatable validation and performance monitoring
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Project 4: Smart Manufacturing -->
+                <div class="project-sleek-card">
+                    <div class="project-sleek-header">
+                        <h3 class="project-sleek-title">Smart Manufacturing QC System</h3>
+                        <a href="https://github.com/asynced24/smart-manufacturing-qc-system" target="_blank"
+                            class="github-btn">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="project-sleek-tech">Raspberry Pi • Computer Vision • PubNub • IoT/IIoT</div>
+                    <ul class="project-sleek-points">
+                        <li>Designed edge-based computer vision system using Raspberry Pi and AI lens for real-time
+                            defect detection</li>
+                        <li>Enabled live monitoring by integrating PubNub-based cloud streaming with local execution
+                        </li>
+                        <li>Reduced false rejections by <span class="highlight">45%</span> by calibrating thresholds and
+                            optimizing servo timing</li>
+                    </ul>
+                </div>
+
+                <!-- Project 5: AWS Log Analytics -->
+                <div class="project-sleek-card">
+                    <div class="project-sleek-header">
+                        <h3 class="project-sleek-title">Distributed Log Analytics Platform</h3>
+                        <div class="github-btn private">
+                            <span>AWS</span>
+                        </div>
+                    </div>
+                    <div class="project-sleek-tech">Kinesis • Lambda • S3 • Athena • Glue • Terraform</div>
+                    <ul class="project-sleek-points">
+                        <li>Built event-driven analytics pipeline processing <span class="highlight">50k events/s</span>
+                            using AWS serverless stack</li>
+                        <li>Reduced infrastructure costs by <span class="highlight">35%</span> by applying Terraform IaC
+                            and auto-scaling policies</li>
+                        <li>Improved query reliability by enforcing schema evolution, partitioning, and monitoring</li>
+                    </ul>
+                </div>
+
+                <!-- Project 6: Task Manager -->
+                <div class="project-sleek-card">
+                    <div class="project-sleek-header">
+                        <h3 class="project-sleek-title">Task Manager Web Application</h3>
+                        <div class="github-btn private">
+                            <span>WEB</span>
+                        </div>
+                    </div>
+                    <div class="project-sleek-tech">Django • SQLite • REST API • Bootstrap • JavaScript</div>
+                    <ul class="project-sleek-points">
+                        <li>Developed full-stack task management system using Django, SQLite, and REST-based CRUD
+                            services</li>
+                        <li>Improved usability by implementing responsive UI components with HTML, CSS, and JavaScript
+                        </li>
+                        <li>Strengthened data integrity by enforcing authentication and secure deployment practices</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Arsenal Section -->
+    <section id="arsenal" class="tech-arsenal">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="title-bracket">[</span>TECHNICAL ARSENAL<span class="title-bracket">]</span>
+            </h2>
+
+            <div class="arsenal-grid">
+                <div class="arsenal-category">
+                    <h3 class="category-title">LANGUAGES</h3>
+                    <div class="tech-badges">
+                        <span class="tech-badge">Python</span><span class="tech-badge">Java</span><span
+                            class="tech-badge">C++</span>
+                        <span class="tech-badge">JavaScript</span><span class="tech-badge">Groovy</span><span
+                            class="tech-badge">SQL</span>
+                        <span class="tech-badge">Bash</span><span class="tech-badge">PowerShell</span>
+                    </div>
+                </div>
+                <div class="arsenal-category">
+                    <h3 class="category-title">ML & DATA</h3>
+                    <div class="tech-badges">
+                        <span class="tech-badge">PyTorch</span><span class="tech-badge">TensorFlow</span><span
+                            class="tech-badge">scikit-learn</span>
+                        <span class="tech-badge">PySpark</span><span class="tech-badge">Pandas</span><span
+                            class="tech-badge">NumPy</span>
+                        <span class="tech-badge">Transformers</span><span class="tech-badge">XGBoost</span>
+                    </div>
+                </div>
+                <div class="arsenal-category">
+                    <h3 class="category-title">CLOUD & INFRA</h3>
+                    <div class="tech-badges">
+                        <span class="tech-badge">AWS</span><span class="tech-badge">Azure</span><span
+                            class="tech-badge">Docker</span>
+                        <span class="tech-badge">Kubernetes</span><span class="tech-badge">Terraform</span><span
+                            class="tech-badge">Ansible</span>
+                    </div>
+                </div>
+                <div class="arsenal-category">
+                    <h3 class="category-title">CI/CD & TOOLS</h3>
+                    <div class="tech-badges">
+                        <span class="tech-badge">Jenkins</span><span class="tech-badge">GitLab CI</span><span
+                            class="tech-badge">GitHub Actions</span>
+                        <span class="tech-badge">Git</span><span class="tech-badge">Jira</span><span
+                            class="tech-badge">Agile</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Clearance Section -->
+    <section id="clearance" class="download-clearance">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="title-bracket">[</span>SECURITY CLEARANCE<span class="title-bracket">]</span>
+            </h2>
+
+            <div class="clearance-container">
+                <div class="clearance-card">
+                    <div class="clearance-header">
+                        <div class="clearance-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
                             </svg>
                         </div>
-                        <span>Email</span>
-                    </a>
+                        <div class="clearance-info">
+                            <h3>PERSONNEL FILE</h3>
+                            <p>COMPREHENSIVE MISSION DOSSIER</p>
+                        </div>
+                    </div>
+
+                    <div class="clearance-details">
+                        <div class="detail-row"><span class="detail-label">CLASSIFICATION:</span><span
+                                class="detail-value">LEVEL-5 AUTHORIZED</span></div>
+                        <div class="detail-row"><span class="detail-label">FORMAT:</span><span class="detail-value">PDF
+                                // ENCRYPTED</span></div>
+                        <div class="detail-row"><span class="detail-label">SIZE:</span><span class="detail-value">2.4
+                                MB</span></div>
+                    </div>
+
+                    <button id="download-resume" class="download-btn">
+                        <span class="btn-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                <polyline points="7 10 12 15 17 10" />
+                                <line x1="12" y1="15" x2="12" y2="3" />
+                            </svg>
+                        </span>
+                        <span class="btn-text">REQUEST CLEARANCE</span>
+                    </button>
+
+                    <div class="download-progress" id="download-progress">
+                        <div class="progress-header">
+                            <span class="progress-label">GENERATING SECURE FILE...</span>
+                            <span class="progress-percentage">0%</span>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-fill"></div>
+                            <div class="progress-glow"></div>
+                        </div>
+                        <div class="progress-status">DECRYPTING PERSONNEL DATA</div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-glow"></div>
+    <footer class="tactical-footer">
         <div class="container">
-            <p>Built with ❤️ by Aryan Singh | © 2025</p>
+            <div class="footer-content">
+                <div class="footer-left">
+                    <p class="footer-text">WAYNE_ENTERPRISES // TACTICAL INTERFACE v2.0</p>
+                    <p class="footer-copyright">© 2025 ARYAN SINGH // ALL SYSTEMS OPERATIONAL</p>
+                </div>
+                <div class="footer-right">
+                    <div class="system-status">
+                        <span class="status-dot"></span>
+                        <span class="status-text">ALL SYSTEMS NOMINAL</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </footer>
 
     <script src="app.js"></script>
 </body>
+
 </html>

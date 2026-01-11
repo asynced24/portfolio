@@ -1,0 +1,1830 @@
+/* ============================================
+   WAYNE ENTERPRISES TACTICAL DASHBOARD
+   Monochromatic Theme with PlayStation Blue
+   ============================================ */
+
+/* Force tactical theme override */
+body[data-theme="tactical"] {
+    --color-background: #0D0D0D !important;
+    --color-text: rgba(255, 255, 255, 0.95) !important;
+    background: #0D0D0D;
+    color: rgba(255, 255, 255, 0.95);
+    font-family: 'Share Tech Mono', 'Rajdhani', monospace;
+}
+
+/* ============================================
+   TACTICAL GRID BACKGROUND
+   ============================================ */
+.tactical-grid {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        linear-gradient(rgba(0, 67, 156, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 67, 156, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.scan-lines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(0deg,
+            rgba(0, 0, 0, 0.15),
+            rgba(0, 0, 0, 0.15) 1px,
+            transparent 1px,
+            transparent 2px);
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.3;
+}
+
+/* ============================================
+   HUD OVERLAY CORNERS
+   ============================================ */
+.hud-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.hud-corner {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border: 2px solid rgba(0, 67, 156, 0.4);
+}
+
+.hud-tl {
+    top: 20px;
+    left: 20px;
+    border-right: none;
+    border-bottom: none;
+}
+
+.hud-tr {
+    top: 20px;
+    right: 20px;
+    border-left: none;
+    border-bottom: none;
+}
+
+.hud-bl {
+    bottom: 20px;
+    left: 20px;
+    border-right: none;
+    border-top: none;
+}
+
+.hud-br {
+    bottom: 20px;
+    right: 20px;
+    border-left: none;
+    border-top: none;
+}
+
+/* ============================================
+   TACTICAL NAVIGATION
+   ============================================ */
+.tactical-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+}
+
+.nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.logo-bracket {
+    color: #00439C;
+    font-size: 1.1rem;
+}
+
+.logo-text {
+    margin: 0 0.5rem;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-link {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    padding: 0.5rem 0;
+}
+
+.nav-link:hover {
+    color: #0066CC;
+    transform: translateY(-2px);
+}
+
+.link-icon {
+    color: #00439C;
+    margin-right: 0.5rem;
+    font-size: 0.8rem;
+}
+
+/* ============================================
+   COMMAND CENTER (HERO)
+   ============================================ */
+.command-center {
+    position: relative;
+    min-height: 100vh;
+    padding: 120px 2rem 80px;
+    z-index: 10;
+}
+
+.command-header {
+    margin-bottom: 3rem;
+}
+
+.status-bar {
+    display: flex;
+    gap: 2rem;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.5);
+    letter-spacing: 1px;
+}
+
+.status-item {
+    text-transform: uppercase;
+}
+
+.status-active {
+    color: #00FF00;
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+}
+
+.status-level {
+    color: #00439C;
+    text-shadow: 0 0 10px rgba(0, 67, 156, 0.5);
+}
+
+.command-identity {
+    margin-bottom: 4rem;
+}
+
+.identity-name {
+    font-family: 'Orbitron', monospace;
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.95);
+    margin-bottom: 1rem;
+    letter-spacing: 3px;
+}
+
+.name-prefix {
+    color: #00439C;
+    font-size: 1.5rem;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.identity-role {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.7);
+    letter-spacing: 2px;
+}
+
+.cursor-blink {
+    animation: cursorCrazy 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+    color: #00439C;
+    font-size: 1.3em;
+    text-shadow:
+        0 0 10px rgba(0, 67, 156, 0.8),
+        0 0 20px rgba(0, 67, 156, 0.6),
+        0 0 30px rgba(0, 67, 156, 0.4);
+    display: inline-block;
+    margin-left: 4px;
+}
+
+@keyframes cursorCrazy {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+        text-shadow:
+            0 0 10px rgba(0, 67, 156, 0.8),
+            0 0 20px rgba(0, 67, 156, 0.6),
+            0 0 30px rgba(0, 67, 156, 0.4);
+    }
+
+    25% {
+        opacity: 0.3;
+        transform: scale(1.2) rotate(5deg);
+        text-shadow:
+            0 0 15px rgba(0, 102, 204, 1),
+            0 0 30px rgba(0, 102, 204, 0.8),
+            0 0 45px rgba(0, 102, 204, 0.6);
+    }
+
+    50% {
+        opacity: 0;
+        transform: scale(0.8) rotate(-5deg);
+    }
+
+    75% {
+        opacity: 0.3;
+        transform: scale(1.2) rotate(5deg);
+        text-shadow:
+            0 0 15px rgba(0, 102, 204, 1),
+            0 0 30px rgba(0, 102, 204, 0.8),
+            0 0 45px rgba(0, 102, 204, 0.6);
+    }
+}
+
+/* ============================================
+   BENTO GRID LAYOUT
+   ============================================ */
+.bento-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+}
+
+.bento-card {
+    background: rgba(30, 41, 59, 0.3);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(148, 163, 184, 0.1);
+    border-radius: 12px;
+    padding: 2rem;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.bento-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0, 67, 156, 0.5), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.bento-card:hover {
+    transform: scale(1.02);
+    border-color: rgba(0, 67, 156, 0.3);
+    box-shadow: 0 0 30px rgba(0, 67, 156, 0.2);
+}
+
+.bento-card:hover::before {
+    opacity: 1;
+}
+
+.card-header {
+    margin-bottom: 1.5rem;
+}
+
+.card-label {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.5);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* Stat Cards */
+.stat-card .stat-value {
+    font-family: 'Orbitron', monospace;
+    font-size: 3rem;
+    font-weight: 900;
+    color: #00439C;
+    line-height: 1;
+    margin: 1rem 0;
+    text-shadow: 0 0 20px rgba(0, 67, 156, 0.5);
+}
+
+.stat-card .stat-unit {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.5);
+    letter-spacing: 1px;
+}
+
+/* Radar Chart Card */
+.radar-card {
+    display: flex;
+    flex-direction: column;
+    min-height: 200px;
+}
+
+.radar-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+}
+
+.radar-chart {
+    width: 100%;
+    max-width: 180px;
+    height: auto;
+}
+
+.radar-grid {
+    fill: none;
+    stroke: rgba(0, 67, 156, 0.2);
+    stroke-width: 1;
+}
+
+.radar-axis {
+    stroke: rgba(0, 67, 156, 0.15);
+    stroke-width: 1;
+    stroke-dasharray: 4, 4;
+}
+
+.radar-data {
+    fill: rgba(0, 67, 156, 0.25);
+    stroke: #00439C;
+    stroke-width: 2;
+    filter: drop-shadow(0 0 8px rgba(0, 67, 156, 0.6));
+    animation: radarPulse 3s ease-in-out infinite;
+}
+
+@keyframes radarPulse {
+
+    0%,
+    100% {
+        filter: drop-shadow(0 0 8px rgba(0, 67, 156, 0.6));
+    }
+
+    50% {
+        filter: drop-shadow(0 0 15px rgba(0, 67, 156, 0.9));
+    }
+}
+
+.radar-point {
+    fill: #00FF00;
+    opacity: 0;
+    filter: drop-shadow(0 0 4px rgba(0, 255, 0, 0.8));
+}
+
+.radar-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px;
+    fill: rgba(255, 255, 255, 0.7);
+    letter-spacing: 1px;
+}
+
+/* Contact Card */
+.contact-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.contact-btn {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: rgba(0, 67, 156, 0.1);
+    border: 1px solid rgba(0, 67, 156, 0.2);
+    border-radius: 8px;
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.contact-btn svg {
+    width: 20px;
+    height: 20px;
+    color: #00439C;
+}
+
+.contact-btn:hover {
+    background: rgba(0, 67, 156, 0.2);
+    border-color: rgba(0, 102, 204, 0.4);
+    transform: translateX(5px);
+}
+
+/* ============================================
+   ACADEMIC DOSSIER
+   ============================================ */
+.academic-dossier {
+    position: relative;
+    padding: 80px 2rem;
+    z-index: 10;
+}
+
+.section-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 2rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.95);
+    margin-bottom: 3rem;
+    letter-spacing: 3px;
+    text-align: center;
+}
+
+.title-bracket {
+    color: #00439C;
+    font-size: 2.5rem;
+    margin: 0 1rem;
+}
+
+.dossier-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.dossier-node {
+    position: relative;
+    background: rgba(30, 41, 59, 0.3);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(148, 163, 184, 0.1);
+    border-radius: 12px;
+    padding: 2rem;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow: hidden;
+}
+
+.dossier-node:hover {
+    transform: scale(1.02);
+    border-color: rgba(0, 67, 156, 0.3);
+    box-shadow: 0 0 40px rgba(0, 67, 156, 0.3);
+}
+
+.node-header {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+}
+
+.node-icon {
+    width: 50px;
+    height: 50px;
+    color: #00439C;
+    flex-shrink: 0;
+}
+
+.node-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.node-info {
+    flex: 1;
+}
+
+.node-name {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.95);
+    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+}
+
+.node-degree {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 0.5rem;
+}
+
+.node-gpa {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.gpa-value {
+    color: #00439C;
+    font-weight: 700;
+}
+
+/* Data Stream - Expand on Hover */
+.data-stream {
+    max-height: 0;
+    overflow: hidden;
+    background: rgba(15, 23, 42, 0.6);
+    border-radius: 8px;
+    margin-top: 0;
+    padding: 0 1.5rem;
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dossier-node:hover .data-stream {
+    max-height: 400px;
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    opacity: 1;
+}
+
+.stream-header {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #00439C;
+    margin-bottom: 1rem;
+    letter-spacing: 2px;
+    text-align: left;
+    border-bottom: 1px solid rgba(0, 67, 156, 0.3);
+    padding-bottom: 0.8rem;
+}
+
+.coursework-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+}
+
+.course-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding: 0.5rem 0.7rem;
+    background: rgba(0, 67, 156, 0.1);
+    border-left: 2px solid #00439C;
+    border-radius: 4px;
+    animation: courseItemFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+.course-item:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.course-item:nth-child(2) {
+    animation-delay: 0.15s;
+}
+
+.course-item:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.course-item:nth-child(4) {
+    animation-delay: 0.25s;
+}
+
+.course-item:nth-child(5) {
+    animation-delay: 0.3s;
+}
+
+.course-item:nth-child(6) {
+    animation-delay: 0.35s;
+}
+
+@keyframes courseItemFadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.course-code {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem;
+    color: #00439C;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.course-name {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* ============================================
+   EXPERIENCE COMMAND (ACCESS CARDS)
+   ============================================ */
+.experience-command {
+    position: relative;
+    padding: 80px 2rem;
+    z-index: 10;
+}
+
+.access-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.access-card {
+    position: relative;
+    background: rgba(30, 41, 59, 0.3);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(148, 163, 184, 0.1);
+    border-radius: 12px;
+    padding: 2rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow: hidden;
+    min-height: 200px;
+}
+
+.access-card:hover {
+    transform: scale(1.02);
+    border-color: rgba(0, 67, 156, 0.3);
+    box-shadow: 0 0 40px rgba(0, 67, 156, 0.3);
+}
+
+.card-scan-line {
+    position: absolute;
+    top: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #00439C, transparent);
+    opacity: 0;
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.access-card:hover .card-scan-line {
+    opacity: 1;
+    animation: tacticalScan 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes tacticalScan {
+    from {
+        top: -2px;
+    }
+
+    to {
+        top: 100%;
+    }
+}
+
+.card-header-section {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+}
+
+.company-badge {
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
+}
+
+.company-badge svg {
+    width: 100%;
+    height: 100%;
+}
+
+.k2-badge,
+.al-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #00439C, #0066CC);
+    border-radius: 8px;
+    border: 1px solid rgba(0, 102, 204, 0.5);
+}
+
+.badge-text {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: white;
+    letter-spacing: 2px;
+}
+
+.card-title-group {
+    flex: 1;
+}
+
+.card-role {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.95);
+    margin-bottom: 0.5rem;
+    letter-spacing: 1px;
+}
+
+.card-company {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 0.3rem;
+}
+
+.card-duration {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.clearance-level {
+    margin-top: 1rem;
+}
+
+.clearance-badge {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: rgba(0, 67, 156, 0.2);
+    border: 1px solid rgba(0, 67, 156, 0.4);
+    border-radius: 4px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.7rem;
+    color: #00439C;
+    letter-spacing: 1px;
+}
+
+/* Tactical Overlay */
+.tactical-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(13, 13, 13, 0.98);
+    backdrop-filter: blur(30px);
+    padding: 2rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow-y: auto;
+}
+
+.access-card:hover .tactical-overlay {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.overlay-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(0, 67, 156, 0.3);
+}
+
+.overlay-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #00439C;
+    letter-spacing: 2px;
+}
+
+.overlay-status {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.7rem;
+    color: rgba(255, 0, 0, 0.7);
+    letter-spacing: 1px;
+}
+
+.objectives-terminal {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.objective-item {
+    display: flex;
+    gap: 1rem;
+    padding: 0.8rem;
+    background: rgba(0, 67, 156, 0.05);
+    border-left: 2px solid #00439C;
+    border-radius: 4px;
+    animation: objectiveFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+.objective-item:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.objective-item:nth-child(2) {
+    animation-delay: 0.15s;
+}
+
+.objective-item:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.objective-item:nth-child(4) {
+    animation-delay: 0.25s;
+}
+
+.objective-item:nth-child(5) {
+    animation-delay: 0.3s;
+}
+
+@keyframes objectiveFadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.obj-marker {
+    color: #00439C;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.obj-text {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.5;
+}
+
+/* ============================================
+   DOWNLOAD CLEARANCE
+   ============================================ */
+.download-clearance {
+    position: relative;
+    padding: 80px 2rem;
+    z-index: 10;
+}
+
+.clearance-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.clearance-card {
+    background: rgba(30, 41, 59, 0.3);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(148, 163, 184, 0.1);
+    border-radius: 12px;
+    padding: 3rem;
+}
+
+.clearance-header {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.clearance-icon {
+    width: 60px;
+    height: 60px;
+    color: #00439C;
+}
+
+.clearance-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.clearance-info h3 {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.95);
+    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+}
+
+.clearance-info p {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.clearance-details {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: rgba(0, 67, 156, 0.05);
+    border: 1px solid rgba(0, 67, 156, 0.2);
+    border-radius: 8px;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+}
+
+.detail-row:last-child {
+    border-bottom: none;
+}
+
+.detail-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.5);
+    letter-spacing: 1px;
+}
+
+.detail-value {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 600;
+}
+
+.download-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1.2rem 2rem;
+    background: linear-gradient(135deg, #00439C, #0066CC);
+    border: 1px solid rgba(0, 102, 204, 0.5);
+    border-radius: 8px;
+    color: white;
+    font-family: 'Orbitron', monospace;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.download-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.download-btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.download-btn:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 40px rgba(0, 67, 156, 0.6);
+}
+
+.btn-icon {
+    width: 24px;
+    height: 24px;
+    position: relative;
+    z-index: 1;
+}
+
+.btn-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.btn-text {
+    position: relative;
+    z-index: 1;
+}
+
+/* PS5 Progress Bar */
+.download-progress {
+    margin-top: 2rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+
+.download-progress.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.progress-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+    letter-spacing: 1px;
+}
+
+.progress-percentage {
+    font-family: 'Orbitron', monospace;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #00439C;
+}
+
+.progress-bar-container {
+    position: relative;
+    height: 8px;
+    background: rgba(30, 41, 59, 0.5);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.progress-bar-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #00439C, #0066CC);
+    border-radius: 4px;
+    transition: width 0.1s linear;
+}
+
+.progress-glow {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100px;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 102, 204, 0.6));
+    opacity: 0;
+    animation: progressGlow 1.5s ease-in-out infinite;
+}
+
+@keyframes progressGlow {
+
+    0%,
+    100% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+.progress-status {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.5);
+    text-align: center;
+}
+
+/* ============================================
+   TACTICAL FOOTER
+   ============================================ */
+.tactical-footer {
+    position: relative;
+    padding: 3rem 2rem;
+    background: rgba(15, 23, 42, 0.5);
+    border-top: 1px solid rgba(148, 163, 184, 0.1);
+    z-index: 10;
+}
+
+.footer-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-text {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+}
+
+.footer-copyright {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.5);
+    letter-spacing: 1px;
+}
+
+.system-status {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    background: #00FF00;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
+    animation: statusPulse 2s ease-in-out infinite;
+}
+
+@keyframes statusPulse {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.5;
+        transform: scale(0.8);
+    }
+}
+
+.status-text {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.7);
+    letter-spacing: 1px;
+}
+
+/* ============================================
+   BOOT SEQUENCE
+   ============================================ */
+.boot-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #0D0D0D;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    animation: bootFadeOut 0.5s ease-out 2s forwards;
+}
+
+.boot-text {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1.5rem;
+    color: #00439C;
+    text-align: center;
+    letter-spacing: 3px;
+    line-height: 2;
+    animation: bootTextGlow 1s ease-in-out infinite;
+}
+
+@keyframes bootTextGlow {
+
+    0%,
+    100% {
+        text-shadow: 0 0 10px rgba(0, 67, 156, 0.5);
+    }
+
+    50% {
+        text-shadow: 0 0 20px rgba(0, 67, 156, 0.8);
+    }
+}
+
+@keyframes bootFadeOut {
+    to {
+        opacity: 0;
+        pointer-events: none;
+    }
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+@media (max-width: 768px) {
+    .identity-name {
+        font-size: 2.5rem;
+    }
+
+    .name-prefix {
+        font-size: 1.2rem;
+    }
+
+    .bento-grid,
+    .dossier-grid,
+    .access-cards-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .nav-links {
+        gap: 0.8rem;
+        flex-wrap: wrap;
+    }
+
+    .nav-link {
+        font-size: 0.75rem;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+    }
+
+    .timeline-wrapper {
+        padding-left: 2rem;
+    }
+
+    .timeline-line {
+        left: 15px;
+    }
+}
+
+/* ============================================
+   CAREER TIMELINE
+   ============================================ */
+.career-timeline {
+    position: relative;
+    padding: 80px 2rem;
+    z-index: 10;
+}
+
+.timeline-wrapper {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    padding-left: 4rem;
+}
+
+.timeline-line {
+    position: absolute;
+    left: 30px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg,
+            transparent 0%,
+            rgba(0, 67, 156, 0.6) 10%,
+            rgba(0, 67, 156, 0.6) 90%,
+            transparent 100%);
+}
+
+.timeline-node {
+    position: relative;
+    margin-bottom: 3rem;
+    padding: 1.5rem 2rem;
+    background: rgba(30, 41, 59, 0.3);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(148, 163, 184, 0.1);
+    border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.timeline-node:hover {
+    transform: translateX(10px);
+    border-color: rgba(0, 67, 156, 0.3);
+    box-shadow: 0 0 30px rgba(0, 67, 156, 0.2);
+}
+
+.timeline-node.active {
+    border-color: rgba(0, 255, 0, 0.3);
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.1);
+}
+
+.timeline-node.active .node-dot {
+    background: #00FF00;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.8);
+    animation: activePulse 2s ease-in-out infinite;
+}
+
+@keyframes activePulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    }
+
+    50% {
+        box-shadow: 0 0 25px rgba(0, 255, 0, 0.9);
+    }
+}
+
+.node-dot {
+    position: absolute;
+    left: -3.5rem;
+    top: 1.8rem;
+    width: 16px;
+    height: 16px;
+    background: #00439C;
+    border-radius: 50%;
+    border: 3px solid #0D0D0D;
+    box-shadow: 0 0 15px rgba(0, 67, 156, 0.6);
+    z-index: 2;
+}
+
+.node-content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+}
+
+.node-date {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.5);
+    letter-spacing: 1px;
+    min-width: 140px;
+}
+
+.node-role {
+    font-family: 'Orbitron', monospace;
+    font-size: 1rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.95);
+    letter-spacing: 1px;
+    flex: 1;
+}
+
+.node-company {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.9rem;
+    color: #00439C;
+    font-weight: 600;
+}
+
+.node-badge {
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.node-badge.alpha {
+    background: rgba(0, 255, 0, 0.15);
+    color: #00FF00;
+    border: 1px solid rgba(0, 255, 0, 0.3);
+}
+
+.node-badge.beta {
+    background: rgba(0, 67, 156, 0.15);
+    color: #0066CC;
+    border: 1px solid rgba(0, 67, 156, 0.3);
+}
+
+.node-badge.gamma {
+    background: rgba(255, 165, 0, 0.15);
+    color: #FFA500;
+    border: 1px solid rgba(255, 165, 0, 0.3);
+}
+
+.node-badge.delta {
+    background: rgba(148, 163, 184, 0.15);
+    color: #94A3B8;
+    border: 1px solid rgba(148, 163, 184, 0.3);
+}
+
+/* Timeline Node Details (Hover Expand) */
+.node-details {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    margin-top: 0;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.timeline-node:hover .node-details {
+    max-height: 200px;
+    opacity: 1;
+    margin-top: 1rem;
+}
+
+.detail-points {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-left: 0.5rem;
+    border-left: 2px solid rgba(0, 67, 156, 0.3);
+}
+
+.detail-points li {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.75);
+    line-height: 1.4;
+    padding-left: 0.8rem;
+    position: relative;
+}
+
+.detail-points li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: #00439C;
+    font-size: 0.7rem;
+}
+
+/* ============================================
+   PROJECTS COMMAND
+   ============================================ */
+.projects-command {
+    position: relative;
+    padding: 80px 2rem;
+    z-index: 10;
+}
+
+.project-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 67, 156, 0.2);
+    border: 1px solid rgba(0, 67, 156, 0.4);
+    border-radius: 8px;
+    color: #00439C;
+}
+
+.project-badge svg {
+    width: 30px;
+    height: 30px;
+}
+
+.overlay-link {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.8rem;
+    color: #0066CC;
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+}
+
+.overlay-link:hover {
+    color: #00FF00;
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+}
+
+/* ============================================
+   TECH ARSENAL
+   ============================================ */
+.tech-arsenal {
+    position: relative;
+    padding: 80px 2rem;
+    z-index: 10;
+}
+
+.arsenal-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.arsenal-category {
+    background: rgba(30, 41, 59, 0.3);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(148, 163, 184, 0.1);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.arsenal-category:hover {
+    border-color: rgba(0, 67, 156, 0.2);
+    box-shadow: 0 0 25px rgba(0, 67, 156, 0.15);
+}
+
+.category-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #00439C;
+    margin-bottom: 1rem;
+    letter-spacing: 2px;
+    border-bottom: 1px solid rgba(0, 67, 156, 0.2);
+    padding-bottom: 0.6rem;
+}
+
+.tech-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+}
+
+.tech-badge {
+    display: inline-block;
+    padding: 0.4rem 0.8rem;
+    background: rgba(0, 67, 156, 0.1);
+    border: 1px solid rgba(0, 67, 156, 0.25);
+    border-radius: 4px;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.85);
+    letter-spacing: 0.5px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tech-badge:hover {
+    background: rgba(0, 67, 156, 0.25);
+    border-color: rgba(0, 102, 204, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 67, 156, 0.25);
+}
+
+/* ============================================
+   CUSTOM CURSOR
+   ============================================ */
+.tactical-cursor {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+    z-index: 10001;
+    mix-blend-mode: difference;
+}
+
+.tactical-cursor::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    background: #00439C;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow:
+        0 0 10px #00439C,
+        0 0 20px #00439C,
+        0 0 30px rgba(0, 67, 156, 0.5);
+    transition: all 0.15s ease-out;
+}
+
+.tactical-cursor::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 30px;
+    height: 30px;
+    border: 1px solid rgba(0, 67, 156, 0.5);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: cursorRing 1.5s ease-in-out infinite;
+}
+
+@keyframes cursorRing {
+
+    0%,
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 0.3;
+    }
+}
+
+.cursor-trail {
+    position: fixed;
+    width: 4px;
+    height: 4px;
+    background: rgba(0, 67, 156, 0.4);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10000;
+    transition: all 0.1s ease-out;
+}
+
+/* Hide default cursor but keep links clickable */
+body[data-theme="tactical"] {
+    cursor: none;
+}
+
+body[data-theme="tactical"] a,
+body[data-theme="tactical"] button,
+body[data-theme="tactical"] [role="button"] {
+    cursor: none;
+    pointer-events: auto;
+}
+
+/* ============================================
+   NODE MINOR STYLING (for Bachelor's)
+   ============================================ */
+.node-minor {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.75rem;
+    color: #00439C;
+    margin-bottom: 0.3rem;
+    letter-spacing: 1px;
+}
+
+/* ============================================
+   SLEEK PROJECT CARDS
+   ============================================ */
+.projects-section {
+    position: relative;
+    padding: 80px 2rem;
+    z-index: 10;
+}
+
+.projects-sleek-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 1.5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.project-sleek-card {
+    background: rgba(30, 41, 59, 0.3);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(148, 163, 184, 0.1);
+    border-radius: 12px;
+    padding: 1.8rem;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.project-sleek-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #00439C, transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.project-sleek-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(0, 67, 156, 0.3);
+    box-shadow: 0 8px 30px rgba(0, 67, 156, 0.2);
+}
+
+.project-sleek-card:hover::before {
+    opacity: 1;
+}
+
+.project-sleek-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.8rem;
+    gap: 1rem;
+}
+
+.project-sleek-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 1rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.95);
+    letter-spacing: 1px;
+    margin: 0;
+    flex: 1;
+}
+
+.github-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: rgba(0, 67, 156, 0.15);
+    border: 1px solid rgba(0, 67, 156, 0.4);
+    border-radius: 8px;
+    color: #00439C;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    text-decoration: none;
+    flex-shrink: 0;
+}
+
+.github-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.github-btn:hover {
+    background: rgba(0, 67, 156, 0.3);
+    border-color: #0066CC;
+    color: #0066CC;
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(0, 67, 156, 0.4);
+}
+
+.github-btn.private {
+    background: rgba(255, 165, 0, 0.15);
+    border-color: rgba(255, 165, 0, 0.4);
+    color: #FFA500;
+    font-family: 'Orbitron', monospace;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.github-btn.private:hover {
+    background: rgba(255, 165, 0, 0.3);
+}
+
+.project-sleek-tech {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.5);
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+}
+
+.project-sleek-points {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.project-sleek-points li {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.5;
+    padding-left: 1.2rem;
+    position: relative;
+}
+
+.project-sleek-points li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: #00439C;
+    font-size: 0.8rem;
+}
+
+.project-sleek-points .highlight {
+    color: #00FF00;
+    font-weight: 700;
+    text-shadow: 0 0 8px rgba(0, 255, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+    .projects-sleek-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .project-sleek-title {
+        font-size: 0.9rem;
+    }
+}
