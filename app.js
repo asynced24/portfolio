@@ -15,6 +15,7 @@ class TacticalDashboard {
         this.initDownloadClearance();
         this.initSmoothScroll();
         this.initCustomCursor();
+        this.initTacticalDuality();
     }
 
     // ============================================
@@ -268,6 +269,114 @@ class TacticalDashboard {
                 cursor.style.transform = 'scale(1)';
             });
         });
+    }
+
+    // ============================================
+    // TACTICAL DUALITY NAVIGATION
+    // 10ms Glitch Jitter Micro-Interaction
+    // ============================================
+    initTacticalDuality() {
+        const dualityLinks = document.querySelectorAll('.duality-link');
+
+        if (!dualityLinks.length) return;
+
+        dualityLinks.forEach(link => {
+            let glitchInterval = null;
+
+            link.addEventListener('mouseenter', () => {
+                // Trigger initial 10ms glitch jitter
+                this.triggerGlitchJitter(link, 3); // 3 rapid jitters
+
+                // Random micro-glitches during hover (simulates faulty monitor)
+                glitchInterval = setInterval(() => {
+                    if (Math.random() > 0.7) { // 30% chance of random glitch
+                        this.triggerMicroGlitch(link);
+                    }
+                }, 500);
+
+                // Log tactical context (for the Bat-Computer aesthetic)
+                const context = link.getAttribute('data-context');
+                if (context) {
+                    console.log(`🦇 TACTICAL LAYER: ${context.toUpperCase()}`);
+                }
+            });
+
+            link.addEventListener('mouseleave', () => {
+                // Clear random glitch interval
+                if (glitchInterval) {
+                    clearInterval(glitchInterval);
+                    glitchInterval = null;
+                }
+
+                // Quick exit glitch
+                this.triggerGlitchJitter(link, 1);
+            });
+        });
+    }
+
+    // Rapid 10ms glitch jitter effect
+    triggerGlitchJitter(element, count = 2) {
+        const glitchText = element.querySelector('.glitch-text');
+        const batWatermark = element.querySelector('.bat-watermark');
+
+        if (!glitchText) return;
+
+        let iterations = 0;
+        const jitterDuration = 10; // 10ms per jitter
+
+        const jitter = () => {
+            if (iterations >= count) {
+                // Reset to normal
+                glitchText.style.transform = '';
+                glitchText.style.textShadow = '';
+                return;
+            }
+
+            // Random offset values for authentic glitch feel
+            const offsetX = (Math.random() - 0.5) * 4;
+            const offsetY = (Math.random() - 0.5) * 2;
+            const skewX = (Math.random() - 0.5) * 3;
+
+            // Apply glitch transform
+            glitchText.style.transform = `translate(${offsetX}px, ${offsetY}px) skewX(${skewX}deg)`;
+            glitchText.style.textShadow = `
+                ${-offsetX}px 0 rgba(0, 67, 156, 0.8),
+                ${offsetX}px 0 rgba(0, 102, 204, 0.6),
+                0 0 10px rgba(0, 67, 156, 0.9)
+            `;
+
+            // Also glitch the bat watermark occasionally
+            if (batWatermark && Math.random() > 0.5) {
+                batWatermark.style.transform = `translate(calc(-50% + ${offsetX * 0.5}px), calc(-50% + ${offsetY * 0.5}px))`;
+            }
+
+            iterations++;
+            setTimeout(jitter, jitterDuration);
+        };
+
+        jitter();
+    }
+
+    // Subtle micro-glitch for continuous hover effect
+    triggerMicroGlitch(element) {
+        const corporateLayer = element.querySelector('.corporate-layer');
+        const batmanLayer = element.querySelector('.batman-layer');
+
+        if (!corporateLayer || !batmanLayer) return;
+
+        // Brief opacity flicker
+        const originalOpacity = batmanLayer.style.opacity;
+        batmanLayer.style.opacity = '0.7';
+
+        setTimeout(() => {
+            batmanLayer.style.opacity = originalOpacity || '1';
+        }, 30);
+
+        // Add subtle filter distortion
+        element.style.filter = 'brightness(1.1) contrast(1.05)';
+        setTimeout(() => {
+            element.style.filter = '';
+        }, 20);
     }
 }
 

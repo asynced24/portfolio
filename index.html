@@ -32,8 +32,34 @@
     <div class="tactical-cursor"></div>
     <div class="cursor-trail"></div>
 
-    <!-- Navigation -->
-    <nav class="tactical-nav">
+    <!-- SVG Filters for Tactical Scratch Effect -->
+    <svg class="svg-filters" aria-hidden="true">
+        <defs>
+            <!-- Grain/Noise Filter for Tactical Sensor Scan -->
+            <filter id="tactical-grain" x="0%" y="0%" width="100%" height="100%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" seed="15" result="noise" />
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G" />
+            </filter>
+
+            <!-- High Contrast Scratch Filter -->
+            <filter id="scratch-distortion" x="-20%" y="-20%" width="140%" height="140%">
+                <feTurbulence type="turbulence" baseFrequency="0.05" numOctaves="2" seed="5" result="turbulence" />
+                <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="4" xChannelSelector="R"
+                    yChannelSelector="B" />
+                <feGaussianBlur stdDeviation="0.3" />
+            </filter>
+
+            <!-- Bat Symbol Path for Masking -->
+            <symbol id="bat-silhouette" viewBox="0 0 100 40">
+                <path
+                    d="M50 0 C45 10, 30 15, 0 20 C15 25, 25 30, 30 40 C35 30, 45 25, 50 35 C55 25, 65 30, 70 40 C75 30, 85 25, 100 20 C70 15, 55 10, 50 0"
+                    fill="currentColor" />
+            </symbol>
+        </defs>
+    </svg>
+
+    <!-- Navigation - Tactical Duality -->
+    <nav class="tactical-nav tactical-duality">
         <div class="nav-container">
             <div class="nav-logo">
                 <span class="logo-bracket">[</span>
@@ -41,12 +67,84 @@
                 <span class="logo-bracket">]</span>
             </div>
             <div class="nav-links">
-                <a href="#command" class="nav-link"><span class="link-icon">▸</span>COMMAND</a>
-                <a href="#timeline" class="nav-link"><span class="link-icon">▸</span>TIMELINE</a>
-                <a href="#dossier" class="nav-link"><span class="link-icon">▸</span>DOSSIER</a>
-                <a href="#projects" class="nav-link"><span class="link-icon">▸</span>PROJECTS</a>
-                <a href="#arsenal" class="nav-link"><span class="link-icon">▸</span>ARSENAL</a>
-                <a href="#clearance" class="nav-link"><span class="link-icon">▸</span>CLEARANCE</a>
+                <a href="#command" class="nav-link duality-link" data-context="operations">
+                    <span class="link-layer corporate-layer">
+                        <span class="link-icon">▸</span>
+                        <span class="link-text">COMMAND</span>
+                    </span>
+                    <span class="link-layer batman-layer" aria-hidden="true">
+                        <svg class="bat-watermark">
+                            <use href="#bat-silhouette" />
+                        </svg>
+                        <span class="link-text glitch-text">COMMAND</span>
+                    </span>
+                    <span class="scratch-overlay"></span>
+                </a>
+                <a href="#timeline" class="nav-link duality-link" data-context="TD Bank • K2 Nextgen">
+                    <span class="link-layer corporate-layer">
+                        <span class="link-icon">▸</span>
+                        <span class="link-text">TIMELINE</span>
+                    </span>
+                    <span class="link-layer batman-layer" aria-hidden="true">
+                        <svg class="bat-watermark">
+                            <use href="#bat-silhouette" />
+                        </svg>
+                        <span class="link-text glitch-text">TIMELINE</span>
+                    </span>
+                    <span class="scratch-overlay"></span>
+                </a>
+                <a href="#dossier" class="nav-link duality-link" data-context="McMaster M.Eng • GPA 3.9">
+                    <span class="link-layer corporate-layer">
+                        <span class="link-icon">▸</span>
+                        <span class="link-text">DOSSIER</span>
+                    </span>
+                    <span class="link-layer batman-layer" aria-hidden="true">
+                        <svg class="bat-watermark">
+                            <use href="#bat-silhouette" />
+                        </svg>
+                        <span class="link-text glitch-text">DOSSIER</span>
+                    </span>
+                    <span class="scratch-overlay"></span>
+                </a>
+                <a href="#projects" class="nav-link duality-link" data-context="classified">
+                    <span class="link-layer corporate-layer">
+                        <span class="link-icon">▸</span>
+                        <span class="link-text">PROJECTS</span>
+                    </span>
+                    <span class="link-layer batman-layer" aria-hidden="true">
+                        <svg class="bat-watermark">
+                            <use href="#bat-silhouette" />
+                        </svg>
+                        <span class="link-text glitch-text">PROJECTS</span>
+                    </span>
+                    <span class="scratch-overlay"></span>
+                </a>
+                <a href="#arsenal" class="nav-link duality-link" data-context="tech-cache">
+                    <span class="link-layer corporate-layer">
+                        <span class="link-icon">▸</span>
+                        <span class="link-text">ARSENAL</span>
+                    </span>
+                    <span class="link-layer batman-layer" aria-hidden="true">
+                        <svg class="bat-watermark">
+                            <use href="#bat-silhouette" />
+                        </svg>
+                        <span class="link-text glitch-text">ARSENAL</span>
+                    </span>
+                    <span class="scratch-overlay"></span>
+                </a>
+                <a href="#clearance" class="nav-link duality-link" data-context="level-5">
+                    <span class="link-layer corporate-layer">
+                        <span class="link-icon">▸</span>
+                        <span class="link-text">CLEARANCE</span>
+                    </span>
+                    <span class="link-layer batman-layer" aria-hidden="true">
+                        <svg class="bat-watermark">
+                            <use href="#bat-silhouette" />
+                        </svg>
+                        <span class="link-text glitch-text">CLEARANCE</span>
+                    </span>
+                    <span class="scratch-overlay"></span>
+                </a>
             </div>
         </div>
     </nav>

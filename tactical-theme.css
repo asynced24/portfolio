@@ -161,6 +161,348 @@ body[data-theme="tactical"] {
 }
 
 /* ============================================
+   TACTICAL DUALITY NAVIGATION
+   Corporate Wayne / Batman Underground Reveal
+   ============================================ */
+
+/* Hide SVG filters container */
+.svg-filters {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+/* Duality Link - Dual Layer Structure */
+.duality-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    overflow: hidden;
+    background: transparent;
+    border-radius: 4px;
+    isolation: isolate;
+}
+
+.duality-link .link-layer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Corporate Layer - Clean Wayne Enterprises OS (Slate Gray #1A1A1B) */
+.duality-link .corporate-layer {
+    position: relative;
+    z-index: 2;
+    color: rgba(255, 255, 255, 0.85);
+    background: linear-gradient(135deg, rgba(26, 26, 27, 0.9), rgba(26, 26, 27, 0.7));
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    border: 1px solid rgba(148, 163, 184, 0.15);
+}
+
+.duality-link .corporate-layer .link-text {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    font-size: 0.85rem;
+}
+
+/* Batman Layer - Carbon Black Underground (#0A0A0B) */
+.duality-link .batman-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0A0A0B;
+    opacity: 0;
+    clip-path: inset(0 100% 0 0);
+    transform: translateZ(0);
+}
+
+.duality-link .batman-layer .link-text {
+    position: relative;
+    z-index: 2;
+    color: rgba(255, 255, 255, 0.95);
+    font-family: 'Orbitron', monospace;
+    font-weight: 700;
+    letter-spacing: 2px;
+    font-size: 0.8rem;
+    text-shadow: 0 0 8px rgba(0, 67, 156, 0.8);
+}
+
+/* Bat Silhouette Watermark */
+.duality-link .bat-watermark {
+    position: absolute;
+    width: 80px;
+    height: 32px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgba(0, 67, 156, 0.25);
+    filter: drop-shadow(0 0 12px rgba(0, 67, 156, 0.4));
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Scratch Overlay - Grain Texture */
+.duality-link .scratch-overlay {
+    position: absolute;
+    top: -10%;
+    left: -10%;
+    right: -10%;
+    bottom: -10%;
+    z-index: 3;
+    pointer-events: none;
+    opacity: 0;
+    mix-blend-mode: overlay;
+    background:
+        repeating-linear-gradient(90deg,
+            transparent,
+            transparent 2px,
+            rgba(255, 255, 255, 0.03) 2px,
+            rgba(255, 255, 255, 0.03) 4px),
+        repeating-linear-gradient(0deg,
+            transparent,
+            transparent 2px,
+            rgba(0, 67, 156, 0.05) 2px,
+            rgba(0, 67, 156, 0.05) 4px);
+    filter: url(#tactical-grain);
+}
+
+/* ============================================
+   HOVER STATE - The Scratch Reveal
+   ============================================ */
+
+.duality-link:hover {
+    transform: none;
+    /* Override parent transform */
+}
+
+/* Corporate layer scratches away */
+.duality-link:hover .corporate-layer {
+    animation: scratchGlitch 0.15s steps(2) forwards;
+    clip-path: polygon(0% 0%,
+            15% 0%,
+            15% 35%,
+            30% 35%,
+            30% 0%,
+            100% 0%,
+            100% 65%,
+            75% 65%,
+            75% 100%,
+            50% 100%,
+            50% 65%,
+            25% 65%,
+            25% 100%,
+            0% 100%);
+    opacity: 0.3;
+    filter: url(#scratch-distortion);
+}
+
+/* Batman layer reveals with scan effect */
+.duality-link:hover .batman-layer {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+    animation: batReveal 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    box-shadow:
+        inset 0 0 20px rgba(0, 67, 156, 0.3),
+        0 0 15px rgba(0, 67, 156, 0.2);
+}
+
+.duality-link:hover .bat-watermark {
+    opacity: 1;
+    animation: batPulse 1.5s ease-in-out infinite;
+}
+
+/* Scratch overlay becomes visible */
+.duality-link:hover .scratch-overlay {
+    opacity: 1;
+    animation: scanLines 0.3s linear;
+}
+
+/* Glitch text jitter - 10ms effect */
+.duality-link:hover .glitch-text {
+    animation: glitchJitter 0.08s steps(3) 2;
+}
+
+/* ============================================
+   KEYFRAME ANIMATIONS
+   ============================================ */
+
+/* 10ms Glitch Jitter for text */
+@keyframes glitchJitter {
+    0% {
+        transform: translate(0, 0) skewX(0deg);
+        text-shadow:
+            -1px 0 rgba(0, 67, 156, 0.8),
+            1px 0 rgba(0, 102, 204, 0.8);
+    }
+
+    25% {
+        transform: translate(-2px, 1px) skewX(-2deg);
+        text-shadow:
+            2px 0 rgba(0, 67, 156, 1),
+            -2px 0 rgba(255, 255, 255, 0.3);
+    }
+
+    50% {
+        transform: translate(2px, -1px) skewX(2deg);
+        text-shadow:
+            -3px 0 rgba(0, 102, 204, 0.9),
+            3px 0 rgba(0, 67, 156, 0.5);
+    }
+
+    75% {
+        transform: translate(-1px, 2px) skewX(-1deg);
+        text-shadow:
+            1px 0 rgba(0, 67, 156, 0.7),
+            -1px 0 rgba(255, 255, 255, 0.2);
+    }
+
+    100% {
+        transform: translate(0, 0) skewX(0deg);
+        text-shadow: 0 0 8px rgba(0, 67, 156, 0.8);
+    }
+}
+
+/* Corporate layer scratch animation */
+@keyframes scratchGlitch {
+    0% {
+        clip-path: inset(0);
+        opacity: 1;
+    }
+
+    20% {
+        clip-path: polygon(0% 0%, 100% 0%, 100% 45%, 60% 45%, 60% 55%, 100% 55%, 100% 100%, 0% 100%);
+    }
+
+    40% {
+        clip-path: polygon(0% 0%, 35% 0%, 35% 100%, 0% 100%);
+    }
+
+    60% {
+        clip-path: polygon(70% 0%, 100% 0%, 100% 100%, 70% 100%, 70% 60%, 45% 60%, 45% 40%, 70% 40%);
+    }
+
+    80% {
+        clip-path: polygon(0% 30%, 20% 30%, 20% 70%, 0% 70%);
+    }
+
+    100% {
+        clip-path: polygon(0% 0%, 0% 0%, 0% 0%);
+        opacity: 0;
+    }
+}
+
+/* Batman layer reveal animation */
+@keyframes batReveal {
+    0% {
+        clip-path: inset(0 100% 0 0);
+        filter: brightness(2) contrast(1.5);
+    }
+
+    30% {
+        clip-path: inset(0 60% 0 0);
+        filter: brightness(1.5) contrast(1.3);
+    }
+
+    60% {
+        clip-path: inset(0 30% 0 0);
+    }
+
+    100% {
+        clip-path: inset(0 0 0 0);
+        filter: brightness(1) contrast(1);
+    }
+}
+
+/* Bat watermark pulse */
+@keyframes batPulse {
+
+    0%,
+    100% {
+        opacity: 0.8;
+        filter: drop-shadow(0 0 12px rgba(0, 67, 156, 0.4));
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        filter: drop-shadow(0 0 20px rgba(0, 67, 156, 0.7));
+        transform: translate(-50%, -50%) scale(1.05);
+    }
+}
+
+/* Scan lines animation */
+@keyframes scanLines {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 0 100%;
+    }
+}
+
+/* ============================================
+   TACTICAL SENSOR SCAN EFFECT
+   ============================================ */
+
+/* Add scan line that sweeps on hover */
+.duality-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(0, 67, 156, 0.5),
+            rgba(0, 102, 204, 0.8),
+            rgba(0, 67, 156, 0.5),
+            transparent);
+    opacity: 0;
+    z-index: 10;
+    transform: translateY(-100%);
+    transition: opacity 0.1s;
+}
+
+.duality-link:hover::before {
+    opacity: 1;
+    animation: sensorScan 0.3s ease-out forwards;
+}
+
+@keyframes sensorScan {
+    0% {
+        transform: translateY(-100%);
+    }
+
+    100% {
+        transform: translateY(2000%);
+    }
+}
+
+/* PlayStation Blue glow effect on hover */
+.duality-link:hover {
+    box-shadow:
+        0 0 20px rgba(0, 67, 156, 0.3),
+        0 0 40px rgba(0, 67, 156, 0.15),
+        inset 0 0 15px rgba(0, 67, 156, 0.1);
+}
+
+/* ============================================
    COMMAND CENTER (HERO)
    ============================================ */
 .command-center {
