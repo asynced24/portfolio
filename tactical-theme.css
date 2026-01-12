@@ -1766,7 +1766,8 @@ body[data-theme="tactical"] {
 }
 
 /* ============================================
-   DOWNLOAD CLEARANCE
+   SECURITY CLEARANCE - TACTICAL TERMINAL
+   Premium Terminal UI Design
    ============================================ */
 .download-clearance {
     position: relative;
@@ -1774,149 +1775,394 @@ body[data-theme="tactical"] {
     z-index: 10;
 }
 
-.clearance-container {
-    max-width: 600px;
+/* Terminal Container */
+.clearance-terminal {
+    max-width: 700px;
     margin: 0 auto;
-}
-
-.clearance-card {
-    background: rgba(30, 41, 59, 0.3);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(148, 163, 184, 0.1);
+    background: #0A0A0B;
     border-radius: 12px;
-    padding: 3rem;
+    overflow: hidden;
+    border: 1px solid rgba(0, 67, 156, 0.3);
+    box-shadow:
+        0 0 40px rgba(0, 67, 156, 0.15),
+        0 20px 60px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
-.clearance-header {
+/* Terminal Header (Title Bar) */
+.terminal-header {
     display: flex;
-    gap: 1.5rem;
     align-items: center;
-    margin-bottom: 2rem;
-}
-
-.clearance-icon {
-    width: 60px;
-    height: 60px;
-    color: #00439C;
-}
-
-.clearance-icon svg {
-    width: 100%;
-    height: 100%;
-}
-
-.clearance-info h3 {
-    font-family: 'Orbitron', monospace;
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: rgba(255, 255, 255, 0.95);
-    margin-bottom: 0.5rem;
-    letter-spacing: 2px;
-}
-
-.clearance-info p {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.7);
-}
-
-.clearance-details {
-    margin-bottom: 2rem;
-    padding: 1.5rem;
-    background: rgba(0, 67, 156, 0.05);
-    border: 1px solid rgba(0, 67, 156, 0.2);
-    border-radius: 8px;
-}
-
-.detail-row {
-    display: flex;
     justify-content: space-between;
-    padding: 0.8rem 0;
-    border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+    padding: 0.8rem 1.2rem;
+    background: linear-gradient(180deg, #1A1A1B, #0F0F10);
+    border-bottom: 1px solid rgba(0, 67, 156, 0.3);
 }
 
-.detail-row:last-child {
-    border-bottom: none;
+.terminal-dots {
+    display: flex;
+    gap: 8px;
 }
 
-.detail-label {
+.terminal-dots .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.terminal-dots .dot.red {
+    background: #FF5F56;
+    box-shadow: 0 0 8px rgba(255, 95, 86, 0.5);
+}
+
+.terminal-dots .dot.yellow {
+    background: #FFBD2E;
+    box-shadow: 0 0 8px rgba(255, 189, 46, 0.5);
+}
+
+.terminal-dots .dot.green {
+    background: #27CA40;
+    box-shadow: 0 0 8px rgba(39, 202, 64, 0.5);
+}
+
+.terminal-title {
     font-family: 'Share Tech Mono', monospace;
-    font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.6);
     letter-spacing: 1px;
 }
 
-.detail-value {
+.terminal-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.terminal-status .status-light {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #00439C;
+}
+
+.terminal-status .status-text {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem;
+    color: #00439C;
+    letter-spacing: 1px;
+}
+
+/* Terminal Body */
+.terminal-body {
+    position: relative;
+    padding: 2rem;
+    background: linear-gradient(180deg, #0D0D0E, #0A0A0B);
+}
+
+/* Scan Line Animation */
+.terminal-scanline {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(0, 67, 156, 0.3), rgba(0, 102, 204, 0.5), rgba(0, 67, 156, 0.3), transparent);
+    animation: terminalScan 4s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes terminalScan {
+    0% {
+        top: 0;
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        top: 100%;
+        opacity: 0;
+    }
+}
+
+/* File Preview Section */
+.file-preview {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: rgba(0, 67, 156, 0.08);
+    border: 1px solid rgba(0, 67, 156, 0.2);
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+}
+
+.file-icon {
+    position: relative;
+    width: 60px;
+    height: 70px;
+    color: #00439C;
+    flex-shrink: 0;
+}
+
+.file-icon svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 0 8px rgba(0, 67, 156, 0.4));
+}
+
+.file-badge {
+    position: absolute;
+    bottom: 0;
+    right: -5px;
+    padding: 2px 6px;
+    background: linear-gradient(135deg, #00439C, #0066CC);
+    border-radius: 3px;
+    font-family: 'Orbitron', monospace;
+    font-size: 0.5rem;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 1px;
+}
+
+.file-info {
+    flex: 1;
+}
+
+.file-name {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.95);
+    margin-bottom: 0.5rem;
+    letter-spacing: 1px;
+}
+
+.file-description {
     font-family: 'Rajdhani', sans-serif;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0;
+}
+
+/* Classification Grid */
+.classification-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.class-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1rem;
+    background: rgba(30, 41, 59, 0.3);
+    border: 1px solid rgba(148, 163, 184, 0.1);
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.class-item:hover {
+    border-color: rgba(0, 67, 156, 0.3);
+    box-shadow: 0 0 15px rgba(0, 67, 156, 0.1);
+}
+
+.class-icon {
+    font-size: 1.2rem;
+    filter: grayscale(20%);
+}
+
+.class-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.class-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.6rem;
+    color: rgba(255, 255, 255, 0.4);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.class-value {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.85rem;
     color: rgba(255, 255, 255, 0.9);
     font-weight: 600;
 }
 
-.download-btn {
+.class-value.authorized {
+    color: #27CA40;
+    text-shadow: 0 0 8px rgba(39, 202, 64, 0.4);
+}
+
+/* Command Line */
+.command-line {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1rem 1.2rem;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(0, 67, 156, 0.2);
+    border-radius: 6px;
+    margin-bottom: 1.5rem;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.prompt {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.75rem;
+    color: #27CA40;
+    flex-shrink: 0;
+}
+
+.command {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.command-line .cursor-blink {
+    font-size: 0.8rem;
+    color: #00439C;
+    animation: cursorCrazy 0.8s ease-in-out infinite;
+}
+
+/* Download Button - Tactical Design */
+.download-btn-tactical {
     width: 100%;
+    position: relative;
+    padding: 1.2rem 2rem;
+    background: linear-gradient(135deg, rgba(0, 67, 156, 0.2), rgba(0, 67, 156, 0.1));
+    border: 1px solid rgba(0, 67, 156, 0.4);
+    border-radius: 8px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.download-btn-tactical .btn-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, rgba(0, 67, 156, 0.3), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.download-btn-tactical:hover .btn-glow {
+    opacity: 1;
+}
+
+.download-btn-tactical .btn-content {
+    position: relative;
+    z-index: 2;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 1rem;
-    padding: 1.2rem 2rem;
-    background: linear-gradient(135deg, #00439C, #0066CC);
-    border: 1px solid rgba(0, 102, 204, 0.5);
-    border-radius: 8px;
-    color: white;
-    font-family: 'Orbitron', monospace;
-    font-size: 1rem;
-    font-weight: 700;
-    letter-spacing: 2px;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    position: relative;
-    overflow: hidden;
 }
 
-.download-btn::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.2);
-    transform: translate(-50%, -50%);
-    transition: width 0.6s, height 0.6s;
-}
-
-.download-btn:hover::before {
-    width: 300px;
-    height: 300px;
-}
-
-.download-btn:hover {
-    transform: scale(1.02);
-    box-shadow: 0 0 40px rgba(0, 67, 156, 0.6);
-}
-
-.btn-icon {
+.download-btn-tactical .btn-icon-svg {
     width: 24px;
     height: 24px;
-    position: relative;
-    z-index: 1;
+    color: #00439C;
+    transition: all 0.3s;
 }
 
-.btn-icon svg {
-    width: 100%;
+.download-btn-tactical:hover .btn-icon-svg {
+    color: #0066CC;
+    filter: drop-shadow(0 0 8px rgba(0, 102, 204, 0.6));
+    animation: downloadBounce 0.6s ease infinite;
+}
+
+@keyframes downloadBounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(3px);
+    }
+}
+
+.download-btn-tactical .btn-text {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+    letter-spacing: 2px;
+}
+
+.download-btn-tactical .btn-scanline {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
     height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 67, 156, 0.2), transparent);
+    animation: btnScanline 3s linear infinite;
 }
 
-.btn-text {
-    position: relative;
-    z-index: 1;
+@keyframes btnScanline {
+    0% {
+        left: -50%;
+    }
+
+    100% {
+        left: 150%;
+    }
 }
 
-/* PS5 Progress Bar */
+.download-btn-tactical:hover {
+    background: linear-gradient(135deg, rgba(0, 67, 156, 0.3), rgba(0, 67, 156, 0.15));
+    border-color: rgba(0, 102, 204, 0.6);
+    box-shadow:
+        0 0 30px rgba(0, 67, 156, 0.3),
+        inset 0 0 20px rgba(0, 67, 156, 0.1);
+    transform: translateY(-2px);
+}
+
+.download-btn-tactical:active {
+    transform: translateY(0);
+    box-shadow: 0 0 20px rgba(0, 67, 156, 0.3);
+}
+
+/* Terminal Footer */
+.terminal-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 1.2rem;
+    background: linear-gradient(180deg, #0F0F10, #0A0A0A);
+    border-top: 1px solid rgba(0, 67, 156, 0.2);
+}
+
+.footer-item {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.6rem;
+    color: rgba(255, 255, 255, 0.4);
+    letter-spacing: 1px;
+}
+
+/* Progress Bar - Keep existing styles */
 .download-progress {
-    margin-top: 2rem;
+    margin-top: 1.5rem;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s;
@@ -1931,28 +2177,28 @@ body[data-theme="tactical"] {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
 }
 
 .progress-label {
     font-family: 'Share Tech Mono', monospace;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     color: rgba(255, 255, 255, 0.7);
     letter-spacing: 1px;
 }
 
 .progress-percentage {
     font-family: 'Orbitron', monospace;
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: 700;
     color: #00439C;
 }
 
 .progress-bar-container {
     position: relative;
-    height: 8px;
+    height: 6px;
     background: rgba(30, 41, 59, 0.5);
-    border-radius: 4px;
+    border-radius: 3px;
     overflow: hidden;
     margin-bottom: 0.5rem;
 }
@@ -1964,7 +2210,7 @@ body[data-theme="tactical"] {
     height: 100%;
     width: 0%;
     background: linear-gradient(90deg, #00439C, #0066CC);
-    border-radius: 4px;
+    border-radius: 3px;
     transition: width 0.1s linear;
 }
 
@@ -1972,30 +2218,52 @@ body[data-theme="tactical"] {
     position: absolute;
     top: 0;
     right: 0;
-    width: 100px;
+    width: 80px;
     height: 100%;
     background: linear-gradient(90deg, transparent, rgba(0, 102, 204, 0.6));
     opacity: 0;
     animation: progressGlow 1.5s ease-in-out infinite;
 }
 
-@keyframes progressGlow {
-
-    0%,
-    100% {
-        opacity: 0;
-    }
-
-    50% {
-        opacity: 1;
-    }
-}
-
 .progress-status {
     font-family: 'Rajdhani', sans-serif;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: rgba(255, 255, 255, 0.5);
     text-align: center;
+}
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+    .classification-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .terminal-header {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .terminal-title {
+        font-size: 0.55rem;
+        order: 3;
+        width: 100%;
+        text-align: center;
+        margin-top: 0.5rem;
+    }
+
+    .file-preview {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .command-line {
+        font-size: 0.65rem;
+    }
+
+    .terminal-footer {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
 }
 
 /* ============================================
