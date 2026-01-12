@@ -16,6 +16,7 @@ class TacticalDashboard {
         this.initSmoothScroll();
         this.initCustomCursor();
         this.initTacticalDuality();
+        this.initMobileNav();
     }
 
     // ============================================
@@ -272,36 +273,37 @@ class TacticalDashboard {
     }
 
     // ============================================
-    // TACTICAL DUALITY NAVIGATION
+    // TACTICAL DUALITY NAVIGATION & CARDS
     // 10ms Glitch Jitter Micro-Interaction
     // ============================================
     initTacticalDuality() {
-        const dualityLinks = document.querySelectorAll('.duality-link');
+        // Select both nav links and bento cards with duality effect
+        const dualityElements = document.querySelectorAll('.duality-link, .duality-card');
 
-        if (!dualityLinks.length) return;
+        if (!dualityElements.length) return;
 
-        dualityLinks.forEach(link => {
+        dualityElements.forEach(element => {
             let glitchInterval = null;
 
-            link.addEventListener('mouseenter', () => {
+            element.addEventListener('mouseenter', () => {
                 // Trigger initial 10ms glitch jitter
-                this.triggerGlitchJitter(link, 3); // 3 rapid jitters
+                this.triggerGlitchJitter(element, 3); // 3 rapid jitters
 
                 // Random micro-glitches during hover (simulates faulty monitor)
                 glitchInterval = setInterval(() => {
                     if (Math.random() > 0.7) { // 30% chance of random glitch
-                        this.triggerMicroGlitch(link);
+                        this.triggerMicroGlitch(element);
                     }
                 }, 500);
 
                 // Log tactical context (for the Bat-Computer aesthetic)
-                const context = link.getAttribute('data-context');
+                const context = element.getAttribute('data-context');
                 if (context) {
                     console.log(`🦇 TACTICAL LAYER: ${context.toUpperCase()}`);
                 }
             });
 
-            link.addEventListener('mouseleave', () => {
+            element.addEventListener('mouseleave', () => {
                 // Clear random glitch interval
                 if (glitchInterval) {
                     clearInterval(glitchInterval);
@@ -309,15 +311,16 @@ class TacticalDashboard {
                 }
 
                 // Quick exit glitch
-                this.triggerGlitchJitter(link, 1);
+                this.triggerGlitchJitter(element, 1);
             });
         });
     }
 
     // Rapid 10ms glitch jitter effect
     triggerGlitchJitter(element, count = 2) {
-        const glitchText = element.querySelector('.glitch-text');
-        const batWatermark = element.querySelector('.bat-watermark');
+        // Support both nav links (.glitch-text) and cards (.glitch-label)
+        const glitchText = element.querySelector('.glitch-text') || element.querySelector('.glitch-label');
+        const batWatermark = element.querySelector('.bat-watermark') || element.querySelector('.bat-watermark-card');
 
         if (!glitchText) return;
 
@@ -329,6 +332,9 @@ class TacticalDashboard {
                 // Reset to normal
                 glitchText.style.transform = '';
                 glitchText.style.textShadow = '';
+                if (batWatermark) {
+                    batWatermark.style.transform = 'translate(-50%, -50%)';
+                }
                 return;
             }
 
@@ -359,24 +365,64 @@ class TacticalDashboard {
 
     // Subtle micro-glitch for continuous hover effect
     triggerMicroGlitch(element) {
-        const corporateLayer = element.querySelector('.corporate-layer');
-        const batmanLayer = element.querySelector('.batman-layer');
+        // Support both nav links and cards
+        const corporateLayer = element.querySelector('.corporate-layer') || element.querySelector('.corporate-card');
+        const batmanLayer = element.querySelector('.batman-layer') || element.querySelector('.batman-card');
 
-        if (!corporateLayer || !batmanLayer) return;
+        if (!corporateLayer && !batmanLayer) return;
 
         // Brief opacity flicker
-        const originalOpacity = batmanLayer.style.opacity;
-        batmanLayer.style.opacity = '0.7';
+        if (batmanLayer) {
+            const originalOpacity = batmanLayer.style.opacity;
+            batmanLayer.style.opacity = '0.7';
 
-        setTimeout(() => {
-            batmanLayer.style.opacity = originalOpacity || '1';
-        }, 30);
+            setTimeout(() => {
+                batmanLayer.style.opacity = originalOpacity || '1';
+            }, 30);
+        }
 
         // Add subtle filter distortion
         element.style.filter = 'brightness(1.1) contrast(1.05)';
         setTimeout(() => {
             element.style.filter = '';
         }, 20);
+    }
+
+    // ============================================
+    // MOBILE NAVIGATION
+    // ============================================
+    initMobileNav() {
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        if (!navToggle || !navLinks) return;
+
+        // Toggle mobile menu
+        navToggle.addEventListener('click', () => {
+            navToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+
+            // Log for Bat-Computer aesthetic
+            const isOpen = navLinks.classList.contains('active');
+            console.log(`🦇 NAV_PANEL: ${isOpen ? 'EXPANDED' : 'COLLAPSED'}`);
+        });
+
+        // Close menu when clicking a link
+        const links = navLinks.querySelectorAll('.nav-link, .duality-link');
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                navToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Close menu on resize if viewport becomes large
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 900) {
+                navToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            }
+        });
     }
 }
 
