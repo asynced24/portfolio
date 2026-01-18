@@ -9,6 +9,7 @@ class TacticalDashboard {
     }
 
     init() {
+        this.initThemeToggle(); // Initialize theme first for immediate visual setup
         this.showBootSequence();
         this.initTypingAnimation();
         this.initStatCounters();
@@ -386,6 +387,48 @@ class TacticalDashboard {
         setTimeout(() => {
             element.style.filter = '';
         }, 20);
+    }
+
+    // ============================================
+    // THEME TOGGLE (LIGHT/DARK MODE)
+    // ============================================
+    initThemeToggle() {
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+
+        // Check for saved theme preference or default to 'tactical' (dark)
+        const savedTheme = localStorage.getItem('theme') || 'tactical';
+
+        // Apply saved theme immediately (before page fully loads)
+        if (savedTheme === 'light') {
+            body.setAttribute('data-theme', 'light');
+        } else {
+            body.setAttribute('data-theme', 'tactical');
+        }
+
+        if (!themeToggle) return;
+
+        // Toggle theme on button click
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'tactical' : 'light';
+
+            // Apply new theme immediately
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+
+            // Add transition class for smooth animation
+            body.classList.add('theme-transitioning');
+            setTimeout(() => {
+                body.classList.remove('theme-transitioning');
+            }, 300);
+
+            // Log for tactical aesthetic
+            console.log(`🔄 THEME: ${newTheme === 'light' ? 'DAYLIGHT_PROTOCOL' : 'TACTICAL_MODE'}`);
+        });
+
+        // Dark mode (tactical) is always the default
+        // System preference is ignored - user can manually switch if desired
     }
 
     // ============================================

@@ -28,9 +28,11 @@
         <div class="hud-corner hud-br"></div>
     </div>
 
+
     <!-- Custom Cursor -->
     <div class="tactical-cursor"></div>
     <div class="cursor-trail"></div>
+
 
     <!-- SVG Filters for Tactical Scratch Effect -->
     <svg class="svg-filters" aria-hidden="true">
@@ -64,7 +66,6 @@
             <div class="nav-logo">
                 <span class="logo-bracket">[</span>
                 <span class="logo-text">WAYNE_ENTERPRISES</span>
-                <span class="logo-bracket">]</span>
             </div>
             <!-- Mobile Menu Toggle -->
             <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
@@ -151,6 +152,25 @@
                     </span>
                     <span class="scratch-overlay"></span>
                 </a>
+                <!-- Theme Toggle - Sleek Pill Style -->
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode">
+                    <div class="toggle-track">
+                        <span class="toggle-thumb">
+                            <svg class="toggle-icon sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <circle cx="12" cy="12" r="4" />
+                                <path
+                                    d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+                            </svg>
+                            <svg class="toggle-icon moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                            </svg>
+                        </span>
+                        <span class="toggle-label dark-label">DARK</span>
+                        <span class="toggle-label light-label">LIGHT</span>
+                    </div>
+                </button>
             </div>
         </div>
     </nav>
