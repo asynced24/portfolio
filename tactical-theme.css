@@ -3416,14 +3416,19 @@ body[data-theme="tactical"] [role="button"] {
 /* ===== MOBILE STYLES ===== */
 @media (max-width: 900px) {
     .cyber-coupling {
-        position: fixed;
+        position: fixed !important;
         bottom: 24px;
         right: 24px;
         margin: 0;
-        z-index: 1000;
+        z-index: 9999;
+        /* Very high to escape nav stacking context */
         width: 120px;
         height: 40px;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        display: flex !important;
+        /* Override any display:none from nav-links */
+        visibility: visible !important;
+        opacity: 1 !important;
     }
 
     .hud-text {
