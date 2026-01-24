@@ -390,11 +390,12 @@ class TacticalDashboard {
     }
 
     // ============================================
-    // THEME TOGGLE (LIGHT/DARK MODE)
+    // THEME TOGGLE (LIGHT/DARK MODE) - Tactical Power Coupling
     // ============================================
     initThemeToggle() {
         const themeToggle = document.getElementById('themeToggle');
         const body = document.body;
+        const PULSE_CLASS = 'system-pulse-active';
 
         // Check for saved theme preference or default to 'tactical' (dark)
         const savedTheme = localStorage.getItem('theme') || 'tactical';
@@ -408,6 +409,21 @@ class TacticalDashboard {
 
         if (!themeToggle) return;
 
+        // Function to trigger the whole-body scanline pulse
+        const triggerBodyPulse = () => {
+            // Remove class if it exists to restart animation
+            body.classList.remove(PULSE_CLASS);
+            // Trigger reflow to ensure animation restarts
+            void body.offsetWidth;
+            // Add the class that contains the animation
+            body.classList.add(PULSE_CLASS);
+
+            // Clean up class after animation finishes (600ms matching CSS)
+            setTimeout(() => {
+                body.classList.remove(PULSE_CLASS);
+            }, 600);
+        };
+
         // Toggle theme on button click
         themeToggle.addEventListener('click', () => {
             const currentTheme = body.getAttribute('data-theme');
@@ -417,6 +433,9 @@ class TacticalDashboard {
             body.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
 
+            // Fire the tactical pulse effect across the screen
+            triggerBodyPulse();
+
             // Add transition class for smooth animation
             body.classList.add('theme-transitioning');
             setTimeout(() => {
@@ -424,11 +443,10 @@ class TacticalDashboard {
             }, 300);
 
             // Log for tactical aesthetic
-            console.log(`🔄 THEME: ${newTheme === 'light' ? 'DAYLIGHT_PROTOCOL' : 'TACTICAL_MODE'}`);
+            console.log(`⚡ COUPLING: ${newTheme === 'light' ? 'VENT_MODE' : 'ARMED'}`);
         });
 
         // Dark mode (tactical) is always the default
-        // System preference is ignored - user can manually switch if desired
     }
 
     // ============================================
