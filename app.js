@@ -455,6 +455,7 @@ class TacticalDashboard {
     initMobileNav() {
         const navToggle = document.getElementById('navToggle');
         const navLinks = document.getElementById('navLinks');
+        const themeToggle = document.getElementById('themeToggle');
 
         if (!navToggle || !navLinks) return;
 
@@ -463,8 +464,15 @@ class TacticalDashboard {
             navToggle.classList.toggle('active');
             navLinks.classList.toggle('active');
 
-            // Log for Bat-Computer aesthetic
+            // Hide/show theme toggle when menu is open/closed
             const isOpen = navLinks.classList.contains('active');
+            if (themeToggle) {
+                themeToggle.style.opacity = isOpen ? '0' : '1';
+                themeToggle.style.visibility = isOpen ? 'hidden' : 'visible';
+                themeToggle.style.pointerEvents = isOpen ? 'none' : 'auto';
+            }
+
+            // Log for Bat-Computer aesthetic
             console.log(`🦇 NAV_PANEL: ${isOpen ? 'EXPANDED' : 'COLLAPSED'}`);
         });
 
@@ -474,6 +482,12 @@ class TacticalDashboard {
             link.addEventListener('click', () => {
                 navToggle.classList.remove('active');
                 navLinks.classList.remove('active');
+                // Show theme toggle again
+                if (themeToggle) {
+                    themeToggle.style.opacity = '1';
+                    themeToggle.style.visibility = 'visible';
+                    themeToggle.style.pointerEvents = 'auto';
+                }
             });
         });
 
@@ -482,6 +496,12 @@ class TacticalDashboard {
             if (window.innerWidth > 900) {
                 navToggle.classList.remove('active');
                 navLinks.classList.remove('active');
+                // Ensure theme toggle is visible on desktop
+                if (themeToggle) {
+                    themeToggle.style.opacity = '1';
+                    themeToggle.style.visibility = 'visible';
+                    themeToggle.style.pointerEvents = 'auto';
+                }
             }
         });
     }

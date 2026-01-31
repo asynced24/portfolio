@@ -3524,6 +3524,15 @@ body[data-theme="tactical"] [role="button"] {
         box-shadow:
             0 4px 20px rgba(0, 0, 0, 0.5),
             0 0 25px rgba(var(--active-color), 0.3);
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    /* Hide theme toggle when mobile menu is open */
+    .nav-links.active~.cyber-coupling,
+    .nav-container:has(.nav-links.active) .cyber-coupling {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
     }
 
     .hud-text {
