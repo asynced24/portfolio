@@ -1165,35 +1165,68 @@ body[data-theme="tactical"] {
 /* ============================================
    BLINKING STATUS LIGHTS (AWS/Azure Mesh Nodes)
    ============================================ */
-.mesh-nodes {
-    display: flex;
-    gap: 1.5rem;
-    margin-top: 0.5rem;
-    justify-content: center;
+/* ===== MESH GRID SYSTEM ===== */
+.mesh-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+    width: 100%;
+    margin-top: 1rem;
 }
 
-.node-item {
+.mesh-cell {
+    background: rgba(10, 20, 30, 0.6);
+    border: 1px solid rgba(0, 217, 255, 0.15);
+    padding: 0.6rem;
     display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 1rem;
-    background: rgba(0, 67, 156, 0.1);
-    border: 1px solid rgba(0, 67, 156, 0.3);
-    border-radius: 6px;
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 92% 100%, 0 100%);
 }
 
-.node-status-light {
-    width: 8px;
-    height: 8px;
+.mesh-cell:hover {
+    background: rgba(0, 217, 255, 0.1);
+    border-color: var(--hud-primary);
+    transform: translateX(4px);
+}
+
+.cell-status {
+    width: 6px;
+    height: 6px;
+    background: var(--hud-primary);
+    box-shadow: 0 0 8px var(--hud-primary);
     border-radius: 50%;
-    background: #00439C;
-    box-shadow:
-        0 0 6px rgba(0, 67, 156, 0.8),
-        0 0 12px rgba(0, 67, 156, 0.5);
 }
 
-.node-status-light.blink-blue {
-    animation: blinkBlue 1.5s ease-in-out infinite;
+.cell-status.pulse {
+    animation: blinkBlue 2s infinite;
+}
+
+.cell-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.cell-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--color-text);
+}
+
+.cell-detail {
+    font-size: 0.55rem;
+    color: var(--color-text-secondary);
+    font-family: 'Share Tech Mono', monospace;
+}
+
+/* Light Mode Overrides */
+[data-theme="light"] .mesh-cell {
+    background: rgba(230, 240, 255, 0.6);
+    border-color: rgba(0, 67, 156, 0.2);
+}
+
+[data-theme="light"] .mesh-cell:hover {
+    background: rgba(0, 67, 156, 0.05);
+    border-color: var(--hud-secondary);
 }
 
 @keyframes blinkBlue {
@@ -1216,13 +1249,6 @@ body[data-theme="tactical"] {
     }
 }
 
-.node-name {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.9);
-    letter-spacing: 1px;
-    font-weight: 600;
-}
 
 /* ============================================
    SECURE CHANNEL STATUS INDICATORS
@@ -1372,13 +1398,39 @@ body[data-theme="tactical"] {
 /* ============================================
    BENTO GRID LAYOUT
    ============================================ */
+/* ============================================
+   BENTO GRID LAYOUT
+   ============================================ */
 .bento-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
     gap: 1.5rem;
     margin-top: 3rem;
 }
 
+/* Radar Chart - Main Feature (Left Side) */
+.radar-card {
+    grid-row: span 2;
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Status Card - Top Right */
+.stat-card {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+/* Contact Card - Bottom Right */
+.contact-card {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+/* Card Styling */
 .bento-card {
     background: rgba(30, 41, 59, 0.3);
     backdrop-filter: blur(20px);
@@ -1403,7 +1455,7 @@ body[data-theme="tactical"] {
 }
 
 .bento-card:hover {
-    transform: scale(1.02);
+    transform: scale(1.01);
     border-color: rgba(0, 67, 156, 0.3);
     box-shadow: 0 0 30px rgba(0, 67, 156, 0.2);
 }
@@ -1412,8 +1464,57 @@ body[data-theme="tactical"] {
     opacity: 1;
 }
 
-.card-header {
-    margin-bottom: 1.5rem;
+/* Responsive Grid */
+@media (max-width: 900px) {
+    .bento-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .radar-card,
+    .stat-card,
+    .contact-card {
+        grid-column: 1;
+        grid-row: auto;
+    }
+
+    .radar-card {
+        min-height: 400px;
+    }
+}
+
+/* Merged Status Card Styles */
+.status-section {
+    margin-bottom: 3.0rem;
+}
+
+.status-section:last-child {
+    margin-bottom: 0;
+}
+
+.section-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--color-text-secondary);
+    margin-bottom: 1.0rem;
+    opacity: 0.8;
+}
+
+.compact-mesh {
+    margin-top: 0.5rem;
+    gap: 0.6rem;
+}
+
+.compact-mesh .mesh-cell {
+    padding: 0.5rem;
+}
+
+.compact-mesh .cell-label {
+    font-size: 0.7rem;
+}
+
+.compact-mesh .cell-detail {
+    font-size: 0.5rem;
 }
 
 .card-label {
@@ -2365,6 +2466,72 @@ body[data-theme="tactical"] {
 .download-btn-tactical:active {
     transform: translateY(0);
     box-shadow: 0 0 20px rgba(0, 67, 156, 0.3);
+}
+
+/* Bat Swarm Download Effect */
+.bat-swarm {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    overflow: hidden;
+    background: radial-gradient(circle at 50% 80%, rgba(0, 217, 255, 0.08), transparent 60%);
+}
+
+.bat-swarm .bat {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: var(--size);
+    height: calc(var(--size) * 0.45);
+    color: #0A0A0B;
+    opacity: 0;
+    filter: blur(var(--blur));
+    animation: batFlight var(--duration) cubic-bezier(0.2, 0.8, 0.2, 1) var(--delay) forwards;
+}
+
+.bat-swarm .bat svg {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+    filter: drop-shadow(0 0 8px rgba(0, 217, 255, 0.35));
+    animation: batFlap var(--flap) ease-in-out infinite;
+}
+
+@keyframes batFlight {
+    0% {
+        transform: translate3d(var(--x-start), var(--y-start), 0) rotate(var(--rotation)) scale(0.7);
+        opacity: 0;
+    }
+
+    18% {
+        opacity: var(--opacity);
+    }
+
+    50% {
+        transform: translate3d(var(--x-mid), var(--y-mid), 0) rotate(calc(var(--rotation) + 20deg)) scale(0.95);
+        opacity: var(--opacity);
+    }
+
+    100% {
+        transform: translate3d(var(--x-end), var(--y-end), 0) rotate(calc(var(--rotation) + 60deg)) scale(1.1);
+        opacity: 0;
+    }
+}
+
+@keyframes batFlap {
+    0%,
+    100% {
+        transform: scaleY(1);
+    }
+
+    50% {
+        transform: scaleY(0.6);
+    }
+}
+
+[data-theme="light"] .bat-swarm .bat {
+    color: #0A0A0B;
 }
 
 /* Terminal Footer */
@@ -3513,28 +3680,38 @@ body[data-theme="tactical"] [role="button"] {
 
 /* ===== MOBILE STYLES ===== */
 @media (max-width: 900px) {
+
+    /* Hide theme toggle from navbar on mobile - use transform for reliable positioning */
     .cyber-coupling {
         position: fixed !important;
-        top: auto !important;
-        left: auto !important;
-        bottom: 24px !important;
-        right: 24px !important;
-        margin: 0;
-        z-index: 9999;
-        width: 120px;
-        height: 40px;
-        box-shadow:
-            0 4px 20px rgba(0, 0, 0, 0.5),
-            0 0 25px rgba(var(--active-color), 0.3);
-        transition: opacity 0.3s ease, visibility 0.3s ease;
-    }
-
-    /* Hide theme toggle when mobile menu is open */
-    .nav-links.active~.cyber-coupling,
-    .nav-container:has(.nav-links.active) .cyber-coupling {
+        top: 0 !important;
+        left: 50% !important;
+        right: auto !important;
+        bottom: auto !important;
+        /* Use transform to position at bottom of viewport */
+        transform: translate(-50%, calc(100vh + 50px)) !important;
+        margin: 0 !important;
+        z-index: 10001;
+        width: 140px;
+        height: 44px;
         opacity: 0;
         visibility: hidden;
         pointer-events: none;
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+            opacity 0.3s ease,
+            visibility 0.3s ease;
+        box-shadow:
+            0 4px 20px rgba(0, 0, 0, 0.5),
+            0 0 25px rgba(var(--active-color), 0.3);
+    }
+
+    /* Show theme toggle when mobile menu is open - using body class from JS */
+    body.mobile-menu-open .cyber-coupling {
+        /* Position at bottom of viewport using calc */
+        transform: translate(-50%, calc(100vh - 80px)) !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
     }
 
     .hud-text {

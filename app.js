@@ -5,6 +5,7 @@
 
 class TacticalDashboard {
     constructor() {
+        this.batSwarmActive = false;
         this.init();
     }
 
@@ -136,6 +137,7 @@ class TacticalDashboard {
         if (!downloadBtn || !progressContainer) return;
 
         downloadBtn.addEventListener('click', () => {
+            this.triggerBatSwarm();
             // Hide button, show progress
             downloadBtn.style.opacity = '0';
             downloadBtn.style.pointerEvents = 'none';
@@ -202,6 +204,105 @@ class TacticalDashboard {
                 }
             }, interval);
         });
+    }
+
+    triggerBatSwarm() {
+        if (this.batSwarmActive) return;
+        this.batSwarmActive = true;
+
+        const swarm = document.createElement('div');
+        swarm.className = 'bat-swarm';
+
+        const batCount = 84;
+        let maxDuration = 0;
+        let maxDelay = 0;
+        const layers = ['bat--near', 'bat--mid', 'bat--far'];
+
+        for (let i = 0; i < batCount; i++) {
+            const bat = document.createElement('div');
+            const layer = layers[i % layers.length];
+            bat.className = `bat ${layer}`;
+
+            const pattern = i % 4;
+            let startX;
+            let startY;
+            let endX;
+            let endY;
+            let midX;
+            let midY;
+
+            if (pattern === 0) {
+                startX = 40 + Math.random() * 20;
+                startY = 85 + Math.random() * 15;
+                endX = Math.random() * 100;
+                endY = Math.random() * 35;
+                midX = 30 + Math.random() * 40;
+                midY = 45 + Math.random() * 20;
+            } else if (pattern === 1) {
+                startX = -10 + Math.random() * 20;
+                startY = 55 + Math.random() * 40;
+                endX = 90 + Math.random() * 20;
+                endY = Math.random() * 40;
+                midX = 40 + Math.random() * 25;
+                midY = 25 + Math.random() * 25;
+            } else if (pattern === 2) {
+                startX = 90 + Math.random() * 20;
+                startY = 55 + Math.random() * 40;
+                endX = -10 + Math.random() * 20;
+                endY = Math.random() * 45;
+                midX = 60 + Math.random() * 25;
+                midY = 25 + Math.random() * 25;
+            } else {
+                startX = Math.random() * 30;
+                startY = 80 + Math.random() * 20;
+                endX = 60 + Math.random() * 40;
+                endY = Math.random() * 30;
+                midX = 35 + Math.random() * 30;
+                midY = 40 + Math.random() * 20;
+            }
+
+            const rotation = (Math.random() * 90) - 45;
+            const sizeBase = layer === 'bat--near' ? 30 : layer === 'bat--mid' ? 22 : 16;
+            const size = sizeBase + Math.random() * 18;
+            const duration = 3 + Math.random() * 2;
+            const delay = Math.random() * 0.9;
+            const opacity = layer === 'bat--near' ? 0.85 : layer === 'bat--mid' ? 0.65 : 0.45;
+            const blur = layer === 'bat--near' ? 0 : layer === 'bat--mid' ? 0.6 : 1.1;
+            const flap = 0.22 + Math.random() * 0.18;
+
+            maxDelay = Math.max(maxDelay, delay);
+            maxDuration = Math.max(maxDuration, duration);
+
+            bat.style.setProperty('--x-start', `${startX}vw`);
+            bat.style.setProperty('--y-start', `${startY}vh`);
+            bat.style.setProperty('--x-mid', `${midX}vw`);
+            bat.style.setProperty('--y-mid', `${midY}vh`);
+            bat.style.setProperty('--x-end', `${endX}vw`);
+            bat.style.setProperty('--y-end', `${endY}vh`);
+            bat.style.setProperty('--rotation', `${rotation}deg`);
+            bat.style.setProperty('--size', `${size}px`);
+            bat.style.setProperty('--duration', `${duration}s`);
+            bat.style.setProperty('--delay', `${delay}s`);
+            bat.style.setProperty('--opacity', opacity);
+            bat.style.setProperty('--blur', `${blur}px`);
+            bat.style.setProperty('--flap', `${flap}s`);
+
+            bat.innerHTML = `
+                <svg viewBox="0 0 100 40" aria-hidden="true">
+                    <use href="#bat-silhouette"></use>
+                </svg>
+            `;
+
+            swarm.appendChild(bat);
+        }
+
+        document.body.appendChild(swarm);
+
+        const removeAfter = (maxDuration + maxDelay) * 1000;
+        setTimeout(() => {
+            swarm.remove();
+            this.batSwarmActive = false;
+        }, removeAfter);
     }
 
     // ============================================
@@ -455,7 +556,6 @@ class TacticalDashboard {
     initMobileNav() {
         const navToggle = document.getElementById('navToggle');
         const navLinks = document.getElementById('navLinks');
-        const themeToggle = document.getElementById('themeToggle');
 
         if (!navToggle || !navLinks) return;
 
@@ -464,15 +564,11 @@ class TacticalDashboard {
             navToggle.classList.toggle('active');
             navLinks.classList.toggle('active');
 
-            // Hide/show theme toggle when menu is open/closed
-            const isOpen = navLinks.classList.contains('active');
-            if (themeToggle) {
-                themeToggle.style.opacity = isOpen ? '0' : '1';
-                themeToggle.style.visibility = isOpen ? 'hidden' : 'visible';
-                themeToggle.style.pointerEvents = isOpen ? 'none' : 'auto';
-            }
+            // Add body class for CSS targeting of theme toggle
+            document.body.classList.toggle('mobile-menu-open');
 
             // Log for Bat-Computer aesthetic
+            const isOpen = navLinks.classList.contains('active');
             console.log(`🦇 NAV_PANEL: ${isOpen ? 'EXPANDED' : 'COLLAPSED'}`);
         });
 
@@ -482,12 +578,7 @@ class TacticalDashboard {
             link.addEventListener('click', () => {
                 navToggle.classList.remove('active');
                 navLinks.classList.remove('active');
-                // Show theme toggle again
-                if (themeToggle) {
-                    themeToggle.style.opacity = '1';
-                    themeToggle.style.visibility = 'visible';
-                    themeToggle.style.pointerEvents = 'auto';
-                }
+                document.body.classList.remove('mobile-menu-open');
             });
         });
 
@@ -496,12 +587,7 @@ class TacticalDashboard {
             if (window.innerWidth > 900) {
                 navToggle.classList.remove('active');
                 navLinks.classList.remove('active');
-                // Ensure theme toggle is visible on desktop
-                if (themeToggle) {
-                    themeToggle.style.opacity = '1';
-                    themeToggle.style.visibility = 'visible';
-                    themeToggle.style.pointerEvents = 'auto';
-                }
+                document.body.classList.remove('mobile-menu-open');
             }
         });
     }

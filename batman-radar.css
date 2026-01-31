@@ -1,0 +1,477 @@
+/* ============================================
+   BATMAN-THEMED RADAR CHART STYLES
+   Gotham Noir Holographic HUD Aesthetic
+   ============================================ */
+
+:root {
+    /* Dark Mode (Default) */
+    --radar-primary: #00D9FF;
+    --radar-secondary: #00439C;
+    --radar-bg: rgba(0, 67, 156, 0.1);
+    --radar-grid: rgba(0, 217, 255, 0.2);
+    --radar-text: rgba(255, 255, 255, 0.9);
+    --radar-scanline: rgba(0, 217, 255, 0.5);
+    --radar-gradient-start: rgba(0, 217, 255, 0.3);
+    --radar-gradient-mid: rgba(0, 67, 156, 0.2);
+    --radar-gradient-end: rgba(0, 217, 255, 0.3);
+    --radar-sweep-start: rgba(0, 217, 255, 0.6);
+    --radar-sweep-end: rgba(0, 217, 255, 0);
+}
+
+[data-theme="light"] {
+    /* Light Mode Overrides */
+    --radar-primary: #00439C;
+    --radar-secondary: #0088FF;
+    --radar-bg: rgba(0, 67, 156, 0.05);
+    --radar-grid: rgba(0, 67, 156, 0.2);
+    --radar-text: #0f172a;
+    /* Nearly black for max contrast */
+    --radar-scanline: rgba(0, 67, 156, 0.2);
+    --radar-gradient-start: rgba(0, 67, 156, 0.3);
+    --radar-gradient-mid: rgba(0, 136, 255, 0.1);
+    --radar-gradient-end: rgba(0, 67, 156, 0.3);
+    --radar-sweep-start: rgba(0, 67, 156, 0.5);
+    --radar-sweep-end: rgba(0, 67, 156, 0);
+}
+
+
+
+/* Container */
+#batman-radar-container {
+    width: 100%;
+    max-width: 400px;
+    min-width: 280px;
+    aspect-ratio: 1;
+    margin: 0 auto;
+    position: relative;
+    background: radial-gradient(ellipse at center, var(--radar-bg) 0%, transparent 70%);
+    overflow: visible;
+}
+
+.batman-radar-svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    will-change: transform;
+}
+
+/* ===== Hexagonal Background ===== */
+.hex-background {
+    opacity: 0.3;
+}
+
+.hex-cell {
+    fill: none;
+    stroke: var(--radar-grid);
+    stroke-width: 0.5;
+    animation: hexPulse 4s ease-in-out infinite;
+}
+
+@keyframes hexPulse {
+
+    0%,
+    100% {
+        stroke-opacity: 0.15;
+    }
+
+    50% {
+        stroke-opacity: 0.25;
+    }
+}
+
+/* ===== Scanlines ===== */
+.scanlines {
+    opacity: 0.03;
+    animation: scanlineMove 8s linear infinite;
+}
+
+.scanline {
+    stroke: var(--radar-scanline);
+    stroke-width: 1;
+}
+
+@keyframes scanlineMove {
+    0% {
+        transform: translateY(-50px);
+    }
+
+    100% {
+        transform: translateY(50px);
+    }
+}
+
+/* ===== Grid Levels ===== */
+.radar-grid-group {
+    opacity: 1;
+}
+
+.radar-grid-level {
+    fill: none;
+    stroke: var(--radar-grid);
+    stroke-width: 1;
+    transition: opacity 0.5s ease, stroke 0.3s ease;
+}
+
+.radar-grid-level.animate-in {
+    animation: gridExpand 0.6s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+}
+
+@keyframes gridExpand {
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.grid-percent-label {
+    fill: var(--radar-text);
+    font-family: 'Orbitron', 'Rajdhani', monospace;
+    font-size: 8px;
+    letter-spacing: 0.5px;
+    opacity: 0.6;
+}
+
+/* ===== Axis Lines ===== */
+.radar-axis-line {
+    stroke: var(--radar-grid);
+    stroke-width: 1;
+    stroke-dasharray: 4, 4;
+    transition: stroke 0.3s ease, stroke-width 0.3s ease;
+    transform-origin: center;
+    stroke-dashoffset: 200;
+}
+
+.radar-axis-line.animate-in {
+    animation: axisReveal 0.8s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+}
+
+@keyframes axisReveal {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+.radar-axis-line.intensified {
+    stroke: var(--radar-primary);
+    stroke-width: 2;
+    filter: drop-shadow(0 0 6px var(--radar-primary));
+}
+
+/* ===== Data Polygon ===== */
+.radar-data-stroke {
+    fill: none;
+    stroke: var(--radar-primary);
+    stroke-width: 2.5;
+    stroke-linejoin: round;
+    transition: points 1.5s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.radar-data-fill {
+    fill: url(#dataGradient);
+    stroke: none;
+    opacity: 0.6;
+    transition: points 1.5s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+/* Gradient Classes */
+.radar-gradient-start {
+    stop-color: var(--radar-gradient-start);
+}
+
+.radar-gradient-mid {
+    stop-color: var(--radar-gradient-mid);
+}
+
+.radar-gradient-end {
+    stop-color: var(--radar-gradient-end);
+}
+
+/* ===== Data Points ===== */
+.radar-point-outer {
+    fill: none;
+    stroke: var(--radar-grid);
+    stroke-width: 1;
+    transition: opacity 0.3s ease, r 0.3s ease, stroke 0.3s ease;
+}
+
+.radar-point-outer.pulse {
+    animation: outerPulse 2s ease-in-out infinite;
+}
+
+@keyframes outerPulse {
+
+    0%,
+    100% {
+        r: 10;
+        stroke-opacity: 0.5;
+    }
+
+    50% {
+        r: 14;
+        stroke-opacity: 0.2;
+    }
+}
+
+.radar-point-outer.hover {
+    stroke: var(--radar-primary);
+    animation: outerPulseHover 0.5s ease-in-out infinite;
+}
+
+@keyframes outerPulseHover {
+
+    0%,
+    100% {
+        r: 12;
+        stroke-opacity: 1;
+    }
+
+    50% {
+        r: 16;
+        stroke-opacity: 0.6;
+    }
+}
+
+.radar-point-inner {
+    fill: var(--radar-primary);
+    stroke: rgba(255, 255, 255, 0.8);
+    stroke-width: 1.5;
+    cursor: pointer;
+    transition: r 0.2s ease, fill 0.2s ease;
+}
+
+.radar-point-inner.hover {
+    r: 9;
+    fill: #FFFFFF;
+}
+
+/* ===== Labels ===== */
+.radar-axis-label {
+    font-family: 'Orbitron', 'Rajdhani', sans-serif;
+    font-size: 10px;
+    /* Reduced base size */
+    font-weight: 700;
+    fill: var(--radar-text);
+    letter-spacing: 1px;
+    /* Reduced spacing */
+    transition: opacity 0.4s ease, fill 0.3s ease;
+    cursor: default;
+}
+
+/* Text shadow for visibility in dark mode */
+[data-theme="tactical"] .radar-axis-label {
+    text-shadow: 0 0 10px var(--radar-primary);
+}
+
+.radar-axis-label.animate-in {
+    animation: labelFadeIn 0.5s ease forwards;
+}
+
+@keyframes labelFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.label-connector {
+    stroke: var(--radar-grid);
+    stroke-width: 1;
+    stroke-dasharray: 2, 2;
+    opacity: 0;
+}
+
+.label-connector.animate-in {
+    animation: connectorReveal 0.5s ease forwards;
+}
+
+@keyframes connectorReveal {
+    to {
+        opacity: 1;
+    }
+}
+
+/* ===== Sweep Animation ===== */
+.radar-sweep-group {
+    transition: transform 0.03s linear;
+    will-change: transform;
+}
+
+.radar-sweep {
+    fill: url(#sweepGradient);
+    opacity: 0.15;
+}
+
+.radar-sweep-start {
+    stop-color: var(--radar-sweep-start);
+}
+
+.radar-sweep-end {
+    stop-color: var(--radar-sweep-end);
+}
+
+.radar-sweep-line {
+    stroke: var(--radar-scanline);
+    stroke-width: 1.5;
+}
+
+/* ===== Particles ===== */
+.radar-particle {
+    fill: var(--radar-primary);
+    animation: particleFloat 3s ease-in-out infinite;
+}
+
+@keyframes particleFloat {
+
+    0%,
+    100% {
+        opacity: 0.3;
+    }
+
+    50% {
+        opacity: 0.8;
+    }
+}
+
+/* ===== Center Point ===== */
+.radar-center {
+    cursor: pointer;
+}
+
+.center-outer-ring {
+    fill: none;
+    stroke: var(--radar-grid);
+    stroke-width: 1;
+    animation: centerPulse 2s ease-in-out infinite;
+}
+
+@keyframes centerPulse {
+
+    0%,
+    100% {
+        r: 12;
+        stroke-opacity: 0.5;
+    }
+
+    50% {
+        r: 16;
+        stroke-opacity: 0.2;
+    }
+}
+
+.center-inner-core {
+    fill: var(--radar-primary);
+    transition: r 0.3s ease;
+}
+
+.radar-center:hover .center-inner-core {
+    r: 8;
+}
+
+.wayne-easter-egg {
+    font-family: 'Orbitron', monospace;
+    font-size: 10px;
+    fill: var(--radar-primary);
+    letter-spacing: 2px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* ===== Tooltip ===== */
+.radar-tooltip rect {
+    fill: rgba(10, 10, 20, 0.95);
+    stroke: var(--radar-primary);
+    stroke-width: 1;
+}
+
+[data-theme="light"] .radar-tooltip rect {
+    fill: rgba(255, 255, 255, 0.95);
+}
+
+.radar-tooltip text {
+    font-family: 'Orbitron', monospace;
+    font-size: 10px;
+    fill: var(--radar-primary);
+}
+
+.tooltip-label {
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.tooltip-value {
+    font-size: 12px;
+    fill: var(--radar-text);
+}
+
+/* ===== Spark Effect ===== */
+.spark-effect {
+    pointer-events: none;
+}
+
+.spark {
+    fill: var(--radar-primary);
+    opacity: 1;
+    animation: sparkBurst 0.6s ease-out forwards;
+}
+
+@keyframes sparkBurst {
+    0% {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(calc(cos(var(--angle)) * 20px),
+                calc(sin(var(--angle)) * 20px));
+        opacity: 0;
+    }
+}
+
+/* ===== Responsive Styles ===== */
+@media (max-width: 768px) {
+    #batman-radar-container {
+        max-width: 300px;
+        min-width: 250px;
+    }
+
+    .radar-axis-label {
+        font-size: 8px;
+        /* Reduced to fit FULLSTACK */
+        letter-spacing: 0.5px;
+    }
+
+    .grid-percent-label {
+        font-size: 6px;
+    }
+}
+
+@media (max-width: 480px) {
+    #batman-radar-container {
+        max-width: 260px;
+        min-width: 220px;
+    }
+
+    .radar-axis-label {
+        font-size: 8px;
+    }
+}
+
+/* ===== Hardware Acceleration ===== */
+.radar-sweep-group,
+.radar-particles,
+.radar-point-outer,
+.radar-point-inner,
+.hex-cell {
+    will-change: transform, opacity;
+    transform: translateZ(0);
+}
