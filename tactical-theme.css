@@ -3514,9 +3514,11 @@ body[data-theme="tactical"] [role="button"] {
 /* ===== MOBILE STYLES ===== */
 @media (max-width: 900px) {
     .cyber-coupling {
-        position: fixed;
-        bottom: 24px;
-        right: 24px;
+        position: fixed !important;
+        top: auto !important;
+        left: auto !important;
+        bottom: 24px !important;
+        right: 24px !important;
         margin: 0;
         z-index: 9999;
         width: 120px;
