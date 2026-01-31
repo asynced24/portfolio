@@ -4,4 +4,4 @@ personal site.
 
 **stack:** html, css, javascript
 
-[live →](http://ssync.xyz)
+[live →](http://www.ssync.xyz)
