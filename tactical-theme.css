@@ -1619,6 +1619,7 @@ body[data-theme="tactical"] {
 }
 
 .contact-btn {
+    position: relative;
     display: flex;
     align-items: center;
     gap: 1rem;
