@@ -117,20 +117,98 @@ body[data-theme="tactical"] {
 }
 
 .nav-logo {
-    font-family: 'Orbitron', monospace;
-    font-size: 0.9rem;
-    font-weight: 700;
-    letter-spacing: 2px;
-    color: rgba(255, 255, 255, 0.95);
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    height: 60px;
+    cursor: pointer;
+    overflow: visible;
+    flex-shrink: 0;
 }
 
+/* Crystalline Canvas Logo */
+.crystalline-canvas {
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Logo Text Overlay - Positioned after the crystal */
+.logo-text-overlay {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: rgba(255, 255, 255, 0.95);
+    text-transform: uppercase;
+    text-shadow:
+        0 0 10px rgba(0, 150, 255, 0.5),
+        0 0 20px rgba(0, 100, 200, 0.3),
+        0 0 30px rgba(0, 67, 156, 0.2);
+    z-index: 2;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+/* Hover effects for logo text */
+.nav-logo:hover .logo-text-overlay {
+    color: #00c8ff;
+    text-shadow:
+        0 0 15px rgba(0, 200, 255, 0.8),
+        0 0 30px rgba(0, 150, 255, 0.6),
+        0 0 45px rgba(0, 100, 200, 0.4),
+        0 0 60px rgba(0, 67, 156, 0.3);
+    letter-spacing: 4px;
+}
+
+/* Glowing underline effect on hover */
+.nav-logo::after {
+    content: '';
+    position: absolute;
+    bottom: 8px;
+    left: 65px;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg,
+            rgba(0, 150, 255, 0.8),
+            rgba(0, 200, 255, 0.4),
+            transparent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-logo:hover::after {
+    transform: scaleX(1);
+}
+
+/* Energy pulse animation */
+@keyframes crystallinePulse {
+
+    0%,
+    100% {
+        filter: drop-shadow(0 0 5px rgba(0, 150, 255, 0.3));
+    }
+
+    50% {
+        filter: drop-shadow(0 0 15px rgba(0, 200, 255, 0.6));
+    }
+}
+
+.nav-logo:hover .crystalline-canvas {
+    animation: crystallinePulse 1.5s ease-in-out infinite;
+}
+
+/* Hide old bracket styling since we're using canvas now */
 .logo-bracket {
-    color: #00439C;
-    font-size: 1.1rem;
+    display: none;
 }
 
 .logo-text {
-    margin: 0 0.5rem;
+    display: none;
 }
 
 .nav-links {
@@ -380,10 +458,20 @@ body[data-theme="tactical"] {
 
 @media (max-width: 480px) {
     .nav-logo {
-        font-size: 0.75rem;
+        min-width: 50px;
+        height: 50px;
     }
 
-    .logo-text {
+    .crystalline-canvas {
+        width: 50px !important;
+        height: 50px !important;
+    }
+
+    .logo-text-overlay {
+        display: none;
+    }
+
+    .nav-logo::after {
         display: none;
     }
 
