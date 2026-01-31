@@ -419,8 +419,11 @@
     }
 
     .lamp-timeline {
-        height: 420px;
-        padding: 30px 16px;
+        height: auto;
+        padding: 28px 16px 32px;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.4rem;
     }
 
     .lamp-terminal-bg {
@@ -429,15 +432,42 @@
         gap: 8px;
     }
 
+    .lamp-connections,
+    .lamp-rail,
+    .lamp-connection-line,
+    .lamp-beam {
+        display: none;
+    }
+
+    .lamp-node {
+        position: relative;
+        left: auto;
+        top: auto;
+        transform: none;
+        width: 100%;
+        gap: 10px;
+    }
+
+    .lamp-node--exp {
+        align-items: center;
+    }
+
     .lamp-node--uni .lamp-node-label {
         font-size: 0.75rem;
         letter-spacing: 1.2px;
     }
 
     .lamp-node-details {
-        width: min(260px, 92vw);
-        padding: 12px 14px;
-        bottom: calc(100% + 36px);
+        position: static;
+        width: 100%;
+        max-width: 100%;
+        padding: 0;
+        margin-top: 0;
+        display: none;
+        opacity: 1;
+        transform: none;
+        box-shadow: none;
+        pointer-events: auto;
     }
 
     .exp-role {
@@ -451,6 +481,19 @@
     .lamp-node-details li {
         font-size: 0.84rem;
         margin-bottom: 5px;
+    }
+
+    .lamp-node--exp::after {
+        display: none;
+    }
+
+    .lamp-node--exp.is-lit .lamp-node-details,
+    .lamp-node--exp:focus-visible .lamp-node-details,
+    .lamp-node--exp:hover .lamp-node-details {
+        display: block;
+        margin-top: 10px;
+        padding: 12px 12px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.35);
     }
 }
 
