@@ -25,6 +25,9 @@
     border: 1px solid rgba(0, 217, 255, 0.15);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
     overflow: visible;
+    /* GPU acceleration for smooth interactions */
+    transform: translateZ(0);
+    backface-visibility: hidden;
 }
 
 .lamp-timeline::before {
@@ -77,15 +80,41 @@
     animation: terminalTyping 8s steps(32, end) infinite;
 }
 
-.terminal-line.line-2 { animation-delay: 1s; }
-.terminal-line.line-3 { animation-delay: 2s; }
-.terminal-line.line-4 { animation-delay: 3s; }
-.terminal-line.line-5 { animation-delay: 4s; }
-.terminal-line.line-6 { animation-delay: 5s; }
-.terminal-line.line-7 { animation-delay: 6s; }
-.terminal-line.line-8 { animation-delay: 7s; }
-.terminal-line.line-9 { animation-delay: 8s; }
-.terminal-line.line-10 { animation-delay: 9s; }
+.terminal-line.line-2 {
+    animation-delay: 1s;
+}
+
+.terminal-line.line-3 {
+    animation-delay: 2s;
+}
+
+.terminal-line.line-4 {
+    animation-delay: 3s;
+}
+
+.terminal-line.line-5 {
+    animation-delay: 4s;
+}
+
+.terminal-line.line-6 {
+    animation-delay: 5s;
+}
+
+.terminal-line.line-7 {
+    animation-delay: 6s;
+}
+
+.terminal-line.line-8 {
+    animation-delay: 7s;
+}
+
+.terminal-line.line-9 {
+    animation-delay: 8s;
+}
+
+.terminal-line.line-10 {
+    animation-delay: 9s;
+}
 
 .terminal-line.align-right {
     align-self: flex-end;
@@ -134,13 +163,15 @@
     position: absolute;
     left: var(--x);
     top: var(--y);
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) translateZ(0);
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 12px;
     z-index: 2;
-    transition: transform 0.6s ease-out;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+    backface-visibility: hidden;
 }
 
 .lamp-node-date {
@@ -167,9 +198,11 @@
     align-items: center;
     justify-content: center;
     box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.8);
-    transition: all 0.6s ease-out;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
+    transform: translateZ(0);
+    will-change: transform, box-shadow, border-color;
 }
 
 .lamp-node-core::before {
@@ -303,10 +336,13 @@
     box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5);
     text-align: center;
     opacity: 0;
-    transform: translate(calc(-50% + var(--detail-shift, 0%)), 6px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    transform: translate(calc(-50% + var(--detail-shift, 0%)), 6px) translateZ(0);
+    transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     pointer-events: none;
     z-index: 3;
+    will-change: opacity, transform;
+    backface-visibility: hidden;
 }
 
 .lamp-node--exp:focus-visible .lamp-node-details,
@@ -351,6 +387,7 @@
 }
 
 @keyframes railPulse {
+
     0%,
     100% {
         opacity: 0.65;
@@ -498,7 +535,7 @@
 }
 
 [data-theme="light"] .career-timeline {
-    background: #F6F8FB;
+    background: linear-gradient(180deg, #F8FAFC 0%, #EDF2F7 100%);
 }
 
 [data-theme="light"] .lamp-timeline {

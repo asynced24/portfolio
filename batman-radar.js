@@ -550,17 +550,21 @@ class BatmanRadar {
 
     startSweepAnimation() {
         let angle = 0;
-        const animate = () => {
-            angle = (angle + 1) % 360;
+        let lastTime = performance.now();
+        const rotationSpeed = 360 / (this.config.sweepDuration); // degrees per ms
+
+        const animate = (currentTime) => {
+            const deltaTime = currentTime - lastTime;
+            lastTime = currentTime;
+
+            // Smooth rotation based on elapsed time
+            angle = (angle + rotationSpeed * deltaTime) % 360;
             this.sweepGroup.style.transform = `rotate(${angle}deg)`;
+
             requestAnimationFrame(animate);
         };
 
-        // Slower animation - complete rotation in 3 seconds
-        setInterval(() => {
-            angle = (angle + 1) % 360;
-            this.sweepGroup.style.transform = `rotate(${angle}deg)`;
-        }, this.config.sweepDuration / 360);
+        requestAnimationFrame(animate);
     }
 
     startParticleAnimation() {

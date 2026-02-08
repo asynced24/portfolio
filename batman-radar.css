@@ -20,18 +20,18 @@
 
 [data-theme="light"] {
     /* Light Mode Overrides */
-    --radar-primary: #00439C;
+    --radar-primary: #0066CC;
     --radar-secondary: #0088FF;
-    --radar-bg: rgba(0, 67, 156, 0.05);
-    --radar-grid: rgba(0, 67, 156, 0.2);
-    --radar-text: #0f172a;
-    /* Nearly black for max contrast */
-    --radar-scanline: rgba(0, 67, 156, 0.2);
-    --radar-gradient-start: rgba(0, 67, 156, 0.3);
-    --radar-gradient-mid: rgba(0, 136, 255, 0.1);
-    --radar-gradient-end: rgba(0, 67, 156, 0.3);
-    --radar-sweep-start: rgba(0, 67, 156, 0.5);
-    --radar-sweep-end: rgba(0, 67, 156, 0);
+    --radar-bg: rgba(0, 102, 204, 0.03);
+    --radar-bg-container: linear-gradient(135deg, rgba(248, 250, 252, 0.95), rgba(255, 255, 255, 0.9));
+    --radar-grid: rgba(0, 102, 204, 0.15);
+    --radar-text: #0D1B2A;
+    --radar-scanline: rgba(0, 102, 204, 0.08);
+    --radar-gradient-start: rgba(0, 102, 204, 0.2);
+    --radar-gradient-mid: rgba(0, 136, 255, 0.08);
+    --radar-gradient-end: rgba(0, 102, 204, 0.2);
+    --radar-sweep-start: rgba(0, 102, 204, 0.3);
+    --radar-sweep-end: rgba(0, 102, 204, 0);
 }
 
 
@@ -46,6 +46,18 @@
     position: relative;
     background: radial-gradient(ellipse at center, var(--radar-bg) 0%, transparent 70%);
     overflow: visible;
+    /* GPU acceleration for smooth animations */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+/* Light mode container fix */
+[data-theme="light"] #batman-radar-container {
+    background: radial-gradient(ellipse at center,
+            rgba(0, 102, 204, 0.04) 0%,
+            rgba(0, 102, 204, 0.02) 40%,
+            transparent 70%);
+    border-radius: 50%;
 }
 
 .batman-radar-svg {
@@ -302,8 +314,11 @@
 
 /* ===== Sweep Animation ===== */
 .radar-sweep-group {
-    transition: transform 0.03s linear;
     will-change: transform;
+    transform-origin: center center;
+    /* Use CSS transform for GPU acceleration */
+    transform: translateZ(0);
+    backface-visibility: hidden;
 }
 
 .radar-sweep {
@@ -394,7 +409,34 @@
 }
 
 [data-theme="light"] .radar-tooltip rect {
-    fill: rgba(255, 255, 255, 0.95);
+    fill: rgba(255, 255, 255, 0.98);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Light mode - reduce visual noise */
+[data-theme="light"] .hex-background {
+    opacity: 0.1;
+}
+
+[data-theme="light"] .scanlines {
+    opacity: 0.01;
+}
+
+[data-theme="light"] .radar-sweep {
+    opacity: 0.08;
+}
+
+[data-theme="light"] .radar-particle {
+    fill: var(--radar-primary);
+    opacity: 0.3;
+}
+
+[data-theme="light"] .radar-data-fill {
+    opacity: 0.35;
+}
+
+[data-theme="light"] .radar-data-stroke {
+    stroke-width: 2;
 }
 
 .radar-tooltip text {
@@ -471,7 +513,22 @@
 .radar-particles,
 .radar-point-outer,
 .radar-point-inner,
-.hex-cell {
+.hex-cell,
+.radar-data-stroke,
+.radar-data-fill {
     will-change: transform, opacity;
     transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+
+    .radar-sweep-group,
+    .radar-particles,
+    .hex-cell,
+    .center-outer-ring {
+        animation: none !important;
+    }
 }

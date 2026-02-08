@@ -11,6 +11,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap"
         rel="stylesheet">
+    <link rel="icon" type="image/png" href="images/favicon.png">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="tactical-theme.css">
     <link rel="stylesheet" href="batman-radar.css">
@@ -179,13 +180,26 @@
             </div>
 
             <div class="command-identity">
-                <h1 class="identity-name">
-                    <span class="name-prefix">AGENT://</span>
-                    ARYAN SINGH
-                </h1>
-                <div class="identity-role">
-                    <span id="typed-role"></span>
-                    <span class="cursor-blink">█</span>
+                <!-- Floating Agent Avatar -->
+                <div class="agent-avatar-container">
+                    <div class="avatar-glow"></div>
+                    <div class="avatar-ring"></div>
+                    <img src="images/aryan_avatar.png" alt="Agent Avatar" class="agent-avatar">
+                    <div class="avatar-status">
+                        <span class="status-dot"></span>
+                        <span class="status-label">ONLINE</span>
+                    </div>
+                </div>
+
+                <div class="identity-text">
+                    <h1 class="identity-name">
+                        <span class="name-prefix">AGENT://</span>
+                        <span class="glitch-reveal" data-text="ARYAN SINGH">ARYAN SINGH</span>
+                    </h1>
+                    <div class="identity-role">
+                        <span id="typed-role" class="glitch-role"></span>
+                        <span class="cursor-blink">█</span>
+                    </div>
                 </div>
             </div>
 
@@ -409,70 +423,99 @@
     </section>
     <script src="batman-timeline.js"></script>
 
-    <!-- Academic Dossier Section -->
+    <!-- Academic Dossier Section - Classified Files -->
     <section id="dossier" class="academic-dossier">
         <div class="container">
             <h2 class="section-title">
-                <span class="title-bracket">[</span>ACADEMIC DOSSIER<span class="title-bracket">]</span>
+                <span class="title-bracket">[</span>CLASSIFIED ACADEMIC DOSSIER<span class="title-bracket">]</span>
             </h2>
 
-            <div class="dossier-grid">
-                <div class="dossier-node" data-institution="mcmaster">
-                    <div class="node-header">
-                        <div class="node-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M12 2L2 7l10 5 10-5-10-5z" />
-                                <path d="M2 17l10 5 10-5M2 12l10 5 10-5" />
-                            </svg>
-                        </div>
-                        <div class="node-info">
-                            <h3 class="node-name">MCMASTER UNIVERSITY</h3>
-                            <p class="node-degree">M.ENG // AUTOMATION & SMART SYSTEMS</p>
-                            <p class="node-gpa">GPA: <span class="gpa-value">3.9</span>/4.0 | JAN 2025 - DEC 2026</p>
-                        </div>
+            <div class="dossier-files-grid">
+                <!-- McMaster University File -->
+                <div class="academic-file" data-institution="mcmaster">
+                    <div class="academic-file-tab">
+                        <span class="file-id">ACAD-001</span>
+                        <span class="clearance-badge top-secret">IN PROGRESS</span>
                     </div>
-                    <div class="data-stream">
-                        <div class="stream-header">TRANSCRIPT COURSEWORK</div>
-                        <div class="coursework-grid">
-                            <div class="course-item"><span class="course-name">Cloud Computing</span></div>
-                            <div class="course-item"><span class="course-name">Internet of Things</span></div>
-                            <div class="course-item"><span class="course-name">Machine Learning</span></div>
-                            <div class="course-item"><span class="course-name">Cyber Physical Systems</span></div>
-                            <div class="course-item"><span class="course-name">Data Analytics & Big Data</span></div>
-                            <div class="course-item"><span class="course-name">Deep Learning</span></div>
-                            <div class="course-item"><span class="course-name">Practical Project Management for
-                                    Engineers</span>
+                    <div class="academic-file-body">
+                        <div class="file-cover">
+                            <div class="institution-badge">
+                                <img src="images/mcmaster_logo.png" alt="McMaster" class="institution-logo">
+                            </div>
+                            <div class="institution-info">
+                                <h3 class="institution-name">MCMASTER UNIVERSITY</h3>
+                                <p class="degree-title">M.ENG // AUTOMATION & SMART SYSTEMS</p>
+                            </div>
+                            <div class="file-stats">
+                                <div class="stat-item">
+                                    <div
+                                        style="display: flex; align-items: baseline; gap: 4px; justify-content: center;">
+                                        <span class="stat-value" data-target="3.9">3.9</span>
+                                        <span class="stat-denominator"
+                                            style="font-size: 0.8em; opacity: 0.7;">/4.0</span>
+                                    </div>
+                                    <span class="stat-label">GPA</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="file-contents">
+                            <div class="contents-header">
+                                <span class="contents-label">▼ CORE MODULES</span>
+                                <span class="duration">JAN 2025 - DEC 2026</span>
+                            </div>
+                            <div class="course-chips">
+                                <span class="course-chip">Cloud Computing</span>
+                                <span class="course-chip">Machine Learning</span>
+                                <span class="course-chip">Deep Learning</span>
+                                <span class="course-chip">Internet of Things</span>
+                                <span class="course-chip">Cyber Physical Systems</span>
+                                <span class="course-chip">Data Analytics</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="dossier-node" data-institution="ggsipu">
-                    <div class="node-header">
-                        <div class="node-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10" />
-                                <path d="M12 6v6l4 2" />
-                            </svg>
-                        </div>
-                        <div class="node-info">
-                            <h3 class="node-name">GGSIPU</h3>
-                            <p class="node-degree">B.TECH // ELECTRONICS & COMMUNICATION ENGINEERING</p>
-                            <p class="node-minor">MINOR: COMPUTER SCIENCE</p>
-                            <p class="node-gpa">GPA: <span class="gpa-value">3.7</span>/4.0 | JUN 2020 - JUN 2024</p>
-                        </div>
+                <!-- GGSIPU File -->
+                <div class="academic-file" data-institution="ggsipu">
+                    <div class="academic-file-tab">
+                        <span class="file-id">ACAD-002</span>
+                        <span class="clearance-badge declassified">COMPLETE</span>
                     </div>
-                    <div class="data-stream">
-                        <div class="stream-header">RELEVANT COURSEWORK</div>
-                        <div class="coursework-grid">
-                            <div class="course-item"><span class="course-name">Data Structures & Algorithms</span></div>
-                            <div class="course-item"><span class="course-name">Data Communication & Networking</span>
+                    <div class="academic-file-body">
+                        <div class="file-cover">
+                            <div class="institution-badge">
+                                <img src="images/ggsipu_logo.png" alt="GGSIPU" class="institution-logo">
                             </div>
-                            <div class="course-item"><span class="course-name">Microprocessors & Microcontrollers</span>
+                            <div class="institution-info">
+                                <h3 class="institution-name">GGSIPU</h3>
+                                <p class="degree-title">B.TECH // ELECTRONICS & COMMUNICATION</p>
+                                <p class="minor-note">MINOR: COMPUTER SCIENCE</p>
                             </div>
-                            <div class="course-item"><span class="course-name">Internet of Things</span></div>
-                            <div class="course-item"><span class="course-name">Machine Learning</span></div>
-                            <div class="course-item"><span class="course-name">Database Management Systems</span></div>
+                            <div class="file-stats">
+                                <div class="stat-item">
+                                    <div
+                                        style="display: flex; align-items: baseline; gap: 4px; justify-content: center;">
+                                        <span class="stat-value" data-target="3.7">3.7</span>
+                                        <span class="stat-denominator"
+                                            style="font-size: 0.8em; opacity: 0.7;">/4.0</span>
+                                    </div>
+                                    <span class="stat-label">GPA</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="file-contents">
+                            <div class="contents-header">
+                                <span class="contents-label">▼ TRANSCRIPT DATA</span>
+                                <span class="duration">JUN 2020 - JUN 2024</span>
+                            </div>
+                            <div class="course-chips">
+                                <span class="course-chip">Data Structures</span>
+                                <span class="course-chip">Machine Learning</span>
+                                <span class="course-chip">Networking</span>
+                                <span class="course-chip">IoT</span>
+                                <span class="course-chip">Microprocessors</span>
+                                <span class="course-chip">DBMS</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -480,162 +523,266 @@
         </div>
     </section>
 
-    <!-- Projects Section (Sleek Cards with GitHub) -->
+    <!-- Projects Section - Classified File Cabinet -->
     <section id="projects" class="projects-section">
         <div class="container">
             <h2 class="section-title">
-                <span class="title-bracket">[</span>PROJECTS ARCHIVE<span class="title-bracket">]</span>
+                <span class="title-bracket">[</span>CLASSIFIED PROJECTS ARCHIVE<span class="title-bracket">]</span>
             </h2>
 
-            <div class="projects-sleek-grid">
+            <div class="projects-grid">
                 <!-- Project 1: Vision-Language Model -->
-                <div class="project-sleek-card">
-                    <div class="project-sleek-header">
-                        <h3 class="project-sleek-title">Vision-Language Model for Image Captioning</h3>
-                        <a href="https://github.com/asynced24/vision-caption" target="_blank" class="github-btn">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
+                <article class="project-card" data-status="active" data-classification="top-secret">
+                    <div class="card-classification">
+                        <span class="classification-badge">TOP SECRET</span>
+                        <span class="project-id">PROJ-001</span>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="project-name">Vision-Language Model</h3>
+                        <p class="project-subtitle">Image Captioning System</p>
+                        <div class="tech-stack">
+                            <span>PyTorch</span><span>SigLIP</span><span>Qwen2</span><span>LoRA</span>
+                        </div>
+                        <ul class="project-highlights">
+                            <li>Production-grade VLM with SigLIP encoder</li>
+                            <li>KV-caching & fp16 optimization</li>
+                            <li>Trained on 118K COCO images</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <span class="status-badge active">● ACTIVE</span>
+                        <a href="https://github.com/asynced24/vision-caption" target="_blank" class="github-link">
+                            <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
                                 <path
                                     d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
                             </svg>
                         </a>
                     </div>
-                    <div class="project-sleek-tech">PyTorch • Transformers • SigLIP • Qwen2 • LoRA</div>
-                    <ul class="project-sleek-points">
-                        <li>Engineered production-grade vision-language model, <span class="highlight">upgrading from
-                                previous ViT-GPT2 architecture</span>, combining SigLIP vision encoder and Qwen2-1.5B
-                            decoder with learnable MLP projector</li>
-                        <li>Optimized inference pipeline with KV-caching and fp16 precision, deployed via Gradio web
-                            interface and CLI tool with multi-platform support (local GPU, Colab, Kaggle)</li>
-                        <li>Achieved stable training on COCO 2017 (118K images) using contrastive alignment loss,
-                            mixed-precision optimization, and parameter-efficient fine-tuning with LoRA (rank-8
-                            adapters)</li>
-                    </ul>
-                </div>
+                </article>
 
-                <!-- Project 2: Financial AI -->
-                <div class="project-sleek-card">
-                    <div class="project-sleek-header">
-                        <h3 class="project-sleek-title">Financial AI Risk & Governance</h3>
+                <!-- Project 2: GitWrapped -->
+                <article class="project-card" data-status="deployed" data-classification="declassified">
+                    <div class="card-classification">
+                        <span class="classification-badge">DEPLOYED</span>
+                        <span class="project-id">PROJ-002</span>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="project-name">GitWrapped</h3>
+                        <p class="project-subtitle">GitHub Analytics Experience</p>
+                        <div class="tech-stack">
+                            <span>Next.js 15</span><span>TypeScript</span><span>Framer Motion</span>
+                        </div>
+                        <ul class="project-highlights">
+                            <li>Spotify Wrapped-style GitHub analytics</li>
+                            <li>Language evolution & developer DNA insights</li>
+                            <li>Shareable profile badges & live stats</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <span class="status-badge deployed">◆ LIVE</span>
+                        <div class="footer-links">
+                            <a href="https://gitwrapped-lemon.vercel.app" target="_blank" class="demo-link"
+                                title="Live Demo">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16"
+                                    height="16">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                                    <polyline points="15 3 21 3 21 9" />
+                                    <line x1="10" y1="14" x2="21" y2="3" />
+                                </svg>
+                            </a>
+                            <a href="https://github.com/asynced24/gitwrapped" target="_blank" class="github-link">
+                                <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+                                    <path
+                                        d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 3: Financial AI -->
+                <article class="project-card" data-status="active" data-classification="confidential">
+                    <div class="card-classification">
+                        <span class="classification-badge">CONFIDENTIAL</span>
+                        <span class="project-id">PROJ-003</span>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="project-name">Financial AI Framework</h3>
+                        <p class="project-subtitle">Risk & Governance</p>
+                        <div class="tech-stack">
+                            <span>Python</span><span>XGBoost</span><span>LightGBM</span>
+                        </div>
+                        <ul class="project-highlights">
+                            <li>Modular credit risk modeling</li>
+                            <li>Uncertainty estimation & fairness</li>
+                            <li>Reproducible risk evaluation</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <span class="status-badge active">● ACTIVE</span>
                         <a href="https://github.com/asynced24/financial-ai-risk-governance-framework" target="_blank"
-                            class="github-btn">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
+                            class="github-link">
+                            <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
                                 <path
                                     d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
                             </svg>
                         </a>
                     </div>
-                    <div class="project-sleek-tech">Python • XGBoost • LightGBM • Random Forest</div>
-                    <ul class="project-sleek-points">
-                        <li>Developed modular Python framework for credit risk modeling using Logistic Regression,
-                            XGBoost, and LightGBM</li>
-                        <li>Improved model transparency by integrating uncertainty estimation, calibration checks, and
-                            fairness diagnostics</li>
-                        <li>Enabled reproducible risk evaluation by standardizing tracking and reporting outputs</li>
-                    </ul>
-                </div>
+                </article>
 
                 <!-- Project 3: Vision-GPT2 -->
-                <div class="project-sleek-card">
-                    <div class="project-sleek-header">
-                        <h3 class="project-sleek-title">Vision-GPT2 Image Captioning</h3>
+                <article class="project-card" data-status="archived" data-classification="declassified">
+                    <div class="card-classification">
+                        <span class="classification-badge">DECLASSIFIED</span>
+                        <span class="project-id">PROJ-004</span>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="project-name">Vision-GPT2</h3>
+                        <p class="project-subtitle">Image Captioning V1</p>
+                        <div class="tech-stack">
+                            <span>PyTorch</span><span>ViT</span><span>GPT-2</span>
+                        </div>
+                        <ul class="project-highlights">
+                            <li>Multimodal Vision Transformer</li>
+                            <li>Flickr8K benchmark evaluation</li>
+                            <li>Validation pipeline framework</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <span class="status-badge archived">○ ARCHIVED</span>
                         <a href="https://github.com/asynced24/vision-gpt2-image-captioning" target="_blank"
-                            class="github-btn">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
+                            class="github-link">
+                            <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
                                 <path
                                     d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
                             </svg>
                         </a>
                     </div>
-                    <div class="project-sleek-tech">PyTorch • ViT • GPT-2 • Transformers</div>
-                    <ul class="project-sleek-points">
-                        <li>Built multimodal pipeline using Vision Transformers, GPT-2, and PyTorch for automated image
-                            caption generation</li>
-                        <li>Improved caption quality through dataset curation and benchmarking on Flickr8K using NLP
-                            metrics</li>
-                        <li>Increased experimentation reliability by implementing validation pipelines</li>
-                    </ul>
-                </div>
+                </article>
 
                 <!-- Project 4: Fetal Health -->
-                <div class="project-sleek-card">
-                    <div class="project-sleek-header">
-                        <h3 class="project-sleek-title">Fetal Health Classification</h3>
+                <article class="project-card" data-status="active" data-classification="confidential">
+                    <div class="card-classification">
+                        <span class="classification-badge">CONFIDENTIAL</span>
+                        <span class="project-id">PROJ-005</span>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="project-name">Fetal Health ML</h3>
+                        <p class="project-subtitle">Classification System</p>
+                        <div class="tech-stack">
+                            <span>scikit-learn</span><span>Neural Nets</span><span>Pandas</span>
+                        </div>
+                        <ul class="project-highlights">
+                            <li>End-to-end ML classification</li>
+                            <li>95%+ F1-score achieved</li>
+                            <li>Stratified cross-validation</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <span class="status-badge active">● ACTIVE</span>
                         <a href="https://github.com/asynced24/fetal-health-classification" target="_blank"
-                            class="github-btn">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
+                            class="github-link">
+                            <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
                                 <path
                                     d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
                             </svg>
                         </a>
                     </div>
-                    <div class="project-sleek-tech">scikit-learn • Neural Networks • Pandas • NumPy</div>
-                    <ul class="project-sleek-points">
-                        <li>Built end-to-end ML classification pipeline using scikit-learn and neural networks</li>
-                        <li>Achieved <span class="highlight">95%+</span> F1-score through hyperparameter tuning and
-                            stratified cross-validation</li>
-                        <li>Improved model stability by implementing repeatable validation and performance monitoring
-                        </li>
-                    </ul>
-                </div>
+                </article>
 
                 <!-- Project 5: Smart Manufacturing -->
-                <div class="project-sleek-card">
-                    <div class="project-sleek-header">
-                        <h3 class="project-sleek-title">Smart Manufacturing QC System</h3>
+                <article class="project-card" data-status="active" data-classification="top-secret">
+                    <div class="card-classification">
+                        <span class="classification-badge">TOP SECRET</span>
+                        <span class="project-id">PROJ-006</span>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="project-name">Smart Manufacturing</h3>
+                        <p class="project-subtitle">QC Vision System</p>
+                        <div class="tech-stack">
+                            <span>RPi</span><span>CV</span><span>PubNub</span><span>IoT</span>
+                        </div>
+                        <ul class="project-highlights">
+                            <li>Edge-based defect detection</li>
+                            <li>Real-time cloud streaming</li>
+                            <li>45% reduction in false rejects</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <span class="status-badge active">● ACTIVE</span>
                         <a href="https://github.com/asynced24/smart-manufacturing-qc-system" target="_blank"
-                            class="github-btn">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
+                            class="github-link">
+                            <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
                                 <path
                                     d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
                             </svg>
                         </a>
                     </div>
-                    <div class="project-sleek-tech">Raspberry Pi • Computer Vision • PubNub • IoT/IIoT</div>
-                    <ul class="project-sleek-points">
-                        <li>Designed edge-based computer vision system using Raspberry Pi and AI lens for real-time
-                            defect detection</li>
-                        <li>Enabled live monitoring by integrating PubNub-based cloud streaming with local execution
-                        </li>
-                        <li>Reduced false rejections by <span class="highlight">45%</span> by calibrating thresholds and
-                            optimizing servo timing</li>
-                    </ul>
-                </div>
+                </article>
 
                 <!-- Project 6: AWS Log Analytics -->
-                <div class="project-sleek-card">
-                    <div class="project-sleek-header">
-                        <h3 class="project-sleek-title">Distributed Log Analytics Platform</h3>
-                        <div class="github-btn private">
-                            <span>AWS</span>
-                        </div>
+                <article class="project-card" data-status="classified" data-classification="restricted">
+                    <div class="card-classification">
+                        <span class="classification-badge">RESTRICTED</span>
+                        <span class="project-id">PROJ-007</span>
                     </div>
-                    <div class="project-sleek-tech">Kinesis • Lambda • S3 • Athena • Glue • Terraform</div>
-                    <ul class="project-sleek-points">
-                        <li>Built event-driven analytics pipeline processing <span class="highlight">50k events/s</span>
-                            using AWS serverless stack</li>
-                        <li>Reduced infrastructure costs by <span class="highlight">35%</span> by applying Terraform IaC
-                            and auto-scaling policies</li>
-                        <li>Improved query reliability by enforcing schema evolution, partitioning, and monitoring</li>
-                    </ul>
-                </div>
+                    <div class="card-content">
+                        <h3 class="project-name">Log Analytics</h3>
+                        <p class="project-subtitle">Distributed System</p>
+                        <div class="tech-stack">
+                            <span>Kinesis</span><span>Lambda</span><span>Athena</span>
+                        </div>
+                        <ul class="project-highlights">
+                            <li>50k events/s processing</li>
+                            <li>35% cost reduction</li>
+                            <li>Schema evolution</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <span class="status-badge classified">◆ AWS</span>
+                        <span class="private-badge">PRIVATE</span>
+                    </div>
+                </article>
 
                 <!-- Project 7: Task Manager -->
-                <div class="project-sleek-card">
-                    <div class="project-sleek-header">
-                        <h3 class="project-sleek-title">Task Manager Web Application</h3>
-                        <div class="github-btn private">
-                            <span>WEB</span>
-                        </div>
+                <article class="project-card" data-status="classified" data-classification="restricted">
+                    <div class="card-classification">
+                        <span class="classification-badge">RESTRICTED</span>
+                        <span class="project-id">PROJ-008</span>
                     </div>
-                    <div class="project-sleek-tech">Django • SQLite • REST API • Bootstrap • JavaScript</div>
-                    <ul class="project-sleek-points">
-                        <li>Developed full-stack task management system using Django, SQLite, and REST-based CRUD
-                            services</li>
-                        <li>Improved usability by implementing responsive UI components with HTML, CSS, and JavaScript
-                        </li>
-                        <li>Strengthened data integrity by enforcing authentication and secure deployment practices</li>
-                    </ul>
-                </div>
+                    <div class="card-content">
+                        <h3 class="project-name">Task Manager</h3>
+                        <p class="project-subtitle">Web Application</p>
+                        <div class="tech-stack">
+                            <span>Django</span><span>REST</span><span>SQLite</span>
+                        </div>
+                        <ul class="project-highlights">
+                            <li>Full-stack management</li>
+                            <li>Responsive UI</li>
+                            <li>Secure authentication</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <span class="status-badge classified">◆ WEB</span>
+                        <span class="private-badge">PRIVATE</span>
+                    </div>
+                </article>
+
+                <!-- Placeholder for future -->
+                <article class="project-card project-placeholder" data-status="pending">
+                    <div class="card-classification">
+                        <span class="classification-badge pending">PENDING</span>
+                        <span class="project-id">PROJ-XXX</span>
+                    </div>
+                    <div class="card-content placeholder-content">
+                        <div class="placeholder-icon">+</div>
+                        <h3 class="project-name">Next Mission</h3>
+                        <p class="project-subtitle">Coming Soon...</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="status-badge pending">◌ AWAITING</span>
+                    </div>
+                </article>
             </div>
         </div>
     </section>

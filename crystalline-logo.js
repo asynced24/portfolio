@@ -218,12 +218,56 @@ class CrystallineLogo {
         };
     }
 
+    // Get theme-based colors
+    getThemeColors() {
+        const isLight = document.body.getAttribute('data-theme') === 'light';
+        return {
+            crystal: isLight ? 'rgba(0, 102, 204, 0.95)' : 'rgba(0, 150, 255, 0.95)',
+            crystalGlow: isLight ? 'rgba(0, 102, 204, 0.4)' : 'rgba(0, 180, 255, 0.7)',
+            orbitCrystal: isLight ? 'rgba(0, 140, 255, 0.9)' : 'rgba(0, 200, 255, 0.8)',
+            orbitGlow: isLight ? 'rgba(0, 140, 255, 0.3)' : 'rgba(0, 220, 255, 0.5)',
+            particle: isLight ? 'rgba(0, 102, 204, ' : 'rgba(100, 200, 255, ',
+            ring: isLight ? 'rgba(0, 102, 204, ' : 'rgba(0, 150, 255, ',
+            connectionstart: isLight ? 'rgba(0, 102, 204, 0.5)' : 'rgba(0, 150, 255, 0.6)',
+            connectionmid: isLight ? 'rgba(0, 140, 255, 0.2)' : 'rgba(0, 200, 255, 0.3)',
+            connectionend: isLight ? 'rgba(0, 102, 204, 0.05)' : 'rgba(0, 150, 255, 0.1)',
+            bgGlow: isLight ? 'rgba(0, 102, 204, 0.08)' : 'rgba(0, 100, 200, 0.15)',
+            coreGlow: isLight ? 'rgba(0, 140, 255, 0.6)' : 'rgba(100, 200, 255, 0.8)',
+            coreSparkle: isLight ? 'rgba(255, 255, 255, ' : 'rgba(255, 255, 255, '
+        };
+    }
+
     // Draw glowing effect
     drawGlow(x, y, radius, color, intensity = 1) {
         const gradient = this.ctx.createRadialGradient(x, y, 0, x, y, radius);
-        gradient.addColorStop(0, color.replace(/[\d.]+\)$/, `${0.8 * intensity})`));
-        gradient.addColorStop(0.4, color.replace(/[\d.]+\)$/, `${0.3 * intensity})`));
-        gradient.addColorStop(1, 'transparent');
+        // Clean color string to extract base RGB if needed, but here we assume RGBA format
+        // For simple theme switching, we use the passed color directly or from getThemeColors
+
+        // Handle transparency
+        let startColor = color;
+        let endColor = 'transparent';
+
+        if (color.startsWith('rgba')) {
+            // Replace alpha
+            const parts = color.match(/rgba\((\d+),\s*(\d+),\s*(\d+),\s*([\d.]+)\)/);
+            if (parts) {
+                const [_, r, g, b, a] = parts;
+                startColor = `rgba(${r}, ${g}, ${b}, ${parseFloat(a) * intensity})`;
+                const endAlpha = parseFloat(a) * 0.3 * intensity;
+                // Use a middle stop for better glow
+                const midColor = `rgba(${r}, ${g}, ${b}, ${endAlpha})`;
+
+                gradient.addColorStop(0, startColor);
+                gradient.addColorStop(0.4, midColor);
+                gradient.addColorStop(1, 'transparent');
+            } else {
+                gradient.addColorStop(0, color);
+                gradient.addColorStop(1, 'transparent');
+            }
+        } else {
+            gradient.addColorStop(0, color);
+            gradient.addColorStop(1, 'transparent');
+        }
 
         this.ctx.fillStyle = gradient;
         this.ctx.beginPath();
@@ -232,7 +276,11 @@ class CrystallineLogo {
     }
 
     // Draw a single crystal
-    drawCrystal(crystal, offsetX = 0, offsetY = 0, scale = 1) {
+    drawCrystal(crystal, offsetX = 0, offsetY = 0, scale = 1, isMain = false) {
+        const theme = this.getThemeColors();
+        const baseColor = isMain ? theme.crystal : theme.orbitCrystal;
+        const glowColor = isMain ? theme.crystalGlow : theme.orbitGlow;
+
         const rotation = {
             x: crystal.rotation.x + this.currentRotation.x * 0.5,
             y: crystal.rotation.y + this.currentRotation.y,
@@ -253,10 +301,10 @@ class CrystallineLogo {
 
         // Draw crystal glow
         const centerProj = this.project({ x: 0, y: floatY, z: 0 }, offsetX, offsetY);
-        this.drawGlow(centerProj.x, centerProj.y, 25 * scale, crystal.glowColor, this.isHovered ? 1.5 : 1);
+        this.drawGlow(centerProj.x, centerProj.y, 25 * scale, glowColor, this.isHovered ? 1.5 : 1);
 
         // Draw edges with gradient
-        this.ctx.strokeStyle = crystal.color;
+        this.ctx.strokeStyle = baseColor;
         this.ctx.lineWidth = this.isHovered ? 1.5 : 1;
         this.ctx.lineCap = 'round';
 
@@ -333,10 +381,10 @@ class CrystallineLogo {
         // Draw energy core
         if (scale > 0.5) {
             const coreIntensity = 0.5 + Math.sin(this.time * 0.05) * 0.3;
-            this.drawGlow(centerProj.x, centerProj.y, 8 * scale, 'rgba(100, 200, 255, 0.8)', coreIntensity);
+            this.drawGlow(centerProj.x, centerProj.y, 8 * scale, theme.coreGlow, coreIntensity);
 
             // Core sparkle
-            this.ctx.fillStyle = `rgba(255, 255, 255, ${0.8 + Math.sin(this.time * 0.1) * 0.2})`;
+            this.ctx.fillStyle = `${theme.coreSparkle}${0.8 + Math.sin(this.time * 0.1) * 0.2})`;
             this.ctx.beginPath();
             this.ctx.arc(centerProj.x, centerProj.y, 2 * scale, 0, Math.PI * 2);
             this.ctx.fill();
@@ -345,6 +393,8 @@ class CrystallineLogo {
 
     // Draw energy rings
     drawEnergyRings() {
+        const theme = this.getThemeColors();
+
         this.energyRings.forEach(ring => {
             ring.rotation.x += ring.rotationSpeed.x;
             ring.rotation.y += ring.rotationSpeed.y;
@@ -369,7 +419,7 @@ class CrystallineLogo {
                 points.push(this.project(rotated));
             }
 
-            this.ctx.strokeStyle = `rgba(0, 150, 255, ${ring.opacity * (this.isHovered ? 1.5 : 1)})`;
+            this.ctx.strokeStyle = `${theme.ring}${ring.opacity * (this.isHovered ? 1.5 : 1)})`;
             this.ctx.lineWidth = 1;
             this.ctx.setLineDash([4, 8]);
             this.ctx.lineDashOffset = ring.dashOffset;
@@ -386,6 +436,8 @@ class CrystallineLogo {
 
     // Draw floating particles
     drawParticles() {
+        const theme = this.getThemeColors();
+
         this.particles.forEach(particle => {
             // Update position
             particle.x += particle.vx;
@@ -411,7 +463,7 @@ class CrystallineLogo {
             const projected = this.project(rotated);
 
             const alpha = particle.alpha * pulse * (this.isHovered ? 1.3 : 1);
-            this.ctx.fillStyle = `rgba(100, 200, 255, ${alpha})`;
+            this.ctx.fillStyle = `${theme.particle}${alpha})`;
             this.ctx.beginPath();
             this.ctx.arc(projected.x, projected.y, particle.size * projected.scale, 0, Math.PI * 2);
             this.ctx.fill();
@@ -422,6 +474,7 @@ class CrystallineLogo {
     drawEnergyConnections() {
         if (!this.isHovered) return;
 
+        const theme = this.getThemeColors();
         const mainCenter = this.project({ x: 0, y: 0, z: 0 });
 
         this.crystals.orbiting.forEach(crystal => {
@@ -440,9 +493,9 @@ class CrystallineLogo {
                 mainCenter.x, mainCenter.y,
                 orbitalCenter.x, orbitalCenter.y
             );
-            gradient.addColorStop(0, 'rgba(0, 150, 255, 0.6)');
-            gradient.addColorStop(0.5, 'rgba(0, 200, 255, 0.3)');
-            gradient.addColorStop(1, 'rgba(0, 150, 255, 0.1)');
+            gradient.addColorStop(0, theme.connectionstart);
+            gradient.addColorStop(0.5, theme.connectionmid);
+            gradient.addColorStop(1, theme.connectionend);
 
             this.ctx.strokeStyle = gradient;
             this.ctx.lineWidth = 1;
@@ -455,6 +508,7 @@ class CrystallineLogo {
 
     animate() {
         this.time++;
+        const theme = this.getThemeColors();
 
         // Smooth rotation following mouse
         this.targetRotation.x = this.mouseY * 0.5;
@@ -479,7 +533,7 @@ class CrystallineLogo {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
         // Draw background glow
-        this.drawGlow(this.centerX, this.centerY, 45, 'rgba(0, 100, 200, 0.15)', this.isHovered ? 1.2 : 0.8);
+        this.drawGlow(this.centerX, this.centerY, 45, theme.bgGlow, this.isHovered ? 1.2 : 0.8);
 
         // Draw elements in order (back to front)
         this.drawParticles();
@@ -500,12 +554,12 @@ class CrystallineLogo {
             });
 
             if (rotated.z < 0) {
-                this.drawCrystal(crystal, orbitX, orbitY, 0.5);
+                this.drawCrystal(crystal, orbitX, orbitY, 0.5, false);
             }
         });
 
         // Draw main crystal
-        this.drawCrystal(this.crystals.main, 0, 0, 1);
+        this.drawCrystal(this.crystals.main, 0, 0, 1, true);
 
         // Draw front orbiting crystals
         this.crystals.orbiting.forEach(crystal => {
@@ -520,7 +574,7 @@ class CrystallineLogo {
             });
 
             if (rotated.z >= 0) {
-                this.drawCrystal(crystal, orbitX, orbitY, 0.5);
+                this.drawCrystal(crystal, orbitX, orbitY, 0.5, false);
             }
         });
 

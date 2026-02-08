@@ -42,50 +42,41 @@ class TacticalDashboard {
     }
 
     // ============================================
-    // TYPING ANIMATION
+    // GLITCH REVEAL ANIMATION
     // ============================================
     initTypingAnimation() {
         const roles = [
             'SOFTWARE ENGINEER INTERN @ TD BANK',
-            'DEVOPS ENGINEER'
+            'DEVOPS ENGINEER',
+            'ML ENGINEER'
         ];
 
         const typedElement = document.getElementById('typed-role');
         if (!typedElement) return;
 
         let roleIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-        let typingSpeed = 100;
 
-        const type = () => {
+        const glitchReveal = () => {
             const currentRole = roles[roleIndex];
 
-            if (isDeleting) {
-                typedElement.textContent = currentRole.substring(0, charIndex - 1);
-                charIndex--;
-                typingSpeed = 50;
-            } else {
-                typedElement.textContent = currentRole.substring(0, charIndex + 1);
-                charIndex++;
-                typingSpeed = 100;
-            }
+            // Add glitch animation class
+            typedElement.classList.remove('glitch-role');
+            void typedElement.offsetWidth; // Force reflow
 
-            if (!isDeleting && charIndex === currentRole.length) {
-                // Pause at end
-                typingSpeed = 2000;
-                isDeleting = true;
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                roleIndex = (roleIndex + 1) % roles.length;
-                typingSpeed = 500;
-            }
+            // Set the text and trigger animation
+            typedElement.textContent = currentRole;
+            typedElement.classList.add('glitch-role');
 
-            setTimeout(type, typingSpeed);
+            // Move to next role after display duration
+            roleIndex = (roleIndex + 1) % roles.length;
         };
 
-        // Start typing after boot sequence
-        setTimeout(type, 2500);
+        // Initial reveal after boot sequence
+        setTimeout(() => {
+            glitchReveal();
+            // Cycle through roles every 4 seconds
+            setInterval(glitchReveal, 4000);
+        }, 1500);
     }
 
     // ============================================
