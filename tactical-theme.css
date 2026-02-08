@@ -6305,3 +6305,133 @@ body:not([data-theme]) {
 [data-theme="light"] .status-badge.active {
     color: #28A745;
 }
+
+/* NUCLEAR OPTION: Force Light Mode Project Cards */
+[data-theme="light"] .project-card,
+[data-theme="light"] .project-card:hover,
+[data-theme="light"] .project-card:focus-within {
+    background: #FFFFFF !important;
+    background-color: #FFFFFF !important;
+    background-image: none !important;
+    border-color: rgba(0, 102, 204, 0.3) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
+    color: #1a202c !important;
+}
+
+[data-theme="light"] .project-card:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: 0 12px 24px rgba(0, 102, 204, 0.1) !important;
+}
+
+[data-theme="light"] .project-card * {
+    text-shadow: none !important;
+}
+
+[data-theme="light"] .card-classification,
+[data-theme="light"] .project-card:hover .card-classification {
+    background: #F8FAFC !important;
+    background-color: #F8FAFC !important;
+    border-bottom: 1px solid rgba(0, 102, 204, 0.1) !important;
+    color: #4A5568 !important;
+}
+
+[data-theme="light"] .card-content,
+[data-theme="light"] .project-card:hover .card-content {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+[data-theme="light"] .card-footer,
+[data-theme="light"] .project-card:hover .card-footer {
+    background: #F8FAFC !important;
+    background-color: #F8FAFC !important;
+    border-top: 1px solid rgba(0, 102, 204, 0.1) !important;
+}
+
+[data-theme="light"] .project-name,
+[data-theme="light"] .project-card:hover .project-name {
+    color: #0066CC !important;
+    background: transparent !important;
+    -webkit-text-fill-color: #0066CC !important;
+}
+
+[data-theme="light"] .project-description {
+    color: #4A5568 !important;
+}
+
+[data-theme="light"] .project-id {
+    color: #64748B !important;
+    opacity: 0.8 !important;
+}
+
+[data-theme="light"] .tech-tag {
+    background: rgba(0, 102, 204, 0.08) !important;
+    color: #0066CC !important;
+    border: 1px solid rgba(0, 102, 204, 0.2) !important;
+}
+
+[data-theme="light"] .tech-tag:hover {
+    background: rgba(0, 102, 204, 0.15) !important;
+}
+
+/* SUPER-AGGRESSIVE PROJECT CARD FIXES */
+[data-theme="light"] .project-card,
+[data-theme="light"] .project-card * {
+    transition: background 0s, background-color 0s, color 0.2s, border-color 0.2s !important;
+}
+
+[data-theme="light"] .project-card::after,
+[data-theme="light"] .project-card:hover::after {
+    display: none !important;
+    content: none !important;
+    background: transparent !important;
+}
+
+[data-theme="light"] .project-card:hover {
+    background: #FFFFFF !important;
+    background-color: #FFFFFF !important;
+    background-image: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    filter: none !important;
+    mix-blend-mode: normal !important;
+    color: #1a202c !important;
+    opacity: 1 !important;
+    z-index: 10 !important;
+}
+
+[data-theme="light"] .project-card:hover .card-content,
+[data-theme="light"] .project-card:hover .card-classification,
+[data-theme="light"] .project-card:hover .card-footer {
+    background: #F8FAFC !important;
+    background-color: #F8FAFC !important;
+    background-image: none !important;
+    box-shadow: none !important;
+}
+
+[data-theme="light"] .project-card:hover .project-description {
+    color: #4A5568 !important;
+    background: transparent !important;
+}
+
+[data-theme="light"] .project-card:hover .project-name {
+    color: #0066CC !important;
+    -webkit-text-fill-color: #0066CC !important;
+    background: transparent !important;
+}
+
+/* Avatar Status - Light Mode */
+[data-theme="light"] .avatar-status {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: rgba(0, 102, 204, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .avatar-status .status-label {
+    color: #1a202c;
+    font-weight: 600;
+}
+
+[data-theme="light"] .avatar-status .status-dot {
+    box-shadow: 0 0 4px #28A745;
+}

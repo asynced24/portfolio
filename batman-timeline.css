@@ -671,6 +671,99 @@
     color: rgba(30, 41, 59, 0.9);
 }
 
+/* ============================================
+   MOBILE RESPONSIVENESS (Vertical Stack)
+   ============================================ */
+@media (max-width: 768px) {
+    .career-timeline {
+        padding: 0 0.5rem;
+        overflow: hidden;
+    }
+
+    .lamp-timeline {
+        height: auto !important;
+        min-height: auto;
+        padding: 2rem 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        overflow: visible;
+    }
+
+    /* Reset absolute positioning */
+    .lamp-node,
+    .lamp-node--uni,
+    .lamp-node--exp {
+        position: relative !important;
+        left: auto !important;
+        top: auto !important;
+        transform: none !important;
+        width: 100% !important;
+        margin: 0 !important;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    /* Adjust Node Core Size */
+    .lamp-node-core {
+        width: 70px !important;
+        height: 70px !important;
+        margin: 0 auto;
+    }
+
+    .lamp-node--uni .lamp-node-core {
+        width: 80px !important;
+        height: 80px !important;
+    }
+
+    /* Date Label */
+    .lamp-node-date {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        transform: none !important;
+        margin-bottom: 0.5rem;
+        width: auto;
+        display: inline-block;
+    }
+
+    /* Details Card - Always Visible or Clickable */
+    .lamp-node-details {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        transform: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        margin-top: 1rem;
+        padding: 1rem !important;
+        clip-path: none !important;
+        background: rgba(13, 13, 13, 0.9);
+        border: 1px solid rgba(0, 217, 255, 0.2);
+    }
+
+    [data-theme="light"] .lamp-node-details {
+        background: rgba(255, 255, 255, 0.95);
+        border: 1px solid rgba(0, 102, 204, 0.2);
+    }
+
+    /* Hide decorative connecting lines on mobile if they look messy */
+    .lamp-beam,
+    .lamp-rail,
+    .lamp-terminal-bg {
+        display: none !important;
+    }
+
+    .timeline-instructions {
+        display: none;
+    }
+}
+
 
 [data-theme="light"] .timeline-instructions .key-hint {
     color: rgba(0, 107, 134, 0.8);
