@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="tactical-theme.css">
     <link rel="stylesheet" href="batman-radar.css">
+    <link rel="stylesheet" href="agent-dossier.css">
 </head>
 
 <body data-theme="tactical">
@@ -181,7 +182,8 @@
 
             <div class="command-identity">
                 <!-- Floating Agent Avatar -->
-                <div class="agent-avatar-container">
+                <div class="agent-avatar-container" id="agentAvatar" role="button" tabindex="0"
+                    aria-label="Click to view agent dossier">
                     <div class="avatar-glow"></div>
                     <div class="avatar-ring"></div>
                     <img src="images/aryan_avatar.png" alt="Agent Avatar" class="agent-avatar">
@@ -190,6 +192,8 @@
                         <span class="status-label">ONLINE</span>
                     </div>
                 </div>
+
+                <!-- Agent Dossier Panel moved to end of body for z-index fix -->
 
                 <div class="identity-text">
                     <h1 class="identity-name">
@@ -982,6 +986,80 @@
     <script src="crystalline-logo.js"></script>
     <script src="batman-radar.js"></script>
     <script src="app.js"></script>
+    <!-- Agent Dossier Panel (ID Card Redesign) -->
+    <div class="agent-dossier-panel" id="agentDossierPanel">
+        <button class="dossier-close square-close" id="dossierClose" aria-label="Close dossier">
+            <span class="close-icon">×</span>
+        </button>
+
+        <div class="id-card-container">
+            <!-- Left Column: Photo & Transform -->
+            <div class="id-card-left">
+                <div class="photo-frame-tech" id="photoFrame">
+                    <img src="images/aryan_real.jpg" alt="Real Photo" class="photo-layer real-photo"
+                        onerror="this.src='images/aryan_avatar.png'">
+                    <img src="images/aryan_avatar.png" alt="Pixel Avatar" class="photo-layer pixel-avatar">
+                    <div class="hologram-overlay"></div>
+                </div>
+
+                <!-- Filler Tech Stats -->
+                <div class="tech-stats-mini">
+                    <div class="stat-line">
+                        <span class="stat-label">SYNC</span>
+                        <div class="stat-bar">
+                            <div class="stat-fill" style="width: 98%"></div>
+                        </div>
+                    </div>
+                    <div class="stat-line">
+                        <span class="stat-label">signal</span>
+                        <span class="stat-val blinking">5G_UW</span>
+                    </div>
+                </div>
+
+                <button class="transform-toggle" id="transformBtn" aria-label="Transform Identity">
+                    <div class="btn-content">
+                        <span class="btn-text">TRANSFORM</span>
+                    </div>
+                    <div class="btn-shine"></div>
+                </button>
+
+                <div class="id-barcode"></div>
+            </div>
+
+            <!-- Right Column: Info -->
+            <div class="id-card-right">
+                <div class="id-header">
+                    <div class="corp-name">WAYNE ENT. // OPS</div>
+                    <div class="clearance-badge">LVL-5</div>
+                </div>
+
+                <div class="id-details">
+                    <div class="detail-row">
+                        <span class="label">NAME</span>
+                        <span class="value">ARYAN S.</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="label">ID</span>
+                        <span class="value code">ARYAN_01</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="label">ROLE</span>
+                        <span class="value">FULL STACK OPERATIVE</span>
+                    </div>
+                </div>
+
+                <div class="dossier-content">
+                    <div class="dossier-text" id="dossierText"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Animated border running around -->
+        <div class="border-anim"></div>
+    </div>
+
+    <!-- Script loaded last to ensure elements exist -->
+    <script src="agent-dossier.js"></script>
 </body>
 
 </html>

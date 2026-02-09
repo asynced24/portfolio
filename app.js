@@ -83,7 +83,7 @@ class TacticalDashboard {
     // STAT COUNTERS
     // ============================================
     initStatCounters() {
-        const statValues = document.querySelectorAll('.stat-value');
+        const statValues = document.querySelectorAll('.stat-value[data-target]');
 
         const animateCounter = (element) => {
             const target = parseFloat(element.getAttribute('data-target'));

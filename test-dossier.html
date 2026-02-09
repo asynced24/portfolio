@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avatar Dossier Test</title>
+    <link rel="stylesheet" href="agent-dossier.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 40px;
+            background: #0a0e1a;
+            font-family: 'Share Tech Mono', monospace;
+            color: white;
+        }
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .test-avatar {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #00d9ff, #0066ff);
+            border-radius: 50%;
+            margin: 40px auto;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+        }
+        .test-avatar:hover {
+            transform: scale(1.1);
+        }
+        h1 {
+            color: #00d9ff;
+            margin-bottom: 20px;
+        }
+        .instructions {
+            background: rgba(0, 217, 255, 0.1);
+            border: 1px solid rgba(0, 217, 255, 0.3);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+            text-align: left;
+        }
+        .instructions h2 {
+            color: #00d9ff;
+            margin-top: 0;
+        }
+        .instructions ul {
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>AGENT DOSSIER TEST</h1>
+        <p>Click the avatar below to test the dossier panel</p>
+        
+        <div class="test-avatar" id="agentAvatar" role="button" tabindex="0" aria-label="Click to view agent dossier">
+            👤
+        </div>
+
+        <!-- Agent Dossier Panel -->
+        <div class="agent-dossier-panel" id="agentDossierPanel">
+            <div class="dossier-header">
+                <span class="dossier-label">AGENT_DOSSIER://</span>
+                <button class="dossier-close" id="dossierClose" aria-label="Close dossier">×</button>
+            </div>
+            <div class="dossier-content">
+                <div class="dossier-text" id="dossierText"></div>
+            </div>
+        </div>
+
+        <div class="instructions">
+            <h2>Expected Behavior:</h2>
+            <ul>
+                <li>✓ Avatar should be clickable with hover effect</li>
+                <li>✓ Clicking avatar opens a glassmorphic panel with smooth animation</li>
+                <li>✓ Text appears line by line with typewriter effect</li>
+                <li>✓ Panel has sci-fi terminal aesthetic with scan lines</li>
+                <li>✓ Click × button or outside panel to close</li>
+                <li>✓ Clicking avatar again toggles the panel</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="agent-dossier.js"></script>
+</body>
+</html>
