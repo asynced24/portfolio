@@ -1,12 +1,12 @@
 /* ============================================
-   AGENT DOSSIER - Interactive Access Card
-   (Transform Edition)
+   AGENT DOSSIER — Interactive Access Card
+   Clean, Senior-Grade Implementation
    ============================================ */
 
 (function () {
     'use strict';
 
-    // THE FULL ORIGINAL STORY
+    /* ── Story Content ── */
     const DOSSIER_CONTENT = [
         "I've always liked building things.",
         "",
@@ -22,10 +22,22 @@
         "Because sometimes, you just want to hit something that isn't a keyboard."
     ];
 
+    /* ── Chat Bubble Messages — Fun, Human, Witty ── */
+    const CHAT_MESSAGES = [
+        "psst... click me 👀",
+        "hey, wanna see something cool?",
+        "I don't bite. usually.",
+        "yes, I'm clickable ↗",
+        "fun fact: I once hacked WiFi",
+        "try clicking. I dare you.",
+        "↑ this guy builds stuff",
+        "open my dossier, I dare you 🔒"
+    ];
+
     let isOpen = false;
     let typewriterInProgress = false;
 
-    // DOM Elements
+    /* ── DOM References ── */
     let avatar = document.getElementById('agentAvatar');
     let panel = document.getElementById('agentDossierPanel');
     let closeBtn = document.getElementById('dossierClose');
@@ -34,7 +46,7 @@
     let photoFrame = document.getElementById('photoFrame');
     let transformBtn = document.getElementById('transformBtn');
 
-    // Create backdrop element if it doesn't exist
+    // Create backdrop if missing
     if (!backdrop) {
         backdrop = document.createElement('div');
         backdrop.className = 'dossier-backdrop';
@@ -42,12 +54,9 @@
         document.body.appendChild(backdrop);
     }
 
-    /* ============================================
-       Typewriter Effect
-       ============================================ */
+    /* ── Typewriter Effect ── */
     function typewriterEffect(lines, container, callback) {
         container.innerHTML = '';
-
         if (typewriterInProgress) return;
         typewriterInProgress = true;
 
@@ -69,43 +78,28 @@
             const lineDiv = document.createElement('div');
             lineDiv.className = 'dossier-line';
 
-            // Handle empty lines for spacing
             if (currentLine.trim() === '') {
                 lineDiv.className += ' paragraph-break';
                 lineDiv.innerHTML = '&nbsp;';
                 container.appendChild(lineDiv);
                 lineIndex++;
-                setTimeout(typeLine, 150);
+                setTimeout(typeLine, 120);
                 return;
             }
 
             lineDiv.textContent = currentLine;
             container.appendChild(lineDiv);
-
             lineIndex++;
 
-            const baseDelay = 30;
-            const lengthFactor = Math.min(currentLine.length, 60);
-            setTimeout(typeLine, baseDelay + lengthFactor);
+            // Natural typing rhythm
+            const delay = 40 + Math.min(currentLine.length * 0.5, 30);
+            setTimeout(typeLine, delay);
         }
 
         typeLine();
     }
 
-    /* ============================================
-       AVATAR CHAT BUBBLE ATTRACTOR - Variables
-       ============================================ */
-    const CHAT_MESSAGES = [
-        "OPEN AGENT DOSSIER",
-        "ACCESS PROFILE // LEVEL 5",
-        "VIEW CLASSIFIED SUMMARY",
-        "CLICK AVATAR TO ENTER",
-        "INTERACTIVE CARD AVAILABLE",
-        "INITIALIZE DOSSIER PREVIEW",
-        "UNLOCK ENGINEERING BRIEF",
-        "ENTER IDENTITY CONSOLE"
-    ];
-
+    /* ── Chat Bubble State ── */
     const chatBubble = document.getElementById('avatarChatBubble');
     const chatTextEl = document.getElementById('chatText');
     let chatInterval = null;
@@ -114,21 +108,13 @@
     let chatStartTimeout = null;
     let chatResumeTimeout = null;
 
-    /* ============================================
-       Panel Control Functions
-       ============================================ */
+    /* ── Panel Open/Close ── */
     function openPanel() {
         if (isOpen) return;
-
-        // Stop chat bubble
         stopChatCycle();
+        if (chatResumeTimeout) { clearTimeout(chatResumeTimeout); chatResumeTimeout = null; }
 
-        if (chatResumeTimeout) {
-            clearTimeout(chatResumeTimeout);
-            chatResumeTimeout = null;
-        }
-
-        // Refresh DOM elements
+        // Refresh DOM refs
         avatar = document.getElementById('agentAvatar');
         panel = document.getElementById('agentDossierPanel');
         closeBtn = document.getElementById('dossierClose');
@@ -141,32 +127,29 @@
         if (avatar) avatar.setAttribute('aria-expanded', 'true');
         if (backdrop) backdrop.classList.add('active');
         if (panel) panel.classList.add('active');
-
         document.body.style.overflow = 'hidden';
 
-        // Animate Photo Reveal
+        // Animate photo in
         if (photoFrame) {
             photoFrame.style.opacity = '0';
-            photoFrame.style.transform = 'translateY(10px)';
+            photoFrame.style.transform = 'translateY(8px)';
             photoFrame.style.transition = 'all 0.4s ease 0.1s';
             requestAnimationFrame(() => {
                 photoFrame.style.opacity = '1';
                 photoFrame.style.transform = 'translateY(0)';
             });
-            // Reset to real photo on open
             photoFrame.classList.remove('pixel-mode');
         }
 
-        // Start Typewriter
+        // Start typewriter
         setTimeout(() => {
             if (isOpen && dossierText) {
                 typewriterEffect(DOSSIER_CONTENT, dossierText);
             }
-        }, 500);
+        }, 400);
 
         document.addEventListener('keydown', handleEscapeKey);
 
-        // Re-attach transform listener if needed (though global one should work if element persists)
         if (transformBtn && !transformBtn.hasAttribute('data-listening')) {
             transformBtn.addEventListener('click', toggleTransform);
             transformBtn.setAttribute('data-listening', 'true');
@@ -175,27 +158,25 @@
 
     function closePanel() {
         if (!isOpen) return;
-
         isOpen = false;
 
         if (avatar) avatar.setAttribute('aria-expanded', 'false');
         if (backdrop) backdrop.classList.remove('active');
         if (panel) panel.classList.remove('active');
-
         document.body.style.overflow = '';
         typewriterInProgress = false;
         if (dossierText) dossierText.innerHTML = '';
 
         document.removeEventListener('keydown', handleEscapeKey);
 
-        // Resume chat bubble after delay
+        // Resume chat after delay
         if (chatResumeTimeout) clearTimeout(chatResumeTimeout);
         chatResumeTimeout = setTimeout(() => {
             if (!isOpen) {
                 showChatBubble();
                 startChatCycle();
             }
-        }, 2000);
+        }, 3000);
     }
 
     function togglePanel() {
@@ -207,10 +188,6 @@
         photoFrame = document.getElementById('photoFrame');
         if (photoFrame) {
             photoFrame.classList.toggle('pixel-mode');
-
-            // Optional: Log transform
-            const isPixel = photoFrame.classList.contains('pixel-mode');
-            console.log(`IDENTITY MATRIX: ${isPixel ? '8-BIT AVATAR' : 'REAL PHOTO'}`);
         }
     }
 
@@ -218,7 +195,7 @@
         if (e.key === 'Escape') closePanel();
     }
 
-    // Initial Event Listeners
+    /* ── Event Listeners ── */
     if (avatar) {
         avatar.addEventListener('click', togglePanel);
         avatar.addEventListener('keydown', (e) => {
@@ -233,122 +210,90 @@
     if (backdrop) backdrop.addEventListener('click', closePanel);
     if (panel) panel.addEventListener('click', (e) => e.stopPropagation());
 
-    // Attach to transform button immediately if present
     if (transformBtn) {
         transformBtn.addEventListener('click', toggleTransform);
         transformBtn.setAttribute('data-listening', 'true');
     }
 
-    /* ============================================
-       AVATAR CHAT BUBBLE - Functions
-       ============================================ */
+    /* ── Chat Bubble Logic ── */
     function showChatBubble() {
         if (isOpen || !chatBubble || !chatTextEl) return;
 
-        // Pick random message (avoid repeating last one)
         let message;
         do {
             message = CHAT_MESSAGES[Math.floor(Math.random() * CHAT_MESSAGES.length)];
         } while (message === lastMessage && CHAT_MESSAGES.length > 1);
         lastMessage = message;
 
-        // Show bubble
         chatTextEl.textContent = message;
         updateChatPlacement();
         chatBubble.classList.add('visible');
 
-        // Hide after 4.4 seconds
         if (chatHideTimeout) clearTimeout(chatHideTimeout);
         chatHideTimeout = setTimeout(() => {
             if (chatBubble) chatBubble.classList.remove('visible');
-        }, 4400);
+        }, 4000);
     }
 
     function updateChatPlacement() {
-        if (!chatBubble) return;
+        if (!chatBubble || !avatar) return;
 
-        const viewportPadding = 12;
-        const pointerGap = 14;
-        const avatarRect = avatar ? avatar.getBoundingClientRect() : null;
-
-        if (!avatarRect) return;
-
+        const pad = 12;
+        const gap = 14;
+        const rect = avatar.getBoundingClientRect();
         const wasVisible = chatBubble.classList.contains('visible');
 
         chatBubble.classList.remove('place-left', 'place-right', 'place-top');
         chatBubble.classList.add('place-top');
 
-        // Temporarily make measurable without showing it to user
+        // Measure
         chatBubble.style.visibility = 'hidden';
         chatBubble.classList.add('visible');
 
-        const bubbleWidth = chatBubble.offsetWidth;
-        const bubbleHeight = chatBubble.offsetHeight;
+        const bw = chatBubble.offsetWidth;
+        const bh = chatBubble.offsetHeight;
 
-        let bubbleLeft = avatarRect.left + (avatarRect.width / 2) - (bubbleWidth / 2);
-        let bubbleTop = avatarRect.top - bubbleHeight - pointerGap;
-
+        let x = rect.left + (rect.width / 2) - (bw / 2);
+        let y = rect.top - bh - gap;
         let placement = 'place-top';
 
-        if (bubbleTop < viewportPadding) {
-            bubbleLeft = avatarRect.left - bubbleWidth - pointerGap;
-            bubbleTop = avatarRect.top + (avatarRect.height * 0.4) - (bubbleHeight / 2);
+        if (y < pad) {
+            x = rect.left - bw - gap;
+            y = rect.top + (rect.height * 0.4) - (bh / 2);
             placement = 'place-left';
 
-            if (bubbleLeft < viewportPadding) {
-                bubbleLeft = avatarRect.right + pointerGap;
+            if (x < pad) {
+                x = rect.right + gap;
                 placement = 'place-right';
             }
         }
 
-        bubbleLeft = Math.min(
-            Math.max(bubbleLeft, viewportPadding),
-            window.innerWidth - bubbleWidth - viewportPadding
-        );
-
-        bubbleTop = Math.min(
-            Math.max(bubbleTop, viewportPadding),
-            window.innerHeight - bubbleHeight - viewportPadding
-        );
+        x = Math.min(Math.max(x, pad), window.innerWidth - bw - pad);
+        y = Math.min(Math.max(y, pad), window.innerHeight - bh - pad);
 
         chatBubble.classList.remove('place-left', 'place-right', 'place-top');
         chatBubble.classList.add(placement);
-        chatBubble.style.setProperty('--bubble-left', `${Math.round(bubbleLeft)}px`);
-        chatBubble.style.setProperty('--bubble-top', `${Math.round(bubbleTop)}px`);
+        chatBubble.style.setProperty('--bubble-left', `${Math.round(x)}px`);
+        chatBubble.style.setProperty('--bubble-top', `${Math.round(y)}px`);
 
         chatBubble.style.visibility = '';
-
-        if (!wasVisible) {
-            chatBubble.classList.remove('visible');
-        }
+        if (!wasVisible) chatBubble.classList.remove('visible');
     }
 
     function startChatCycle() {
         if (chatInterval) return;
-        chatInterval = setInterval(showChatBubble, 8200);
+        chatInterval = setInterval(showChatBubble, 8000);
     }
 
     function stopChatCycle() {
-        if (chatInterval) {
-            clearInterval(chatInterval);
-            chatInterval = null;
-        }
-        if (chatStartTimeout) {
-            clearTimeout(chatStartTimeout);
-            chatStartTimeout = null;
-        }
-        if (chatResumeTimeout) {
-            clearTimeout(chatResumeTimeout);
-            chatResumeTimeout = null;
-        }
-        if (chatHideTimeout) {
-            clearTimeout(chatHideTimeout);
-            chatHideTimeout = null;
-        }
+        if (chatInterval) { clearInterval(chatInterval); chatInterval = null; }
+        if (chatStartTimeout) { clearTimeout(chatStartTimeout); chatStartTimeout = null; }
+        if (chatResumeTimeout) { clearTimeout(chatResumeTimeout); chatResumeTimeout = null; }
+        if (chatHideTimeout) { clearTimeout(chatHideTimeout); chatHideTimeout = null; }
         if (chatBubble) chatBubble.classList.remove('visible');
     }
 
-    // Start initial bubble after 3 seconds
+    // Kick off after 3s
     chatStartTimeout = setTimeout(() => {
         chatStartTimeout = null;
         showChatBubble();
@@ -356,9 +301,7 @@
     }, 3000);
 
     window.addEventListener('resize', () => {
-        if (!isOpen && chatBubble) {
-            updateChatPlacement();
-        }
+        if (!isOpen && chatBubble) updateChatPlacement();
     });
 
     window.addEventListener('scroll', () => {
@@ -366,7 +309,5 @@
             updateChatPlacement();
         }
     }, { passive: true });
-
-    console.log('Agent Dossier System: ONLINE v8.0 (Transform Matrix)');
 
 })();
