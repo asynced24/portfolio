@@ -93,10 +93,40 @@
     }
 
     /* ============================================
+       AVATAR CHAT BUBBLE ATTRACTOR - Variables
+       ============================================ */
+    const CHAT_MESSAGES = [
+        "OPEN AGENT DOSSIER",
+        "ACCESS PROFILE // LEVEL 5",
+        "VIEW CLASSIFIED SUMMARY",
+        "CLICK AVATAR TO ENTER",
+        "INTERACTIVE CARD AVAILABLE",
+        "INITIALIZE DOSSIER PREVIEW",
+        "UNLOCK ENGINEERING BRIEF",
+        "ENTER IDENTITY CONSOLE"
+    ];
+
+    const chatBubble = document.getElementById('avatarChatBubble');
+    const chatTextEl = document.getElementById('chatText');
+    let chatInterval = null;
+    let lastMessage = null;
+    let chatHideTimeout = null;
+    let chatStartTimeout = null;
+    let chatResumeTimeout = null;
+
+    /* ============================================
        Panel Control Functions
        ============================================ */
     function openPanel() {
         if (isOpen) return;
+
+        // Stop chat bubble
+        stopChatCycle();
+
+        if (chatResumeTimeout) {
+            clearTimeout(chatResumeTimeout);
+            chatResumeTimeout = null;
+        }
 
         // Refresh DOM elements
         avatar = document.getElementById('agentAvatar');
@@ -157,6 +187,15 @@
         if (dossierText) dossierText.innerHTML = '';
 
         document.removeEventListener('keydown', handleEscapeKey);
+
+        // Resume chat bubble after delay
+        if (chatResumeTimeout) clearTimeout(chatResumeTimeout);
+        chatResumeTimeout = setTimeout(() => {
+            if (!isOpen) {
+                showChatBubble();
+                startChatCycle();
+            }
+        }, 2000);
     }
 
     function togglePanel() {
@@ -199,6 +238,134 @@
         transformBtn.addEventListener('click', toggleTransform);
         transformBtn.setAttribute('data-listening', 'true');
     }
+
+    /* ============================================
+       AVATAR CHAT BUBBLE - Functions
+       ============================================ */
+    function showChatBubble() {
+        if (isOpen || !chatBubble || !chatTextEl) return;
+
+        // Pick random message (avoid repeating last one)
+        let message;
+        do {
+            message = CHAT_MESSAGES[Math.floor(Math.random() * CHAT_MESSAGES.length)];
+        } while (message === lastMessage && CHAT_MESSAGES.length > 1);
+        lastMessage = message;
+
+        // Show bubble
+        chatTextEl.textContent = message;
+        updateChatPlacement();
+        chatBubble.classList.add('visible');
+
+        // Hide after 4.4 seconds
+        if (chatHideTimeout) clearTimeout(chatHideTimeout);
+        chatHideTimeout = setTimeout(() => {
+            if (chatBubble) chatBubble.classList.remove('visible');
+        }, 4400);
+    }
+
+    function updateChatPlacement() {
+        if (!chatBubble) return;
+
+        const viewportPadding = 12;
+        const pointerGap = 14;
+        const avatarRect = avatar ? avatar.getBoundingClientRect() : null;
+
+        if (!avatarRect) return;
+
+        const wasVisible = chatBubble.classList.contains('visible');
+
+        chatBubble.classList.remove('place-left', 'place-right', 'place-top');
+        chatBubble.classList.add('place-top');
+
+        // Temporarily make measurable without showing it to user
+        chatBubble.style.visibility = 'hidden';
+        chatBubble.classList.add('visible');
+
+        const bubbleWidth = chatBubble.offsetWidth;
+        const bubbleHeight = chatBubble.offsetHeight;
+
+        let bubbleLeft = avatarRect.left + (avatarRect.width / 2) - (bubbleWidth / 2);
+        let bubbleTop = avatarRect.top - bubbleHeight - pointerGap;
+
+        let placement = 'place-top';
+
+        if (bubbleTop < viewportPadding) {
+            bubbleLeft = avatarRect.left - bubbleWidth - pointerGap;
+            bubbleTop = avatarRect.top + (avatarRect.height * 0.4) - (bubbleHeight / 2);
+            placement = 'place-left';
+
+            if (bubbleLeft < viewportPadding) {
+                bubbleLeft = avatarRect.right + pointerGap;
+                placement = 'place-right';
+            }
+        }
+
+        bubbleLeft = Math.min(
+            Math.max(bubbleLeft, viewportPadding),
+            window.innerWidth - bubbleWidth - viewportPadding
+        );
+
+        bubbleTop = Math.min(
+            Math.max(bubbleTop, viewportPadding),
+            window.innerHeight - bubbleHeight - viewportPadding
+        );
+
+        chatBubble.classList.remove('place-left', 'place-right', 'place-top');
+        chatBubble.classList.add(placement);
+        chatBubble.style.setProperty('--bubble-left', `${Math.round(bubbleLeft)}px`);
+        chatBubble.style.setProperty('--bubble-top', `${Math.round(bubbleTop)}px`);
+
+        chatBubble.style.visibility = '';
+
+        if (!wasVisible) {
+            chatBubble.classList.remove('visible');
+        }
+    }
+
+    function startChatCycle() {
+        if (chatInterval) return;
+        chatInterval = setInterval(showChatBubble, 8200);
+    }
+
+    function stopChatCycle() {
+        if (chatInterval) {
+            clearInterval(chatInterval);
+            chatInterval = null;
+        }
+        if (chatStartTimeout) {
+            clearTimeout(chatStartTimeout);
+            chatStartTimeout = null;
+        }
+        if (chatResumeTimeout) {
+            clearTimeout(chatResumeTimeout);
+            chatResumeTimeout = null;
+        }
+        if (chatHideTimeout) {
+            clearTimeout(chatHideTimeout);
+            chatHideTimeout = null;
+        }
+        if (chatBubble) chatBubble.classList.remove('visible');
+    }
+
+    // Start initial bubble after 3 seconds
+    chatStartTimeout = setTimeout(() => {
+        chatStartTimeout = null;
+        showChatBubble();
+        startChatCycle();
+    }, 3000);
+
+    window.addEventListener('resize', () => {
+        if (!isOpen && chatBubble) {
+            updateChatPlacement();
+        }
+    });
+
+    window.addEventListener('scroll', () => {
+        if (!isOpen && chatBubble && chatBubble.classList.contains('visible')) {
+            updateChatPlacement();
+        }
+    }, { passive: true });
 
     console.log('Agent Dossier System: ONLINE v8.0 (Transform Matrix)');
 
