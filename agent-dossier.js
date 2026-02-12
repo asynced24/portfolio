@@ -11,7 +11,7 @@
         "I've always liked building things.",
         "",
         "One of the first things I hacked together was back in 6th grade. We had wired broadband, but no router.",
-        "So I used USB tethering on my mom's phone to turn it into a high-speed hotspot.",
+        "So I used USB tethering and mobile hotspot on my mom's phone to turn it into a high-speed hotspot.",
         "",
         "It worked perfectly.",
         "Well... until she got a call.",
