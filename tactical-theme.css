@@ -12,22 +12,7 @@ body[data-theme="tactical"] {
     font-family: 'Share Tech Mono', 'Rajdhani', monospace;
 }
 
-/* ============================================
-   TACTICAL GRID BACKGROUND
-   ============================================ */
-.tactical-grid {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image:
-        linear-gradient(rgba(0, 67, 156, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 67, 156, 0.03) 1px, transparent 1px);
-    background-size: 50px 50px;
-    pointer-events: none;
-    z-index: 0;
-}
+/* Tactical grid removed — replaced by neural vortex WebGL background */
 
 .scan-lines {
     position: fixed;
@@ -43,6 +28,25 @@ body[data-theme="tactical"] {
     pointer-events: none;
     z-index: 1;
     opacity: 0.3;
+}
+
+/* ============================================
+   NEURAL VORTEX WEBGL BACKGROUND
+   ============================================ */
+#neural-vortex {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.55;
+    transition: opacity 0.6s ease;
+}
+
+[data-theme="light"] #neural-vortex {
+    opacity: 0.45;
 }
 
 /* ============================================
@@ -1303,6 +1307,7 @@ body[data-theme="tactical"] {
     font-size: 0.75rem;
     color: rgba(255, 255, 255, 0.5);
     letter-spacing: 1px;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
 }
 
 .status-item {
@@ -1330,6 +1335,7 @@ body[data-theme="tactical"] {
     color: rgba(255, 255, 255, 0.95);
     margin-bottom: 1rem;
     letter-spacing: 3px;
+    text-shadow: 0 0 20px rgba(0, 0, 0, 0.9), 0 0 40px rgba(0, 0, 0, 0.6);
 }
 
 .name-prefix {
@@ -1345,6 +1351,7 @@ body[data-theme="tactical"] {
     color: rgba(255, 255, 255, 0.7);
     letter-spacing: 2px;
     font-weight: 500;
+    text-shadow: 0 0 15px rgba(0, 0, 0, 0.9), 0 0 30px rgba(0, 0, 0, 0.5);
 }
 
 .cursor-blink {
@@ -1709,6 +1716,7 @@ body[data-theme="tactical"] {
     margin-bottom: 3rem;
     letter-spacing: 3px;
     text-align: center;
+    text-shadow: 0 0 20px rgba(0, 0, 0, 0.9), 0 0 40px rgba(0, 0, 0, 0.6);
 }
 
 .title-bracket {
@@ -2711,7 +2719,9 @@ body[data-theme="tactical"] {
 .tactical-footer {
     position: relative;
     padding: 3rem 2rem;
-    background: rgba(15, 23, 42, 0.5);
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     border-top: 1px solid rgba(148, 163, 184, 0.1);
     z-index: 10;
 }
@@ -3917,7 +3927,8 @@ body[data-theme="light"] {
 
 /* Identity/Hero Section - Light Mode */
 [data-theme="light"] .identity-name {
-    color: #1A1A2E;
+    color: #0D1B2A;
+    text-shadow: 0 1px 2px rgba(0, 67, 156, 0.12), 0 0 30px rgba(0, 67, 156, 0.08);
 }
 
 [data-theme="light"] .name-prefix {
@@ -3925,7 +3936,8 @@ body[data-theme="light"] {
 }
 
 [data-theme="light"] .identity-role {
-    color: rgba(26, 26, 46, 0.7);
+    color: #3D5A80;
+    text-shadow: 0 1px 2px rgba(0, 67, 156, 0.08);
 }
 
 [data-theme="light"] .cursor-blink {
@@ -4052,11 +4064,13 @@ body[data-theme="light"] {
 
 /* Section Titles - Light Mode */
 [data-theme="light"] .section-title {
-    color: #1A1A2E;
+    color: #0D1B2A;
+    text-shadow: 0 1px 3px rgba(0, 67, 156, 0.1), 0 0 20px rgba(0, 67, 156, 0.06);
 }
 
 [data-theme="light"] .title-bracket {
     color: #00439C;
+    text-shadow: 0 0 12px rgba(0, 67, 156, 0.2);
 }
 
 /* Timeline - Light Mode - PREMIUM REDESIGN */
@@ -4461,7 +4475,7 @@ body[data-theme="light"] {
 /* Hero Section - Colors Only */
 [data-theme="light"] .identity-name {
     color: #0D1B2A;
-    text-shadow: none;
+    text-shadow: 0 1px 2px rgba(0, 67, 156, 0.12), 0 0 30px rgba(0, 67, 156, 0.08);
 }
 
 [data-theme="light"] .name-prefix {
@@ -4470,6 +4484,7 @@ body[data-theme="light"] {
 
 [data-theme="light"] .identity-role {
     color: #3D5A80;
+    text-shadow: 0 1px 2px rgba(0, 67, 156, 0.08);
 }
 
 /* Status Bar - Colors */
@@ -4494,6 +4509,7 @@ body[data-theme="light"] {
 /* Section Titles - Colors */
 [data-theme="light"] .section-title {
     color: #0D1B2A;
+    text-shadow: 0 1px 3px rgba(0, 67, 156, 0.1), 0 0 20px rgba(0, 67, 156, 0.06);
 }
 
 /* ============================================
@@ -4658,14 +4674,17 @@ body[data-theme="light"] {
 @media (max-width: 900px) {
     [data-theme="light"] .identity-name {
         color: #0D1B2A;
+        text-shadow: 0 1px 2px rgba(0, 67, 156, 0.12), 0 0 30px rgba(0, 67, 156, 0.08);
     }
 
     [data-theme="light"] .identity-role {
         color: #3D5A80;
+        text-shadow: 0 1px 2px rgba(0, 67, 156, 0.08);
     }
 
     [data-theme="light"] .section-title {
         color: #0D1B2A;
+        text-shadow: 0 1px 3px rgba(0, 67, 156, 0.1), 0 0 20px rgba(0, 67, 156, 0.06);
     }
 }
 
