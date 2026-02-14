@@ -962,7 +962,7 @@ body.theme-purple {
 
 body {
   font-family: var(--font-secondary);
-  background-color: var(--dark-bg);
+  background-color: #0D0D0D;
   color: var(--text-primary);
   overflow-x: hidden;
   line-height: 1.6;
