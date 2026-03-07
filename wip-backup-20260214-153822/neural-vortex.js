@@ -31,6 +31,8 @@ class NeuralVortex {
         this.createCanvas();
         if (!this.initWebGL()) return;
         this.bindEvents();
+        // Ensure the canvas theme/opacity is correct on first load
+        this.updateTheme();
         this.animate();
     }
 
