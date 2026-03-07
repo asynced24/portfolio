@@ -3244,6 +3244,8 @@ body[data-theme="tactical"] {
     pointer-events: none;
     z-index: 10001;
     will-change: transform;
+    /* Position driven by JS via CSS custom properties so scale() can compose cleanly */
+    transform: translate3d(var(--reticle-x, 0px), var(--reticle-y, 0px), 0);
 }
 
 /* Center dot */
@@ -3260,26 +3262,7 @@ body[data-theme="tactical"] {
     box-shadow: 0 0 6px rgba(0, 67, 156, 0.6);
 }
 
-/* Crosshair arms — 4 bars via box-shadow cloning */
-.tactical-reticle::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 1px;
-    height: 8px;
-    background: rgba(0, 102, 204, 0.85);
-    transform: translate(-50%, -50%);
-    /* top bar, bottom bar, left bar, right bar */
-    box-shadow:
-        0px -8px 0 rgba(0, 102, 204, 0.85),   /* top arm */
-        0px  8px 0 rgba(0, 102, 204, 0.85),   /* bottom arm */
-        -8px 0px 0 rgba(0, 102, 204, 0.85),   /* left arm (via width trick below) */
-         8px 0px 0 rgba(0, 102, 204, 0.85);   /* right arm */
-    opacity: 0;
-}
-
-/* Horizontal arms need a rotated pair — use a child-free approach with gradients */
+/* Horizontal arms — gradient approach (child-free, no pseudo-element needed) */
 .tactical-reticle {
     background:
         /* vertical top arm */
@@ -3291,11 +3274,6 @@ body[data-theme="tactical"] {
         /* horizontal right arm */
         linear-gradient(rgba(0, 102, 204, 0.85), rgba(0, 102, 204, 0.85)) calc(100% - 2px) center / 7px 1px no-repeat;
     transition: background-position 0.15s ease-out;
-}
-
-/* Override ::after — not needed, gradients handle the arms */
-.tactical-reticle::after {
-    display: none;
 }
 
 /* Hover state — target-lock: arms spread outward */
@@ -3312,9 +3290,9 @@ body[data-theme="tactical"] {
     box-shadow: 0 0 10px rgba(0, 102, 204, 0.8);
 }
 
-/* Click feedback — quick scale pulse */
+/* Click feedback — quick scale pulse; compose with the translate so inline style is not needed */
 .tactical-reticle.active {
-    transform: scale(0.85);
+    transform: translate3d(var(--reticle-x, 0px), var(--reticle-y, 0px), 0) scale(0.85);
 }
 
 /* Hide default cursor */
