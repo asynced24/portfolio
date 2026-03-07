@@ -537,11 +537,7 @@
 }
 
 [data-theme="light"] .career-timeline {
-<<<<<<< HEAD
-    background: linear-gradient(180deg, #F8FAFC 0%, #EDF2F7 100%);
-=======
     background: transparent;
->>>>>>> 65a07f9 (feat: implement neural vortex WebGL background and update tactical theme styles)
 }
 
 [data-theme="light"] .lamp-timeline {
