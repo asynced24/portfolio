@@ -321,12 +321,15 @@ class TacticalDashboard {
         const reticle = document.querySelector('.tactical-reticle');
         if (!reticle) return;
 
-        // Half-size offset so the crosshair centers on the pointer
-        const offset = 14;
+        // Derive offset from element size so centering survives CSS size changes
+        let offset = reticle.offsetWidth / 2 || 14;
+        window.addEventListener('resize', () => { offset = reticle.offsetWidth / 2 || 14; });
 
-        // Instant-follow: translate3d is GPU-composited, no RAF loop needed
+        // Instant-follow via CSS custom properties; inline transform is removed so
+        // the .active scale in CSS can compose cleanly on top.
         document.addEventListener('mousemove', (e) => {
-            reticle.style.transform = `translate3d(${e.clientX - offset}px, ${e.clientY - offset}px, 0)`;
+            reticle.style.setProperty('--reticle-x', `${e.clientX - offset}px`);
+            reticle.style.setProperty('--reticle-y', `${e.clientY - offset}px`);
         });
 
         // Hover detection via event delegation (single listener, no per-element binding)
@@ -336,9 +339,15 @@ class TacticalDashboard {
                 reticle.classList.add('hover');
             }
         });
+        // Only remove hover when the pointer fully leaves interactive regions,
+        // not when moving between child elements or between interactive elements.
         document.addEventListener('mouseout', (e) => {
             if (e.target.closest(interactiveSelector)) {
-                reticle.classList.remove('hover');
+                const related = e.relatedTarget;
+                const nextInteractive = related && related.closest(interactiveSelector);
+                if (!nextInteractive) {
+                    reticle.classList.remove('hover');
+                }
             }
         });
 
