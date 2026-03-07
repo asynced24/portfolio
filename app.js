@@ -318,50 +318,25 @@ class TacticalDashboard {
     // CUSTOM CURSOR
     // ============================================
     initCustomCursor() {
-        const cursor = document.querySelector('.tactical-cursor');
-        const cursorTrail = document.querySelector('.cursor-trail');
+        const reticle = document.querySelector('.tactical-reticle');
+        if (!reticle) return;
 
-        if (!cursor) return;
-
-        let mouseX = 0, mouseY = 0;
-        let cursorX = 0, cursorY = 0;
-        let trailX = 0, trailY = 0;
+        const offset = 14;
 
         document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
+            reticle.style.transform = `translate3d(${e.clientX - offset}px, ${e.clientY - offset}px, 0)`;
         });
 
-        // Smooth cursor animation
-        const animateCursor = () => {
-            // Main cursor - fast follow
-            cursorX += (mouseX - cursorX) * 0.2;
-            cursorY += (mouseY - cursorY) * 0.2;
-            cursor.style.left = cursorX + 'px';
-            cursor.style.top = cursorY + 'px';
-
-            // Trail - slower follow
-            if (cursorTrail) {
-                trailX += (mouseX - trailX) * 0.1;
-                trailY += (mouseY - trailY) * 0.1;
-                cursorTrail.style.left = trailX + 'px';
-                cursorTrail.style.top = trailY + 'px';
+        const interactiveSelector = 'a, button, .access-card, .dossier-node, .timeline-node, .tech-badge, [role="button"]';
+        document.addEventListener('mouseover', (e) => {
+            if (e.target.closest(interactiveSelector)) {
+                reticle.classList.add('hover');
             }
-
-            requestAnimationFrame(animateCursor);
-        };
-        animateCursor();
-
-        // Hover effects on interactive elements
-        const interactiveElements = document.querySelectorAll('a, button, .access-card, .dossier-node, .timeline-node, .tech-badge');
-        interactiveElements.forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                cursor.style.transform = 'scale(1.5)';
-                cursor.querySelector('::before')?.style?.setProperty('background', '#00FF00');
-            });
-            el.addEventListener('mouseleave', () => {
-                cursor.style.transform = 'scale(1)';
-            });
+        });
+        document.addEventListener('mouseout', (e) => {
+            if (e.target.closest(interactiveSelector)) {
+                reticle.classList.remove('hover');
+            }
         });
     }
 
