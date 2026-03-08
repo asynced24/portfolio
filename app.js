@@ -321,7 +321,6 @@ class TacticalDashboard {
         const reticle = document.querySelector('.tactical-reticle');
         if (!reticle) return;
 
-        // Half-size offset so the crosshair centers on the pointer
         const offset = 14;
 
         // Instant-follow: translate3d is GPU-composited, no RAF loop needed
@@ -329,7 +328,6 @@ class TacticalDashboard {
             reticle.style.transform = `translate3d(${e.clientX - offset}px, ${e.clientY - offset}px, 0)`;
         });
 
-        // Hover detection via event delegation (single listener, no per-element binding)
         const interactiveSelector = 'a, button, .access-card, .dossier-node, .timeline-node, .tech-badge, [role="button"]';
         document.addEventListener('mouseover', (e) => {
             if (e.target.closest(interactiveSelector)) {

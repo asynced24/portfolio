@@ -3244,9 +3244,14 @@ body[data-theme="tactical"] {
     pointer-events: none;
     z-index: 10001;
     will-change: transform;
+    background:
+        linear-gradient(rgba(0, 102, 204, 0.85), rgba(0, 102, 204, 0.85)) center 2px / 1px 7px no-repeat,
+        linear-gradient(rgba(0, 102, 204, 0.85), rgba(0, 102, 204, 0.85)) center calc(100% - 2px) / 1px 7px no-repeat,
+        linear-gradient(rgba(0, 102, 204, 0.85), rgba(0, 102, 204, 0.85)) 2px center / 7px 1px no-repeat,
+        linear-gradient(rgba(0, 102, 204, 0.85), rgba(0, 102, 204, 0.85)) calc(100% - 2px) center / 7px 1px no-repeat;
+    transition: background-position 0.15s ease-out;
 }
 
-/* Center dot */
 .tactical-reticle::before {
     content: '';
     position: absolute;
@@ -3258,66 +3263,21 @@ body[data-theme="tactical"] {
     border-radius: 50%;
     transform: translate(-50%, -50%);
     box-shadow: 0 0 6px rgba(0, 67, 156, 0.6);
+    transition: box-shadow 0.15s ease-out;
 }
 
-/* Crosshair arms — 4 bars via box-shadow cloning */
-.tactical-reticle::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 1px;
-    height: 8px;
-    background: rgba(0, 102, 204, 0.85);
-    transform: translate(-50%, -50%);
-    /* top bar, bottom bar, left bar, right bar */
-    box-shadow:
-        0px -8px 0 rgba(0, 102, 204, 0.85),   /* top arm */
-        0px  8px 0 rgba(0, 102, 204, 0.85),   /* bottom arm */
-        -8px 0px 0 rgba(0, 102, 204, 0.85),   /* left arm (via width trick below) */
-         8px 0px 0 rgba(0, 102, 204, 0.85);   /* right arm */
-    opacity: 0;
-}
-
-/* Horizontal arms need a rotated pair — use a child-free approach with gradients */
-.tactical-reticle {
-    background:
-        /* vertical top arm */
-        linear-gradient(rgba(0, 102, 204, 0.85), rgba(0, 102, 204, 0.85)) center 2px / 1px 7px no-repeat,
-        /* vertical bottom arm */
-        linear-gradient(rgba(0, 102, 204, 0.85), rgba(0, 102, 204, 0.85)) center calc(100% - 2px) / 1px 7px no-repeat,
-        /* horizontal left arm */
-        linear-gradient(rgba(0, 102, 204, 0.85), rgba(0, 102, 204, 0.85)) 2px center / 7px 1px no-repeat,
-        /* horizontal right arm */
-        linear-gradient(rgba(0, 102, 204, 0.85), rgba(0, 102, 204, 0.85)) calc(100% - 2px) center / 7px 1px no-repeat;
-    transition: background-position 0.15s ease-out;
-}
-
-/* Override ::after — not needed, gradients handle the arms */
-.tactical-reticle::after {
-    display: none;
-}
-
-/* Hover state — target-lock: arms spread outward */
 .tactical-reticle.hover {
     background:
         linear-gradient(rgba(77, 143, 224, 1), rgba(77, 143, 224, 1)) center 0px / 1px 7px no-repeat,
-        linear-gradient(rgba(77, 143, 224, 1), rgba(77, 143, 224, 1)) center calc(100% - 0px) / 1px 7px no-repeat,
+        linear-gradient(rgba(77, 143, 224, 1), rgba(77, 143, 224, 1)) center 100% / 1px 7px no-repeat,
         linear-gradient(rgba(77, 143, 224, 1), rgba(77, 143, 224, 1)) 0px center / 7px 1px no-repeat,
-        linear-gradient(rgba(77, 143, 224, 1), rgba(77, 143, 224, 1)) calc(100% - 0px) center / 7px 1px no-repeat;
+        linear-gradient(rgba(77, 143, 224, 1), rgba(77, 143, 224, 1)) 100% center / 7px 1px no-repeat;
 }
 
 .tactical-reticle.hover::before {
-    background: #4d8fe0;
     box-shadow: 0 0 10px rgba(0, 102, 204, 0.8);
 }
 
-/* Click feedback — quick scale pulse */
-.tactical-reticle.active {
-    transform: scale(0.85);
-}
-
-/* Hide default cursor */
 body[data-theme="tactical"] {
     cursor: none;
 }
@@ -3329,7 +3289,6 @@ body[data-theme="tactical"] [role="button"] {
     pointer-events: auto;
 }
 
-/* Hide reticle on touch devices */
 @media (pointer: coarse) {
     .tactical-reticle {
         display: none !important;
