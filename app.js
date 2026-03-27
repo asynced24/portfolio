@@ -323,6 +323,7 @@ class TacticalDashboard {
 
         const offset = 14;
 
+        // Instant-follow: translate3d is GPU-composited, no RAF loop needed
         document.addEventListener('mousemove', (e) => {
             reticle.style.transform = `translate3d(${e.clientX - offset}px, ${e.clientY - offset}px, 0)`;
         });
@@ -338,6 +339,10 @@ class TacticalDashboard {
                 reticle.classList.remove('hover');
             }
         });
+
+        // Click feedback
+        document.addEventListener('mousedown', () => reticle.classList.add('active'));
+        document.addEventListener('mouseup', () => reticle.classList.remove('active'));
     }
 
     // ============================================
